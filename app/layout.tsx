@@ -1,6 +1,6 @@
 import type React from "react"
 import type { Metadata } from "next"
-import { Manrope } from "next/font/google"
+import { Manrope, Space_Grotesk } from "next/font/google"
 import "./globals.css"
 import Navbar from "@/components/navbar"
 import Footer from "@/components/footer"
@@ -14,29 +14,58 @@ const manrope = Manrope({
   display: "swap",
 })
 
+const spaceGrotesk = Space_Grotesk({
+  subsets: ["latin"],
+  variable: "--font-space-grotesk",
+  display: "swap",
+})
+
 export const metadata: Metadata = {
-  title: "Rayon Web Solutions | Your Vision, Our Code",
+  title: {
+    default: "Rayon Web Solutions | Your Vision, Our Code",
+    template: "%s | Rayon Web Solutions",
+  },
   description:
-    "Turning Ideas into Reality - Web Development, App Development, DevOps & Cloud, UI/UX Design, LMS & Integration, QA & Automation",
+    "Software development company for web, mobile, AI/ML, DevOps, QA, and UI/UX services. We design and build scalable digital products for startups and enterprises.",
   keywords: [
     "Rayon Web Solutions",
     "Web Development",
     "App Development",
+    "Python Django Development",
+    "Backend Development",
     "DevOps",
+    "Docker",
+    "Kubernetes",
     "Cloud Services",
     "UI/UX Design",
     "LMS Integration",
     "QA Testing",
     "Automation",
+    "AI Development",
+    "Machine Learning Services",
   ],
   authors: [{ name: "Rayon Web Solutions", url: "https://rayonweb.com" }],
   creator: "Rayon Web Solutions",
   publisher: "Rayon Web Solutions",
   metadataBase: new URL("https://rayonweb.com"),
+  alternates: {
+    canonical: "/",
+  },
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      "max-snippet": -1,
+      "max-image-preview": "large",
+      "max-video-preview": -1,
+    },
+  },
   openGraph: {
     title: "Rayon Web Solutions | Your Vision, Our Code",
     description:
-      "Turning Ideas into Reality - Web Development, App Development, DevOps & Cloud, UI/UX Design, LMS & Integration, QA & Automation",
+      "Software development partner for web apps, mobile apps, AI/ML systems, and cloud-native engineering.",
     url: "https://rayonweb.com",
     siteName: "Rayon Web Solutions",
     images: [
@@ -54,9 +83,9 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "Rayon Web Solutions | Your Vision, Our Code",
     description:
-      "We build cutting-edge web & app solutions tailored to your vision — from development to design, cloud, DevOps, and more.",
-    images: ["https://rayonweb.com/images/new-1.png"], // Same or separate image for Twitter
-    creator: "@rayonweb", // Optional: your Twitter handle
+      "We build modern web, app, cloud, and AI solutions tailored to your business goals.",
+    images: ["https://rayonweb.com/images/new-1.png"],
+    creator: "@rayonweb",
   },
 }
 
@@ -68,7 +97,7 @@ export default function RootLayout({
   return (
     <html lang="en" suppressHydrationWarning>
       <body
-        className={`${manrope.variable} font-sans bg-gradient-to-b from-gray-950 to-gray-900 text-gray-100 min-h-screen`}
+        className={`${manrope.variable} ${spaceGrotesk.variable} font-sans antialiased text-gray-100 min-h-screen`}
       >
         {/* Google Analytics */}
         <Script
@@ -109,8 +138,9 @@ export default function RootLayout({
         />
 
         <div className="relative">
+          <div className="pointer-events-none fixed inset-x-0 top-0 h-72 bg-gradient-to-b from-cyan-400/10 via-transparent to-transparent blur-3xl" />
           <Navbar />
-          <main className="pt-20">{children}</main>
+          <main className="pt-20 relative z-10">{children}</main>
           <FloatingCTA />
           <Footer />
         </div>

@@ -101,14 +101,14 @@ export default function FloatingCTA() {
             initial={{ opacity: 0, scale: 0.9, y: 20 }}
             animate={{ opacity: 1, scale: 1, y: 0 }}
             exit={{ opacity: 0, scale: 0.9, y: 20 }}
-            className="bg-gray-900 rounded-2xl shadow-2xl w-80 sm:w-96 overflow-hidden border border-gray-800"
+            className="glass-card rounded-2xl shadow-2xl w-80 sm:w-96 overflow-hidden border border-white/20"
             style={{ maxHeight: "calc(100vh - 100px)" }}
           >
             {/* Chat header */}
-            <div className="bg-gradient-to-r from-purple-600 to-blue-600 p-4 flex justify-between items-center">
+            <div className="bg-gradient-to-r from-cyan-500 to-blue-600 p-4 flex justify-between items-center">
               <div className="flex items-center gap-3">
                 <div className="bg-white rounded-full p-1.5">
-                  <Bot className="h-5 w-5 text-purple-600" />
+                  <Bot className="h-5 w-5 text-cyan-600" />
                 </div>
                 <div>
                   <h3 className="font-bold text-white">RayonBot</h3>
@@ -125,19 +125,19 @@ export default function FloatingCTA() {
             </div>
 
             {/* Chat messages */}
-            <div className="p-4 h-80 overflow-y-auto bg-gray-950">
+            <div className="p-4 h-80 overflow-y-auto bg-slate-950/85">
               {messages.map((message, index) => (
                 <div key={index} className={`mb-4 flex ${message.sender === "bot" ? "justify-start" : "justify-end"}`}>
                   {message.sender === "bot" && (
-                    <div className="bg-gray-800 rounded-full p-1.5 mr-2 h-8 w-8 flex-shrink-0">
-                      <Bot className="h-5 w-5 text-purple-400" />
+                    <div className="bg-white/10 rounded-full p-1.5 mr-2 h-8 w-8 flex-shrink-0">
+                      <Bot className="h-5 w-5 text-cyan-300" />
                     </div>
                   )}
                   <div
                     className={`rounded-2xl px-4 py-2 max-w-[80%] ${
                       message.sender === "bot"
-                        ? "bg-gray-800 text-white"
-                        : "bg-gradient-to-r from-purple-600 to-blue-600 text-white ml-2"
+                        ? "bg-white/10 text-white"
+                        : "bg-gradient-to-r from-cyan-500 to-blue-600 text-white ml-2"
                     }`}
                   >
                     <p className="text-sm">{message.text}</p>
@@ -148,10 +148,10 @@ export default function FloatingCTA() {
               {/* Typing indicator */}
               {isTyping && (
                 <div className="mb-4 flex justify-start">
-                  <div className="bg-gray-800 rounded-full p-1.5 mr-2 h-8 w-8 flex-shrink-0">
-                    <Bot className="h-5 w-5 text-purple-400" />
+                  <div className="bg-white/10 rounded-full p-1.5 mr-2 h-8 w-8 flex-shrink-0">
+                    <Bot className="h-5 w-5 text-cyan-300" />
                   </div>
-                  <div className="bg-gray-800 rounded-2xl px-4 py-3 max-w-[80%]">
+                  <div className="bg-white/10 rounded-2xl px-4 py-3 max-w-[80%]">
                     <div className="flex space-x-1 items-center">
                       <div
                         className="w-2 h-2 bg-gray-400 rounded-full animate-bounce"
@@ -174,18 +174,18 @@ export default function FloatingCTA() {
             </div>
 
             {/* Chat input */}
-            <form onSubmit={handleSubmit} className="p-3 border-t border-gray-800 bg-gray-900 flex gap-2">
+            <form onSubmit={handleSubmit} className="p-3 border-t border-white/10 bg-slate-950/75 flex gap-2">
               <Input
                 type="text"
                 placeholder="Type your message..."
                 value={inputValue}
                 onChange={(e) => setInputValue(e.target.value)}
-                className="bg-gray-800 border-gray-700 focus:border-purple-500 text-white"
+                className="text-white"
               />
               <Button
                 type="submit"
                 size="icon"
-                className="bg-gradient-to-r from-purple-600 to-blue-600 hover:from-purple-700 hover:to-blue-700"
+                className="bg-gradient-to-r from-cyan-500 to-blue-600 hover:from-cyan-400 hover:to-blue-500"
               >
                 <Send className="h-4 w-4" />
               </Button>
@@ -199,7 +199,7 @@ export default function FloatingCTA() {
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
             onClick={() => setIsOpen(true)}
-            className="bg-gradient-to-r from-purple-600 to-blue-600 hover:from-purple-700 hover:to-blue-700 text-white rounded-full p-4 shadow-lg flex items-center justify-center neon-glow"
+            className="bg-gradient-to-r from-cyan-500 to-blue-600 hover:from-cyan-400 hover:to-blue-500 text-white rounded-full p-4 shadow-lg flex items-center justify-center neon-glow"
             aria-label="Open chat"
           >
             <Bot className="h-6 w-6" />

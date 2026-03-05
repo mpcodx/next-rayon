@@ -47,7 +47,7 @@ const faqs = [
 
 export default function TrainingFaq() {
   return (
-    <section className="py-20 bg-gray-950">
+    <section className="py-24 bg-slate-950/35">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-16">
           <h2 className="text-3xl md:text-4xl font-bold mb-6">Frequently Asked Questions</h2>
@@ -62,7 +62,7 @@ export default function TrainingFaq() {
               <AccordionItem
                 key={index}
                 value={`item-${index}`}
-                className="border border-gray-800 rounded-lg bg-gray-900/50 px-6"
+                className="border border-white/15 rounded-xl glass-card px-6"
               >
                 <AccordionTrigger className="text-left py-4 hover:no-underline">
                   <span className="font-medium text-lg">{faq.question}</span>
@@ -76,7 +76,7 @@ export default function TrainingFaq() {
         <div className="text-center mt-12">
           <p className="text-gray-400">
             Still have questions?{" "}
-            <a href="/contact" className="text-purple-400 hover:underline">
+            <a href="/contact" className="text-cyan-300 hover:underline">
               Contact our team
             </a>{" "}
             for more information.

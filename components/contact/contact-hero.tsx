@@ -17,12 +17,27 @@ export default function ContactHero() {
           transition={{ duration: 0.5 }}
           className="max-w-3xl mx-auto text-center"
         >
-          <h1 className="text-4xl sm:text-5xl font-bold mb-6">
+          <motion.div
+            initial={{ opacity: 0, scale: 0.8 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ duration: 0.5 }}
+            className="mb-6"
+          >
+            <span className="inline-block px-4 py-2 rounded-full border border-purple-500/30 bg-purple-500/10 text-purple-300 text-sm font-medium">
+              ✨ We're Here to Help
+            </span>
+          </motion.div>
+          <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold mb-6">
             Get in <span className="gradient-text">Touch</span>
           </h1>
-          <p className="text-xl text-gray-300 mb-8">
-            Have a question, project idea, or want to work with us? We'd love to hear from you. Reach out using the form
-            below or contact us directly.
+          <p className="text-xl text-gray-300 mb-4">
+            Have a question, project idea, or want to explore freelance opportunities? We'd love to hear from you.
+          </p>
+          <p className="text-lg text-gray-400">
+            Reach out using the form below or contact us directly. Our team typically responds within 24 hours.
+          </p>
+          <p className="text-sm text-cyan-300 mt-6 rounded-full inline-flex px-4 py-2 border border-cyan-500/30 bg-cyan-500/10">
+            Need freelance talent? Send your query at info@rayonweb.com
           </p>
         </motion.div>
       </div>

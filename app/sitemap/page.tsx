@@ -79,6 +79,24 @@ export default function SitemapPage() {
               </li>
               <li>
                 <Link
+                  href="/training"
+                  className="flex items-center text-purple-500 hover:text-purple-600 transition-colors"
+                >
+                  <ChevronRight className="h-4 w-4 mr-2" />
+                  Training
+                </Link>
+              </li>
+              <li>
+                <Link
+                  href="/training/courses"
+                  className="flex items-center text-purple-500 hover:text-purple-600 transition-colors"
+                >
+                  <ChevronRight className="h-4 w-4 mr-2" />
+                  Training Courses
+                </Link>
+              </li>
+              <li>
+                <Link
                   href="/contact"
                   className="flex items-center text-purple-500 hover:text-purple-600 transition-colors"
                 >
@@ -338,6 +356,84 @@ export default function SitemapPage() {
                       className="text-sm text-gray-600 hover:text-purple-500 transition-colors"
                     >
                       Performance Audits
+                    </Link>
+                  </li>
+                </ul>
+              </li>
+
+              <li>
+                <div className="mb-2">
+                  <Link
+                    href="/services/ai-ml"
+                    className="text-lg font-medium text-purple-500 hover:text-purple-600 transition-colors flex items-center"
+                  >
+                    <ChevronRight className="h-5 w-5 mr-2" />
+                    AI & Machine Learning
+                  </Link>
+                </div>
+                <ul className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-2 pl-7">
+                  <li>
+                    <Link
+                      href="/services/ai-ml/hugging-face-models"
+                      className="text-sm text-gray-600 hover:text-purple-500 transition-colors"
+                    >
+                      Hugging Face Models
+                    </Link>
+                  </li>
+                  <li>
+                    <Link
+                      href="/services/ai-ml/llm-development"
+                      className="text-sm text-gray-600 hover:text-purple-500 transition-colors"
+                    >
+                      LLM Development
+                    </Link>
+                  </li>
+                  <li>
+                    <Link
+                      href="/services/ai-ml/custom-model-training"
+                      className="text-sm text-gray-600 hover:text-purple-500 transition-colors"
+                    >
+                      Custom Model Training
+                    </Link>
+                  </li>
+                  <li>
+                    <Link
+                      href="/services/ai-ml/predictive-analytics"
+                      className="text-sm text-gray-600 hover:text-purple-500 transition-colors"
+                    >
+                      Predictive Analytics
+                    </Link>
+                  </li>
+                  <li>
+                    <Link
+                      href="/services/ai-ml/ai-integration"
+                      className="text-sm text-gray-600 hover:text-purple-500 transition-colors"
+                    >
+                      AI Integration
+                    </Link>
+                  </li>
+                  <li>
+                    <Link
+                      href="/services/ai-ml/computer-vision"
+                      className="text-sm text-gray-600 hover:text-purple-500 transition-colors"
+                    >
+                      Computer Vision
+                    </Link>
+                  </li>
+                  <li>
+                    <Link
+                      href="/services/ai-ml/conversational-ai"
+                      className="text-sm text-gray-600 hover:text-purple-500 transition-colors"
+                    >
+                      Conversational AI
+                    </Link>
+                  </li>
+                  <li>
+                    <Link
+                      href="/services/ai-ml/mlops-model-monitoring"
+                      className="text-sm text-gray-600 hover:text-purple-500 transition-colors"
+                    >
+                      MLOps & Model Monitoring
                     </Link>
                   </li>
                 </ul>

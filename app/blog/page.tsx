@@ -5,22 +5,22 @@ import BlogHero from "@/components/blog/blog-hero"
 import BlogCategories from "@/components/blog/blog-categories"
 import BlogGrid from "@/components/blog/blog-grid"
 import BlogNewsletter from "@/components/blog/blog-newsletter"
-import FloatingCta from "@/components/floating-cta"
+import { blogCategories } from "@/lib/blog-data"
 
 export default function BlogPage() {
   const [activeCategory, setActiveCategory] = useState("All")
-
-  const handleCategoryChange = (category) => {
-    setActiveCategory(category)
-  }
+  const [searchQuery, setSearchQuery] = useState("")
 
   return (
-    <main className="min-h-screen bg-gray-950 text-white">
-      <BlogHero />
-      <BlogCategories onCategoryChange={handleCategoryChange} />
-      <BlogGrid activeCategory={activeCategory} />
+    <main className="min-h-screen">
+      <BlogHero searchQuery={searchQuery} onSearchChange={setSearchQuery} />
+      <BlogCategories
+        categories={blogCategories}
+        activeCategory={activeCategory}
+        onCategoryChange={setActiveCategory}
+      />
+      <BlogGrid activeCategory={activeCategory} searchQuery={searchQuery} />
       <BlogNewsletter />
-      <FloatingCta />
     </main>
   )
 }

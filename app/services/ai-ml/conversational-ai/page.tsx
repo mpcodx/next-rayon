@@ -79,7 +79,7 @@ export default function ConversationalAIPage() {
     "Anthropic Claude",
     "Rasa",
     "Dialogflow",
-    "Langchain",
+    "LangChain",
     "Vector Databases",
     "WebSockets",
     "Speech-to-Text/Text-to-Speech",

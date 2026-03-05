@@ -1,17 +1,16 @@
 "use client"
 
-import { useState } from "react"
 import Link from "next/link"
 import { motion } from "framer-motion"
 import { Code, Smartphone, Cloud, Palette, BookOpen, TestTube, Brain, ArrowRight } from "lucide-react"
 
 const services = [
   {
-    icon: <Code className="h-10 w-10" />,
+    icon: <Code className="h-6 w-6" />,
     title: "Web Development",
     description: "Custom websites, e-commerce solutions, and CMS integrations tailored to your business needs.",
     href: "/services/web-development",
-    color: "from-purple-500 to-blue-500",
+    color: "from-violet-500 to-blue-500",
     subServices: [
       { name: "Custom Website Design", href: "/services/web-development/custom-website-design" },
       { name: "E-commerce Solutions", href: "/services/web-development/ecommerce-solutions" },
@@ -19,7 +18,7 @@ const services = [
     ],
   },
   {
-    icon: <Smartphone className="h-10 w-10" />,
+    icon: <Smartphone className="h-6 w-6" />,
     title: "App Development",
     description: "Native and cross-platform mobile applications for Android, iOS, and Progressive Web Apps.",
     href: "/services/app-development",
@@ -31,7 +30,7 @@ const services = [
     ],
   },
   {
-    icon: <Cloud className="h-10 w-10" />,
+    icon: <Cloud className="h-6 w-6" />,
     title: "DevOps & Cloud",
     description: "Cloud infrastructure setup, CI/CD pipelines, Docker, Kubernetes, and monitoring solutions.",
     href: "/services/devops-cloud",
@@ -43,11 +42,11 @@ const services = [
     ],
   },
   {
-    icon: <Palette className="h-10 w-10" />,
+    icon: <Palette className="h-6 w-6" />,
     title: "UI/UX Design",
     description: "User-centered design with wireframes, prototypes, and comprehensive design systems.",
     href: "/services/ui-ux-design",
-    color: "from-pink-500 to-purple-500",
+    color: "from-fuchsia-500 to-purple-500",
     subServices: [
       { name: "Wireframes & Prototyping", href: "/services/ui-ux-design/wireframes-prototyping" },
       { name: "Web & Mobile App Design", href: "/services/ui-ux-design/web-mobile-design" },
@@ -55,7 +54,7 @@ const services = [
     ],
   },
   {
-    icon: <BookOpen className="h-10 w-10" />,
+    icon: <BookOpen className="h-6 w-6" />,
     title: "LMS & Integration",
     description: "Custom Learning Management Systems and third-party integrations for seamless workflows.",
     href: "/services/lms-integration",
@@ -67,7 +66,7 @@ const services = [
     ],
   },
   {
-    icon: <TestTube className="h-10 w-10" />,
+    icon: <TestTube className="h-6 w-6" />,
     title: "QA & Automation",
     description: "Comprehensive testing strategies with manual and automated testing to ensure quality.",
     href: "/services/qa-automation",
@@ -79,93 +78,95 @@ const services = [
     ],
   },
   {
-    icon: <Brain className="h-10 w-10" />,
+    icon: <Brain className="h-6 w-6" />,
     title: "AI & Machine Learning",
-    description:
-      "Cutting-edge AI solutions including natural language processing, computer vision, and custom ML models.",
+    description: "Applied AI solutions including LLMs, forecasting, computer vision, and production-ready MLOps.",
     href: "/services/ai-ml",
     color: "from-blue-600 to-violet-600",
     subServices: [
-      { name: "Natural Language Processing", href: "/services/ai-ml/natural-language-processing" },
-      { name: "LLM Integration (Langchain)", href: "/services/ai-ml/llm-integration" },
       { name: "Hugging Face Models", href: "/services/ai-ml/hugging-face-models" },
+      { name: "LLM Development", href: "/services/ai-ml/llm-development" },
+      { name: "Custom Model Training", href: "/services/ai-ml/custom-model-training" },
+      { name: "Predictive Analytics", href: "/services/ai-ml/predictive-analytics" },
+      { name: "AI Integration", href: "/services/ai-ml/ai-integration" },
       { name: "Computer Vision", href: "/services/ai-ml/computer-vision" },
-      { name: "Model Training & Deployment", href: "/services/ai-ml/model-training-deployment" },
+      { name: "Conversational AI", href: "/services/ai-ml/conversational-ai" },
+      { name: "MLOps & Model Monitoring", href: "/services/ai-ml/mlops-model-monitoring" },
     ],
   },
 ]
 
 export default function ServicesList() {
-  const [expandedService, setExpandedService] = useState<string | null>(null)
-
-  const toggleExpand = (title: string) => {
-    setExpandedService(expandedService === title ? null : title)
-  }
-
   return (
     <section className="py-20">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.5 }}
+          className="mx-auto mb-14 max-w-3xl text-center"
+        >
+          <h2 className="text-3xl sm:text-4xl font-bold mb-4">
+            Service Areas Built for <span className="gradient-text">Real Outcomes</span>
+          </h2>
+          <p className="text-lg text-gray-400">
+            Pick one service or combine multiple tracks. We design delivery plans around your timeline, budget, and
+            product stage.
+          </p>
+        </motion.div>
+
+        <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6">
           {services.map((service, index) => (
-            <motion.div
-              key={index}
+            <motion.article
+              key={service.title}
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              transition={{ duration: 0.5, delay: index * 0.1 }}
-              className="glass-card rounded-xl overflow-hidden"
+              transition={{ duration: 0.45, delay: index * 0.06 }}
+              className="glass-card rounded-2xl p-6 flex flex-col h-full border border-white/10 hover:border-cyan-400/35 hover:-translate-y-1 transition-all"
             >
-              <div className="p-8">
+              <div className="flex items-center justify-between gap-4 mb-5">
                 <div
-                  className={`p-4 rounded-full bg-gradient-to-r ${service.color} w-16 h-16 flex items-center justify-center mb-6`}
+                  className={`h-12 w-12 rounded-2xl bg-gradient-to-br ${service.color} text-white flex items-center justify-center shadow-[0_12px_24px_rgba(15,23,42,0.35)]`}
                 >
                   {service.icon}
                 </div>
-                <h3 className="text-2xl font-bold mb-4">{service.title}</h3>
-                <p className="text-gray-400 mb-6">{service.description}</p>
+                <span className="rounded-full border border-white/15 bg-white/5 px-2.5 py-1 text-xs text-gray-300">
+                  {service.subServices.length} offerings
+                </span>
+              </div>
 
-                <div className="flex flex-col space-y-4">
-                  <Link href={service.href} className="flex items-center text-purple-500 font-medium group">
-                    <span>View Service Details</span>
-                    <ArrowRight className="ml-2 h-5 w-5 transition-transform group-hover:translate-x-1" />
+              <h3 className="text-xl font-bold mb-3">{service.title}</h3>
+              <p className="text-gray-400 text-sm leading-relaxed">{service.description}</p>
+
+              <div className="mt-5 flex flex-wrap gap-2">
+                {service.subServices.slice(0, 4).map((subService) => (
+                  <Link
+                    key={subService.name}
+                    href={subService.href}
+                    className="rounded-full border border-white/15 bg-white/[0.04] px-3 py-1.5 text-xs text-gray-300 hover:text-white hover:border-cyan-400/40"
+                  >
+                    {subService.name}
                   </Link>
-
-                  <button
-                    onClick={() => toggleExpand(service.title)}
-                    className="flex items-center text-gray-400 hover:text-white transition-colors"
-                  >
-                    <span>{expandedService === service.title ? "Hide Sub-Services" : "Show Sub-Services"}</span>
-                    <ArrowRight
-                      className={`ml-2 h-5 w-5 transition-transform ${expandedService === service.title ? "rotate-90" : ""}`}
-                    />
-                  </button>
-                </div>
-
-                {expandedService === service.title && (
-                  <motion.div
-                    initial={{ opacity: 0, height: 0 }}
-                    animate={{ opacity: 1, height: "auto" }}
-                    exit={{ opacity: 0, height: 0 }}
-                    className="mt-6 pt-6 border-t border-gray-800"
-                  >
-                    <h4 className="text-lg font-semibold mb-4">Sub-Services</h4>
-                    <ul className="space-y-3">
-                      {service.subServices.map((subService, idx) => (
-                        <li key={idx}>
-                          <Link
-                            href={subService.href}
-                            className="flex items-center text-gray-400 hover:text-purple-400 transition-colors"
-                          >
-                            <ArrowRight className="mr-2 h-4 w-4" />
-                            <span>{subService.name}</span>
-                          </Link>
-                        </li>
-                      ))}
-                    </ul>
-                  </motion.div>
+                ))}
+                {service.subServices.length > 4 && (
+                  <span className="rounded-full border border-cyan-500/30 bg-cyan-500/10 px-3 py-1.5 text-xs text-cyan-200">
+                    +{service.subServices.length - 4} more
+                  </span>
                 )}
               </div>
-            </motion.div>
+
+              <div className="mt-auto pt-6">
+                <Link
+                  href={service.href}
+                  className="inline-flex items-center gap-2 text-cyan-300 hover:text-cyan-200 font-medium transition-colors"
+                >
+                  Explore Service
+                  <ArrowRight className="h-4 w-4" />
+                </Link>
+              </div>
+            </motion.article>
           ))}
         </div>
       </div>

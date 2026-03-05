@@ -1,6 +1,6 @@
 "use client"
 
-import { useState, useEffect } from "react"
+import { useEffect, useState } from "react"
 import Link from "next/link"
 import Image from "next/image"
 import { usePathname } from "next/navigation"
@@ -79,9 +79,11 @@ const services = [
       { name: "Hugging Face Models", href: "/services/ai-ml/hugging-face-models" },
       { name: "LLM Development", href: "/services/ai-ml/llm-development" },
       { name: "Custom Model Training", href: "/services/ai-ml/custom-model-training" },
+      { name: "Predictive Analytics", href: "/services/ai-ml/predictive-analytics" },
       { name: "AI Integration", href: "/services/ai-ml/ai-integration" },
       { name: "Computer Vision", href: "/services/ai-ml/computer-vision" },
       { name: "Conversational AI", href: "/services/ai-ml/conversational-ai" },
+      { name: "MLOps & Model Monitoring", href: "/services/ai-ml/mlops-model-monitoring" },
     ],
   },
 ]
@@ -89,7 +91,7 @@ const services = [
 const navLinks = [
   { name: "Home", href: "/" },
   { name: "About", href: "/about" },
-  { name: "Services", href: "/services", dropdown: true, items: services },
+  { name: "Services", href: "/services", dropdown: true },
   { name: "Projects", href: "/projects" },
   { name: "Blog", href: "/blog" },
   { name: "Careers", href: "/careers" },
@@ -105,10 +107,7 @@ export default function Navbar() {
   const pathname = usePathname()
 
   useEffect(() => {
-    const handleScroll = () => {
-      setScrolled(window.scrollY > 10)
-    }
-
+    const handleScroll = () => setScrolled(window.scrollY > 10)
     window.addEventListener("scroll", handleScroll)
     return () => window.removeEventListener("scroll", handleScroll)
   }, [])
@@ -118,152 +117,197 @@ export default function Navbar() {
     setOpenDropdown(null)
   }, [pathname])
 
+  useEffect(() => {
+    const onEscape = (event: KeyboardEvent) => {
+      if (event.key === "Escape") {
+        setIsOpen(false)
+        setOpenDropdown(null)
+      }
+    }
+
+    window.addEventListener("keydown", onEscape)
+    return () => window.removeEventListener("keydown", onEscape)
+  }, [])
+
+  const isServicesOpen = openDropdown === "Services"
+
   const toggleDropdown = (name: string) => {
-    setOpenDropdown(openDropdown === name ? null : name)
+    setOpenDropdown((current) => (current === name ? null : name))
   }
+
+  const closeAllMenus = () => {
+    setIsOpen(false)
+    setOpenDropdown(null)
+  }
+
   const handleOpenModal = () => {
     setShowModal(true)
+    closeAllMenus()
   }
 
   const handleCloseModal = () => {
     setShowModal(false)
   }
 
-  
   return (
     <header
       className={cn(
         "fixed top-0 left-0 right-0 z-50 transition-all duration-300",
-        scrolled ? "bg-gray-900/80 shadow-lg" : "bg-transparent",
+        scrolled
+          ? "bg-slate-950/75 backdrop-blur-xl border-b border-white/10 shadow-[0_16px_35px_rgba(2,6,23,0.55)]"
+          : "bg-slate-950/40 backdrop-blur-md border-b border-white/5",
       )}
     >
-      <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+      <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative">
         <div className="flex items-center justify-between h-20">
           <div className="flex-shrink-0">
-            <Link href="/" className="flex items-center">
-             <Image
-              src={"/new-1.png"}
-              alt={"logo"}
-              height='200'
-              width='300'
-              className="object-cover"
-            /></Link>
+            <Link href="/" className="flex items-center" aria-label="Rayon Web Solutions Home" onClick={closeAllMenus}>
+              <Image
+                src="/new-1.png"
+                alt="Rayon Web Solutions"
+                height={200}
+                width={300}
+                priority
+                className="object-cover"
+              />
+            </Link>
           </div>
 
-          {/* Desktop Navigation */}
-          <nav className="hidden lg:flex items-center space-x-8">
+          <nav className="hidden lg:flex items-center gap-1">
             {navLinks.map((link) => (
-              <div key={link.name} className="relative group">
+              <div key={link.name} className="relative">
                 {link.dropdown ? (
                   <button
                     onClick={() => toggleDropdown(link.name)}
                     className={cn(
-                      "flex items-center text-gray-300 hover:text-white transition-colors",
-                      pathname.startsWith(link.href) && "text-white font-medium",
+                      "flex items-center rounded-full px-3 py-2 text-sm text-gray-300 hover:text-white hover:bg-white/[0.06] transition-all",
+                      pathname.startsWith(link.href) && "text-white bg-white/[0.08] font-medium",
                     )}
                   >
                     {link.name}
                     <ChevronDown
                       className={cn(
                         "ml-1 h-4 w-4 transition-transform duration-200",
-                        openDropdown === link.name && "rotate-180",
+                        isServicesOpen && "rotate-180",
                       )}
                     />
                   </button>
                 ) : (
                   <Link
                     href={link.href}
+                    onClick={closeAllMenus}
                     className={cn(
-                      "text-gray-300 hover:text-white transition-colors",
-                      pathname === link.href && "text-white font-medium",
+                      "rounded-full px-3 py-2 text-sm text-gray-300 hover:text-white hover:bg-white/[0.06] transition-all",
+                      pathname === link.href && "text-white bg-white/[0.08] font-medium",
                     )}
                   >
                     {link.name}
                   </Link>
-                )}
-
-                {link.dropdown && (
-                  <AnimatePresence>
-                    {openDropdown === link.name && (
-                      <motion.div
-                        initial={{ opacity: 0, y: 10 }}
-                        animate={{ opacity: 1, y: 0 }}
-                        exit={{ opacity: 0, y: 10 }}
-                        transition={{ duration: 0.2 }}
-                        className="absolute left-0 mt-2 w-72 rounded-xl glass-card overflow-hidden z-50"
-                      >
-                        <div className="py-2">
-                          {link.items?.map((item) => (
-                            <div key={item.name}>
-                              <div className="flex items-center px-4 py-3 hover:bg-gray-800/50 transition-colors">
-                                <span className="mr-3 text-purple-500">{item.icon}</span>
-                                <div>
-                                  <Link href={item.href} className="font-medium">
-                                    {item.name}
-                                  </Link>
-                                  <div className="mt-1">
-                                    <ul className="flex flex-wrap gap-2 text-xs text-gray-400">
-                                      {item.subServices.map((subService, idx) => (
-                                        <li key={idx}>
-                                          <Link
-                                            href={subService.href}
-                                            className="hover:text-purple-400 transition-colors"
-                                            onClick={(e) => e.stopPropagation()}
-                                          >
-                                            {subService.name}
-                                            {idx < item.subServices.length - 1 && <span className="ml-2">•</span>}
-                                          </Link>
-                                        </li>
-                                      ))}
-                                    </ul>
-                                  </div>
-                                </div>
-                              </div>
-                            </div>
-                          ))}
-                        </div>
-                      </motion.div>
-                    )}
-                  </AnimatePresence>
                 )}
               </div>
             ))}
           </nav>
 
           <div className="hidden lg:flex">
-            <Button onClick={handleOpenModal} className="bg-gradient-to-r from-purple-600 to-blue-600 hover:from-purple-700 hover:to-blue-700 text-white rounded-full px-6">
+            <Button
+              onClick={handleOpenModal}
+              className="h-10 rounded-full px-5 text-sm font-semibold bg-gradient-to-r from-cyan-500 to-blue-600 hover:from-cyan-400 hover:to-blue-500 text-white"
+            >
               Book a Consultation
             </Button>
           </div>
-          
 
-          {/* Mobile menu button */}
           <div className="lg:hidden">
             <button
-              onClick={() => setIsOpen(!isOpen)}
-              className="inline-flex items-center justify-center p-2 rounded-md text-gray-400 hover:text-white hover:bg-gray-800 focus:outline-none"
+              onClick={() => setIsOpen((prev) => !prev)}
+              className="inline-flex items-center justify-center p-2 rounded-lg text-gray-300 hover:text-white hover:bg-white/10 focus:outline-none border border-white/15"
+              aria-expanded={isOpen}
+              aria-label="Toggle navigation menu"
             >
-              <span className="sr-only">Open main menu</span>
-              {isOpen ? (
-                <X className="block h-6 w-6" aria-hidden="true" />
-              ) : (
-                <Menu className="block h-6 w-6" aria-hidden="true" />
-              )}
+              {isOpen ? <X className="block h-6 w-6" aria-hidden="true" /> : <Menu className="block h-6 w-6" aria-hidden="true" />}
             </button>
           </div>
         </div>
+
+        <AnimatePresence>
+          {isServicesOpen && (
+            <>
+              <motion.button
+                type="button"
+                aria-label="Close services menu"
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                exit={{ opacity: 0 }}
+                onClick={() => setOpenDropdown(null)}
+                className="hidden lg:block fixed inset-0 top-20 z-40 bg-black/20"
+              />
+
+              <motion.div
+                initial={{ opacity: 0, y: 8 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: 8 }}
+                transition={{ duration: 0.2 }}
+                className="hidden lg:block absolute left-[11%] top-full mt-3 w-[min(94vw,64rem)] z-50 rounded-2xl glass-card border border-white/20 shadow-[0_24px_45px_rgba(2,6,23,0.55)]"
+              >
+                <div className="flex items-center justify-between gap-4 border-b border-white/10 px-5 py-4">
+                  <div>
+                    <p className="text-xs uppercase tracking-[0.2em] text-cyan-300">Services</p>
+                    <p className="text-sm text-gray-300 mt-1">Choose any service to view details and sub-services</p>
+                  </div>
+                  <Link
+                    href="/services"
+                    onClick={closeAllMenus}
+                    className="text-xs rounded-md border border-cyan-400/35 bg-cyan-500/10 px-3 py-1.5 text-cyan-200 hover:bg-cyan-500/20"
+                  >
+                    View All Services
+                  </Link>
+                </div>
+
+                <div className="max-h-[70vh] overflow-y-auto p-5">
+                  <ul className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-3">
+                    {services.map((item) => (
+                      <li key={item.name} className="rounded-xl border border-white/15 bg-white/[0.03] p-4 hover:border-cyan-400/35 transition-colors">
+                        <Link
+                          href={item.href}
+                          onClick={closeAllMenus}
+                          className="flex items-center gap-2 text-sm font-semibold text-white hover:text-cyan-200"
+                        >
+                          <span className="text-cyan-300">{item.icon}</span>
+                          {item.name}
+                        </Link>
+
+                        <ul className="mt-3 space-y-1.5 pl-5 list-disc marker:text-cyan-300">
+                          {item.subServices.map((subService) => (
+                            <li key={subService.name}>
+                              <Link
+                                href={subService.href}
+                                onClick={closeAllMenus}
+                                className="text-xs text-gray-400 hover:text-cyan-200 transition-colors"
+                              >
+                                {subService.name}
+                              </Link>
+                            </li>
+                          ))}
+                        </ul>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              </motion.div>
+            </>
+          )}
+        </AnimatePresence>
       </div>
 
-      {/* Mobile menu */}
       <AnimatePresence>
         {isOpen && (
           <motion.div
             initial={{ opacity: 0, height: 0 }}
             animate={{ opacity: 1, height: "auto" }}
             exit={{ opacity: 0, height: 0 }}
-            className="lg:hidden bg-gray-900 overflow-hidden"
+            className="lg:hidden bg-slate-950/95 backdrop-blur-xl border-t border-white/10 overflow-hidden shadow-2xl"
           >
-            <div className="px-2 pt-2 pb-3 space-y-1 sm:px-3">
+            <div className="px-3 pt-3 pb-4 space-y-1 max-h-[calc(100vh-5rem)] overflow-y-auto">
               {navLinks.map((link) => (
                 <div key={link.name}>
                   {link.dropdown ? (
@@ -281,38 +325,43 @@ export default function Navbar() {
                         <ChevronDown
                           className={cn(
                             "ml-1 h-4 w-4 transition-transform duration-200",
-                            openDropdown === link.name && "rotate-180",
+                            isServicesOpen && "rotate-180",
                           )}
                         />
                       </button>
+
                       <AnimatePresence>
-                        {openDropdown === link.name && (
+                        {isServicesOpen && (
                           <motion.div
                             initial={{ opacity: 0, height: 0 }}
                             animate={{ opacity: 1, height: "auto" }}
                             exit={{ opacity: 0, height: 0 }}
-                            className="pl-4 space-y-1"
+                            className="pl-2 pr-1 mt-2 space-y-2 max-h-[60vh] overflow-y-auto"
                           >
-                            {link.items?.map((item) => (
-                              <div key={item.name} className="mt-2">
-                                <div className="flex items-center px-3 py-2 rounded-md text-sm font-medium text-gray-300 hover:bg-gray-700 hover:text-white">
-                                  <span className="mr-3 text-purple-500">{item.icon}</span>
-                                  <Link href={item.href}>{item.name}</Link>
-                                </div>
-                                <div className="pl-8 mt-1">
-                                  <ul className="space-y-1">
-                                    {item.subServices.map((subService) => (
-                                      <li key={subService.name}>
-                                        <Link
-                                          href={subService.href}
-                                          className="block px-3 py-1 text-xs text-gray-400 hover:text-white"
-                                        >
-                                          {subService.name}
-                                        </Link>
-                                      </li>
-                                    ))}
-                                  </ul>
-                                </div>
+                            {services.map((item) => (
+                              <div key={item.name} className="rounded-lg border border-white/10 bg-white/[0.03] p-3">
+                                <Link
+                                  href={item.href}
+                                  onClick={closeAllMenus}
+                                  className="flex items-center gap-2 px-1 py-1 text-sm font-medium text-gray-100"
+                                >
+                                  <span className="text-cyan-300">{item.icon}</span>
+                                  {item.name}
+                                </Link>
+
+                                <ul className="mt-2 pl-6 space-y-1 list-disc marker:text-cyan-300">
+                                  {item.subServices.map((subService) => (
+                                    <li key={subService.name}>
+                                      <Link
+                                        href={subService.href}
+                                        onClick={closeAllMenus}
+                                        className="block py-0.5 text-xs text-gray-400 hover:text-white"
+                                      >
+                                        {subService.name}
+                                      </Link>
+                                    </li>
+                                  ))}
+                                </ul>
                               </div>
                             ))}
                           </motion.div>
@@ -322,6 +371,7 @@ export default function Navbar() {
                   ) : (
                     <Link
                       href={link.href}
+                      onClick={closeAllMenus}
                       className={cn(
                         "block px-3 py-2 rounded-md text-base font-medium",
                         pathname === link.href
@@ -334,8 +384,12 @@ export default function Navbar() {
                   )}
                 </div>
               ))}
-              <div className="pt-4">
-                <Button onClick={handleOpenModal} className="w-full bg-gradient-to-r from-purple-600 to-blue-600 hover:from-purple-700 hover:to-blue-700 text-white rounded-full">
+
+              <div className="pt-3">
+                <Button
+                  onClick={handleOpenModal}
+                  className="w-full bg-gradient-to-r from-cyan-500 to-blue-600 hover:from-cyan-400 hover:to-blue-500 text-white rounded-full"
+                >
                   Book a Consultation
                 </Button>
               </div>
@@ -343,6 +397,7 @@ export default function Navbar() {
           </motion.div>
         )}
       </AnimatePresence>
+
       <BookConsultationModal showModal={showModal} onClose={handleCloseModal} />
     </header>
   )

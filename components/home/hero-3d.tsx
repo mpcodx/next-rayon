@@ -9,7 +9,7 @@ const Scene3D = () => {
   const isMobile = useMobile()
 
   // Reduce complexity for mobile devices
-  const sphereArgs = isMobile
+  const sphereArgs: [number, number, number] = isMobile
     ? [1.2, 50, 100] // Lower resolution for mobile
     : [1.5, 100, 200] // Higher resolution for desktop
 
@@ -28,12 +28,12 @@ const Scene3D = () => {
       <directionalLight position={[10, 10, 5]} intensity={1} />
       <Sphere args={sphereArgs} position={[0, 0, 0]}>
         <MeshDistortMaterial
-          color="#8b5cf6"
+          color="#06b6d4"
           attach="material"
           distort={distortAmount}
           speed={speedAmount}
-          roughness={0.2}
-          metalness={0.8}
+          roughness={0.28}
+          metalness={0.72}
         />
       </Sphere>
       <OrbitControls

@@ -40,6 +40,7 @@ export default function JobApplicationForm({ jobTitle, onClose }: JobApplication
       const payload = {
         subject: `Job Application for ${jobTitle}`,
         message: `Name: ${formData.name}\nPhone: ${formData.phone}\nResume: ${formData.resumeLink}\n\nCover Letter:\n${formData.coverLetter}`,
+        name: formData.name,
         email: formData.email, // optional reply-to
       }
 

@@ -12,6 +12,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     "/blog",
     "/careers",
     "/training",
+    "/training/courses",
     "/contact",
     "/privacy-policy",
     "/terms",
@@ -27,6 +28,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     "/services/ui-ux-design",
     "/services/lms-integration",
     "/services/qa-automation",
+    "/services/ai-ml",
   ]
 
   // Web development sub-pages
@@ -71,6 +73,18 @@ export default function sitemap(): MetadataRoute.Sitemap {
     "/services/qa-automation/performance-audits",
   ]
 
+  // AI/ML sub-pages
+  const aiMlRoutes = [
+    "/services/ai-ml/hugging-face-models",
+    "/services/ai-ml/llm-development",
+    "/services/ai-ml/custom-model-training",
+    "/services/ai-ml/predictive-analytics",
+    "/services/ai-ml/ai-integration",
+    "/services/ai-ml/computer-vision",
+    "/services/ai-ml/conversational-ai",
+    "/services/ai-ml/mlops-model-monitoring",
+  ]
+
   // Combine all routes
   const allRoutes = [
     ...mainRoutes,
@@ -81,6 +95,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     ...uiUxRoutes,
     ...lmsRoutes,
     ...qaRoutes,
+    ...aiMlRoutes,
   ]
 
   // Create sitemap entries

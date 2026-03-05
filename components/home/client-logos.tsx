@@ -5,11 +5,10 @@ import { motion } from "framer-motion"
 import Image from "next/image"
 import { useMobile } from "@/hooks/use-mobile"
 
-
 const clients = [
-  { name: "Client 1", logo: "/aws-cloud.svg?height=80&width=160" },
+  { name: "AWS", logo: "/aws-cloud.svg?height=80&width=160" },
   { name: "Client 2", logo: "/download.png?height=80&width=160" },
-  { name: "Client 3", logo: "/lenovo-service-centre.jpg?height=80&width=160" },
+  { name: "Lenovo", logo: "/lenovo-service-centre.jpg?height=80&width=160" },
   { name: "Client 4", logo: "/rKXaODLl_400x400.jpg?height=80&width=160" },
   { name: "Client 5", logo: "/touchicon-180.png?height=80&width=160" },
   { name: "Client 6", logo: "/unnamed.png?height=80&width=160" },
@@ -19,12 +18,10 @@ export default function ClientLogos() {
   const containerRef = useRef<HTMLDivElement>(null)
   const isMobile = useMobile()
 
-  // Use CSS-based animation instead of JavaScript for better performance
   useEffect(() => {
     const container = containerRef.current
     if (!container) return
 
-    // Add CSS animation class based on screen size
     if (isMobile) {
       container.classList.add("animate-scroll-slow")
     } else {
@@ -37,7 +34,7 @@ export default function ClientLogos() {
   }, [isMobile])
 
   return (
-    <section className="py-16 bg-gray-950 overflow-hidden">
+    <section className="py-20 bg-slate-950/30 overflow-hidden">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -46,16 +43,18 @@ export default function ClientLogos() {
           transition={{ duration: 0.5 }}
           className="text-center mb-12"
         >
+          <div className="inline-flex items-center rounded-full border border-cyan-400/40 bg-cyan-500/10 px-4 py-1.5 text-sm text-cyan-200 mb-4">
+            Trusted Partnerships
+          </div>
           <h2 className="text-3xl font-bold mb-4">
             Trusted by <span className="gradient-text">Leading Companies</span>
           </h2>
-          <p className="text-xl text-gray-400 max-w-3xl mx-auto">
-            We've had the privilege of working with amazing clients across various industries.
+          <p className="text-xl text-gray-300/85 max-w-3xl mx-auto">
+            Teams across industries trust Rayon Web Solutions for stable delivery and long-term engineering support.
           </p>
         </motion.div>
 
         <div className="relative overflow-hidden">
-          {/* Use CSS-based animation for smooth scrolling */}
           <div
             ref={containerRef}
             className="flex space-x-12 py-8 logo-scroll-container"
@@ -65,11 +64,10 @@ export default function ClientLogos() {
               msOverflowStyle: "none",
             }}
           >
-            {/* First set of logos */}
             {clients.map((client, index) => (
               <div
                 key={index}
-                className="flex-shrink-0 flex items-center justify-center h-20 w-40 glass-card rounded-lg p-4"
+                className="flex-shrink-0 flex items-center justify-center h-20 w-40 glass-card rounded-xl border border-white/15 p-4"
                 style={{ willChange: "opacity, transform" }}
               >
                 <Image
@@ -83,11 +81,10 @@ export default function ClientLogos() {
               </div>
             ))}
 
-            {/* Duplicate set for infinite scroll */}
             {clients.map((client, index) => (
               <div
                 key={`duplicate-${index}`}
-                className="flex-shrink-0 flex items-center justify-center h-20 w-40 glass-card rounded-lg p-4"
+                className="flex-shrink-0 flex items-center justify-center h-20 w-40 glass-card rounded-xl border border-white/15 p-4"
                 style={{ willChange: "opacity, transform" }}
               >
                 <Image
@@ -102,9 +99,8 @@ export default function ClientLogos() {
             ))}
           </div>
 
-          {/* Gradient overlays for fade effect */}
-          <div className="absolute top-0 left-0 h-full w-20 bg-gradient-to-r from-gray-950 to-transparent z-10"></div>
-          <div className="absolute top-0 right-0 h-full w-20 bg-gradient-to-l from-gray-950 to-transparent z-10"></div>
+          <div className="absolute top-0 left-0 h-full w-20 bg-gradient-to-r from-[#030712] to-transparent z-10" />
+          <div className="absolute top-0 right-0 h-full w-20 bg-gradient-to-l from-[#030712] to-transparent z-10" />
         </div>
       </div>
     </section>

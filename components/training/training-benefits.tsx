@@ -49,7 +49,7 @@ const benefits = [
 
 export default function TrainingBenefits() {
   return (
-    <section className="py-20 bg-gradient-to-b from-gray-950 to-gray-900">
+    <section className="py-24 bg-slate-950/35">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-16">
           <h2 className="text-3xl md:text-4xl font-bold mb-6">Why Choose Our Training Programs</h2>
@@ -67,7 +67,7 @@ export default function TrainingBenefits() {
               transition={{ duration: 0.5, delay: index * 0.1 }}
               viewport={{ once: true }}
             >
-              <Card className="bg-gray-900/50 border-gray-800 hover:border-purple-500/30 transition-all h-full">
+              <Card className="glass-card border border-white/15 hover:border-cyan-400/30 transition-all h-full">
                 <CardContent className="p-6 flex flex-col items-center text-center">
                   <div className="mb-5 p-3 rounded-full bg-gray-800/50">{benefit.icon}</div>
                   <h3 className="text-xl font-bold mb-3">{benefit.title}</h3>

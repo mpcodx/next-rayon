@@ -6,6 +6,7 @@ export default function robots(): MetadataRoute.Robots {
       userAgent: "*",
       allow: "/",
     },
+    host: "https://rayonweb.com",
     sitemap: "https://rayonweb.com/sitemap.xml",
   }
 }

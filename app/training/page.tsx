@@ -8,11 +8,10 @@ import TrainingTestimonials from "@/components/training/training-testimonials"
 import TrainingFaq from "@/components/training/training-faq"
 import TrainingCta from "@/components/training/training-cta"
 import TrainingForm from "@/components/training/training-form"
-import FloatingCta from "@/components/floating-cta"
 
 export default function TrainingPage() {
   return (
-    <main className="min-h-screen bg-gray-950 text-white">
+    <main className="min-h-screen text-white">
       <TrainingHero />
       <TrainingCourses />
       <TrainingBenefits />
@@ -21,7 +20,6 @@ export default function TrainingPage() {
       <TrainingForm />
       <TrainingFaq />
       <TrainingCta />
-      <FloatingCta />
     </main>
   )
 }
