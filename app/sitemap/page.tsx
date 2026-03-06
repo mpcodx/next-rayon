@@ -2,6 +2,7 @@ import type { Metadata } from "next"
 import Link from "next/link"
 import { ArrowRight, ChevronRight } from "lucide-react"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
+import { blogPosts } from "@/lib/blog-data"
 
 export const metadata: Metadata = {
   title: "Sitemap | Rayon Web Solutions",
@@ -438,6 +439,31 @@ export default function SitemapPage() {
                   </li>
                 </ul>
               </li>
+            </ul>
+          </CardContent>
+        </Card>
+
+        <Card>
+          <CardHeader>
+            <CardTitle>Blog Pages</CardTitle>
+            <CardDescription>All inner blog article pages</CardDescription>
+          </CardHeader>
+          <CardContent>
+            <ul className="grid grid-cols-1 md:grid-cols-2 gap-3">
+              {blogPosts.map((post) => (
+                <li key={post.slug}>
+                  <Link
+                    href={`/blog/${post.slug}`}
+                    className="group flex items-start justify-between gap-3 rounded-lg border border-gray-200 px-4 py-3 text-sm text-gray-700 hover:border-purple-400 hover:text-purple-600 transition-colors"
+                  >
+                    <span className="inline-flex items-start gap-2">
+                      <ChevronRight className="mt-0.5 h-4 w-4 shrink-0" />
+                      {post.title}
+                    </span>
+                    <span className="shrink-0 text-xs text-gray-500 group-hover:text-purple-500">{post.date}</span>
+                  </Link>
+                </li>
+              ))}
             </ul>
           </CardContent>
         </Card>

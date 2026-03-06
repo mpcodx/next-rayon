@@ -6,17 +6,20 @@ import { ArrowLeft, CalendarDays, Clock3, User } from "lucide-react"
 import { blogPosts, getBlogPostBySlug } from "@/lib/blog-data"
 
 interface BlogDetailPageProps {
-  params: {
+  params: Promise<{
     slug: string
-  }
+  }>
 }
+
+export const dynamicParams = false
 
 export function generateStaticParams() {
   return blogPosts.map((post) => ({ slug: post.slug }))
 }
 
-export function generateMetadata({ params }: BlogDetailPageProps): Metadata {
-  const post = getBlogPostBySlug(params.slug)
+export async function generateMetadata({ params }: BlogDetailPageProps): Promise<Metadata> {
+  const { slug } = await params
+  const post = getBlogPostBySlug(slug)
   if (!post) {
     return {
       title: "Blog Not Found",
@@ -29,8 +32,9 @@ export function generateMetadata({ params }: BlogDetailPageProps): Metadata {
   }
 }
 
-export default function BlogDetailPage({ params }: BlogDetailPageProps) {
-  const post = getBlogPostBySlug(params.slug)
+export default async function BlogDetailPage({ params }: BlogDetailPageProps) {
+  const { slug } = await params
+  const post = getBlogPostBySlug(slug)
   if (!post) notFound()
 
   const relatedPosts = blogPosts

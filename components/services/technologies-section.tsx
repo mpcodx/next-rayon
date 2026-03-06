@@ -8,19 +8,31 @@ const technologies = [
     category: "Frontend",
     techs: [
       { name: "React", logo: "/technologies/react.png" },
+      { name: "TypeScript" },
+      { name: "JavaScript" },
       { name: "Next.js", logo: "/technologies/next.png" },
       { name: "Vue.js", logo: "/technologies/vue.png" },
+      { name: "Nuxt.js" },
+      { name: "Redux" },
       { name: "Angular", logo: "/technologies/angularjs.png" },
+      { name: "Svelte" },
       { name: "Tailwind CSS", logo: "/technologies/tailwind.png" },
+      { name: "Bootstrap" },
     ],
   },
   {
     category: "Backend",
     techs: [
       { name: "Node.js", logo: "/technologies/node.png" },
+      { name: "Express.js" },
+      { name: "NestJS" },
       { name: "Python", logo: "/technologies/python.png" },
+      { name: "Django" },
+      { name: "FastAPI" },
       { name: "PHP", logo: "/technologies/php.png" },
+      { name: "Laravel" },
       { name: "Java", logo: "/technologies/java.png" },
+      { name: "Spring Boot" },
       { name: ".NET", logo: "/technologies/net.png" },
     ],
   },
@@ -31,6 +43,10 @@ const technologies = [
       { name: "Flutter", logo: "/technologies/flutter.png" },
       { name: "Swift", logo: "/technologies/swift.png" },
       { name: "Kotlin", logo: "/technologies/kotlin.png" },
+      { name: "Android SDK" },
+      { name: "iOS SDK" },
+      { name: "Expo" },
+      { name: "Firebase" },
     ],
   },
   {
@@ -41,6 +57,42 @@ const technologies = [
       { name: "AWS", logo: "/technologies/aws.png" },
       { name: "Azure", logo: "/technologies/azure.png" },
       { name: "Google Cloud", logo: "/technologies/gcp.jpeg" },
+      { name: "GitHub Actions" },
+      { name: "Jenkins" },
+      { name: "Terraform" },
+      { name: "Helm" },
+      { name: "Nginx" },
+      { name: "Linux" },
+    ],
+  },
+  {
+    category: "Database & Analytics",
+    techs: [
+      { name: "PostgreSQL" },
+      { name: "MySQL" },
+      { name: "MongoDB" },
+      { name: "Redis" },
+      { name: "Elasticsearch" },
+      { name: "BigQuery" },
+      { name: "Snowflake" },
+      { name: "Supabase" },
+    ],
+  },
+  {
+    category: "AI & ML",
+    techs: [
+      { name: "OpenAI API" },
+      { name: "Hugging Face" },
+      { name: "LangChain" },
+      { name: "LlamaIndex" },
+      { name: "PyTorch" },
+      { name: "TensorFlow" },
+      { name: "scikit-learn" },
+      { name: "MLflow" },
+      { name: "Pinecone" },
+      { name: "ChromaDB" },
+      { name: "Apache Airflow" },
+      { name: "Weights & Biases" },
     ],
   },
 ]
@@ -91,7 +143,11 @@ export default function TechnologiesSection() {
                     className="rounded-xl border border-white/10 bg-white/[0.03] p-3 flex items-center gap-3 hover:border-cyan-400/35 transition-colors"
                   >
                     <div className="h-9 w-9 rounded-md bg-slate-900/80 flex items-center justify-center overflow-hidden">
-                      <Image src={tech.logo} alt={tech.name} width={28} height={28} className="object-contain" />
+                      {tech.logo ? (
+                        <Image src={tech.logo} alt={tech.name} width={28} height={28} className="object-contain" />
+                      ) : (
+                        <span className="text-[10px] font-semibold text-cyan-300">{tech.name.slice(0, 2).toUpperCase()}</span>
+                      )}
                     </div>
                     <span className="text-sm text-gray-200 leading-tight">{tech.name}</span>
                   </div>
