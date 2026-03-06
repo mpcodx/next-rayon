@@ -1,6 +1,7 @@
 "use client"
 
 import React, { useCallback, useEffect, useState } from "react"
+import { createPortal } from "react-dom"
 import { motion, AnimatePresence } from "framer-motion"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
@@ -15,6 +16,7 @@ interface BookConsultationModalProps {
 
 export default function BookConsultationModal({ isOpen, onClose, initialService = "" }: BookConsultationModalProps) {
   const [step, setStep] = useState(1)
+  const [isMounted, setIsMounted] = useState(false)
   const [form, setForm] = useState({
     name: "",
     email: "",
@@ -50,6 +52,10 @@ export default function BookConsultationModal({ isOpen, onClose, initialService 
     resetModalState()
     onClose()
   }, [onClose, resetModalState])
+
+  useEffect(() => {
+    setIsMounted(true)
+  }, [])
 
   useEffect(() => {
     if (!isOpen) return
@@ -143,9 +149,9 @@ export default function BookConsultationModal({ isOpen, onClose, initialService 
     }
   }
 
-  if (!isOpen) return null
+  if (!isMounted || !isOpen) return null
 
-  return (
+  return createPortal(
     <AnimatePresence>
       {isOpen && (
         <>
@@ -400,5 +406,7 @@ export default function BookConsultationModal({ isOpen, onClose, initialService 
         </>
       )}
     </AnimatePresence>
+    ,
+    document.body,
   )
 }
