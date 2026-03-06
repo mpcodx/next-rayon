@@ -22,7 +22,7 @@ export default function BookConsultationModal({ isOpen, onClose, initialService 
     email: "",
     phone: "",
     company: "",
-    service: initialService,
+    services: initialService ? [initialService] : [],
     message: "",
   })
   const [isSubmitted, setIsSubmitted] = useState(false)
@@ -45,7 +45,7 @@ export default function BookConsultationModal({ isOpen, onClose, initialService 
     setError("")
     setIsLoading(false)
     setIsSubmitted(false)
-    setForm({ name: "", email: "", phone: "", company: "", service: initialService || "", message: "" })
+    setForm({ name: "", email: "", phone: "", company: "", services: initialService ? [initialService] : [], message: "" })
   }, [initialService])
 
   const handleClose = useCallback(() => {
@@ -76,7 +76,7 @@ export default function BookConsultationModal({ isOpen, onClose, initialService 
   }, [isOpen, handleClose])
 
   useEffect(() => {
-    setForm((prev) => ({ ...prev, service: initialService || "" }))
+    setForm((prev) => ({ ...prev, services: initialService ? [initialService] : [] }))
   }, [initialService])
 
   const validateStep = () => {
@@ -84,7 +84,7 @@ export default function BookConsultationModal({ isOpen, onClose, initialService 
       return form.name.trim() !== "" && form.email.includes("@")
     }
     if (step === 2) {
-      return form.service.trim() !== ""
+      return form.services.length > 0
     }
     if (step === 3) {
       return form.message.trim() !== ""
@@ -117,9 +117,10 @@ export default function BookConsultationModal({ isOpen, onClose, initialService 
     setError("")
 
     try {
+      const selectedServices = form.services.join(", ")
       const payload = {
-        subject: `Consultation Request - ${form.service}`,
-        message: `Name: ${form.name}\nEmail: ${form.email}\nPhone: ${form.phone || "Not provided"}\nCompany: ${form.company || "Not provided"}\nService: ${form.service}\n\nMessage:\n${form.message}`,
+        subject: `Consultation Request - ${selectedServices || "General Inquiry"}`,
+        message: `Name: ${form.name}\nEmail: ${form.email}\nPhone: ${form.phone || "Not provided"}\nCompany: ${form.company || "Not provided"}\nServices: ${selectedServices || "Not selected"}\n\nMessage:\n${form.message}`,
         name: form.name,
         email: form.email,
       }
@@ -299,8 +300,9 @@ export default function BookConsultationModal({ isOpen, onClose, initialService 
                         >
                           <h3 className="text-lg font-semibold text-white flex items-center gap-2 mb-6">
                             <Briefcase className="w-5 h-5 text-purple-500" />
-                            What Service Interests You?
+                            What Services Interest You?
                           </h3>
+                          <p className="text-xs text-gray-400 -mt-4">Select one or more options.</p>
 
                           <div className="grid grid-cols-2 gap-3">
                             {services.map((svc) => (
@@ -309,9 +311,17 @@ export default function BookConsultationModal({ isOpen, onClose, initialService 
                                 type="button"
                                 whileHover={{ scale: 1.02 }}
                                 whileTap={{ scale: 0.98 }}
-                                onClick={() => setForm({ ...form, service: svc.value })}
+                                onClick={() =>
+                                  setForm((prev) => ({
+                                    ...prev,
+                                    services: prev.services.includes(svc.value)
+                                      ? prev.services.filter((value) => value !== svc.value)
+                                      : [...prev.services, svc.value],
+                                  }))
+                                }
+                                aria-pressed={form.services.includes(svc.value)}
                                 className={`p-4 rounded-lg border-2 transition-all text-sm font-medium ${
-                                  form.service === svc.value
+                                  form.services.includes(svc.value)
                                     ? "border-purple-500 bg-purple-500/10 text-white"
                                     : "border-gray-700 bg-gray-800 text-gray-300 hover:border-gray-600"
                                 }`}
