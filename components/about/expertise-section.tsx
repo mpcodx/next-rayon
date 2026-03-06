@@ -1,7 +1,7 @@
 "use client"
 
 import { motion } from "framer-motion"
-import { Code2, Palette, Cloud, Zap } from "lucide-react"
+import { Code2, Palette, Cloud, Zap, Smartphone, TestTube, Database, BookOpen, ShieldCheck } from "lucide-react"
 
 const expertise = [
   {
@@ -28,6 +28,36 @@ const expertise = [
     description: "Intelligent solutions that streamline your business processes",
     skills: ["Machine Learning", "AI Integration", "Automation", "Data Analytics", "APIs"],
   },
+  {
+    icon: Smartphone,
+    title: "Mobile App Engineering",
+    description: "High-performance cross-platform and native apps for iOS and Android",
+    skills: ["React Native", "Flutter", "Kotlin", "Swift", "App Store Deployment"],
+  },
+  {
+    icon: TestTube,
+    title: "QA & Test Automation",
+    description: "Reliable software quality pipelines across web, mobile, and backend",
+    skills: ["Playwright", "Cypress", "Jest", "API Testing", "Performance Testing"],
+  },
+  {
+    icon: Database,
+    title: "Data Engineering & BI",
+    description: "Data pipelines, warehousing, and analytics systems for decision-making",
+    skills: ["ETL Pipelines", "PostgreSQL", "BigQuery", "Data Modeling", "Dashboards"],
+  },
+  {
+    icon: BookOpen,
+    title: "LMS & Platform Integrations",
+    description: "Seamless integrations between LMS, CRM, payments, and third-party tools",
+    skills: ["Moodle", "CRM APIs", "Payment Gateways", "SSO", "SCORM/xAPI"],
+  },
+  {
+    icon: ShieldCheck,
+    title: "Security & Compliance",
+    description: "Secure-by-design implementation practices and compliance-ready systems",
+    skills: ["OWASP", "JWT/OAuth2", "RBAC", "Encryption", "Audit Logging"],
+  },
 ]
 
 export default function ExpertiseSection() {
@@ -52,12 +82,12 @@ export default function ExpertiseSection() {
           </p>
         </motion.div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+        <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-8">
           {expertise.map((item, index) => {
             const Icon = item.icon
             return (
               <motion.div
-                key={index}
+                key={item.title}
                 initial={{ opacity: 0, x: index % 2 === 0 ? -20 : 20 }}
                 whileInView={{ opacity: 1, x: 0 }}
                 transition={{ duration: 0.5, delay: index * 0.1 }}
