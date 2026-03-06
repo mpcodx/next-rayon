@@ -1,9 +1,9 @@
 import { NextRequest, NextResponse } from "next/server"
 import nodemailer from "nodemailer"
 
-const EMAIL_USER = process.env.EMAIL_USER || ""
-const EMAIL_PASS = process.env.EMAIL_PASS || ""
-const EMAIL_TO = process.env.EMAIL_TO || EMAIL_USER
+const EMAIL_USER = (process.env.EMAIL_USER || "").trim()
+const EMAIL_PASS = (process.env.EMAIL_PASS || "").replace(/\s+/g, "")
+const EMAIL_TO = (process.env.EMAIL_TO || EMAIL_USER).trim()
 const EMAIL_FROM_NAME = process.env.EMAIL_FROM_NAME || "Rayon Web Solutions"
 
 const isValidEmail = (value?: string) => Boolean(value && /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value))

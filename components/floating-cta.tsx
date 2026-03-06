@@ -8,19 +8,52 @@ import { X, Bot, Send } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 
+type ChatSender = "bot" | "user"
+type ChatMessage = { text: string; sender: ChatSender }
+type BotStep = "askName" | "askEmail" | "askService" | "askDetails" | "confirmSend" | "done"
+
+const CONTACT_EMAIL = process.env.NEXT_PUBLIC_CONTACT_EMAIL || "contact@rayonweb.com"
+
+const SERVICE_OPTIONS = [
+  "Web Development",
+  "App Development",
+  "DevOps & Cloud",
+  "UI/UX Design",
+  "LMS & Integration",
+  "QA & Automation",
+  "AI & Machine Learning",
+]
+
+const servicePrompt = [
+  "Please choose the service you need (you can type numbers or names, multiple with commas):",
+  ...SERVICE_OPTIONS.map((service, index) => `${index + 1}. ${service}`),
+].join("\n")
+
+const initialOptionPrompt = [
+  "I can help with:",
+  "1. Start consultation request",
+  "2. View services list",
+  "3. Contact details",
+].join("\n")
+
+const EMAIL_REGEX = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
+const EMAIL_IN_TEXT_REGEX = /[^\s@]+@[^\s@]+\.[^\s@]+/
+const CONTACT_QUERY_REGEX = /\b(contact|details|email|reach|support)\b/i
+
 export default function FloatingCTA() {
   const [isVisible, setIsVisible] = useState(false)
   const [isOpen, setIsOpen] = useState(false)
-  const [messages, setMessages] = useState<{ text: string; sender: "bot" | "user" }[]>([])
+  const [messages, setMessages] = useState<ChatMessage[]>([])
   const [inputValue, setInputValue] = useState("")
   const [isTyping, setIsTyping] = useState(false)
+  const [step, setStep] = useState<BotStep>("askName")
+  const [lead, setLead] = useState({
+    name: "",
+    email: "",
+    service: "",
+    details: "",
+  })
   const messagesEndRef = useRef<HTMLDivElement>(null)
-
-  // Initial bot messages
-  const initialMessages = [
-    { text: "👋 Hi there! I'm RayonBot, your digital assistant.", sender: "bot" as const },
-    { text: "How can I help you today?", sender: "bot" as const },
-  ]
 
   // Show the CTA after a delay
   useEffect(() => {
@@ -39,56 +72,237 @@ export default function FloatingCTA() {
   // Initialize chat with bot messages
   useEffect(() => {
     if (isOpen && messages.length === 0) {
-      // Add first message immediately
-      setMessages([initialMessages[0]])
+      const initialMessages: ChatMessage[] = [
+        { text: "👋 Hi there! I'm RayonBot, your digital assistant.", sender: "bot" },
+        { text: "I'll help you with a quick consultation request.", sender: "bot" },
+        { text: initialOptionPrompt, sender: "bot" },
+        { text: "To begin, please share your name.", sender: "bot" },
+      ]
 
-      // Add second message with typing effect
+      setLead({ name: "", email: "", service: "", details: "" })
+      setStep("askName")
+      setMessages([initialMessages[0]])
       setIsTyping(true)
       const timer = setTimeout(() => {
-        setMessages([initialMessages[0], initialMessages[1]])
+        setMessages(initialMessages)
         setIsTyping(false)
-      }, 1500)
+      }, 900)
 
       return () => clearTimeout(timer)
     }
   }, [isOpen])
 
+  const addBotMessage = (text: string, delay = 700) => {
+    setIsTyping(true)
+    setTimeout(() => {
+      setMessages((prev) => [...prev, { text, sender: "bot" }])
+      setIsTyping(false)
+    }, delay)
+  }
+
+  const parseServicesFromInput = (value: string) => {
+    const input = value.trim()
+    if (!input) return []
+
+    const tokens = input.split(",").map((token) => token.trim()).filter(Boolean)
+    const selected: string[] = []
+
+    for (const token of tokens) {
+      const number = Number(token)
+      if (Number.isInteger(number) && number >= 1 && number <= SERVICE_OPTIONS.length) {
+        selected.push(SERVICE_OPTIONS[number - 1])
+        continue
+      }
+
+      const lowerToken = token.toLowerCase()
+      const matched = SERVICE_OPTIONS.find(
+        (service) => service.toLowerCase() === lowerToken || service.toLowerCase().includes(lowerToken),
+      )
+
+      if (matched) {
+        selected.push(matched)
+      }
+    }
+
+    if (selected.length === 0) {
+      const lowerInput = input.toLowerCase()
+      const includesMatches = SERVICE_OPTIONS.filter((service) => lowerInput.includes(service.toLowerCase()))
+      selected.push(...includesMatches)
+    }
+
+    if (selected.length === 0 && input.length > 2) {
+      selected.push(input)
+    }
+
+    return Array.from(new Set(selected))
+  }
+
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault()
     if (!inputValue.trim()) return
 
+    const userText = inputValue.trim()
+    const lowerText = userText.toLowerCase()
+    const emailFromText = userText.match(EMAIL_IN_TEXT_REGEX)?.[0] || ""
+
     // Add user message
-    const userMessage = { text: inputValue, sender: "user" as const }
-    setMessages([...messages, userMessage])
+    const userMessage = { text: userText, sender: "user" as const }
+    setMessages((prev) => [...prev, userMessage])
     setInputValue("")
 
-    // Simulate bot typing
-    setIsTyping(true)
+    if (CONTACT_QUERY_REGEX.test(userText) && !(step === "askEmail" && EMAIL_REGEX.test(emailFromText || userText))) {
+      addBotMessage(`You can contact us at ${CONTACT_EMAIL}.`)
+      if (step === "askName") addBotMessage("Please share your name to continue.")
+      if (step === "askEmail") addBotMessage("Please share your email address.")
+      if (step === "askService") addBotMessage(servicePrompt)
+      if (step === "askDetails") addBotMessage("Please share your project details in 1-2 lines.")
+      if (step === "confirmSend") addBotMessage("Type SEND to submit this consultation request.")
+      return
+    }
 
-    // Generate bot response based on user input
-    setTimeout(() => {
-      let botResponse = ""
-      const userText = inputValue.toLowerCase()
-
-      if (userText.includes("pricing") || userText.includes("cost") || userText.includes("price")) {
-        botResponse =
-          "Our pricing depends on your specific project needs. Would you like to schedule a free consultation to discuss your requirements?"
-      } else if (userText.includes("contact") || userText.includes("talk") || userText.includes("speak")) {
-        botResponse =
-          "You can reach our team at contact@rayonweb.com or schedule a call directly through our calendar. Would you like me to set that up for you?"
-      } else if (userText.includes("service") || userText.includes("offer")) {
-        botResponse =
-          "We offer web development, app development, DevOps & cloud services, UI/UX design, LMS & integration, and QA & automation. Which service are you interested in learning more about?"
-      } else if (userText.includes("hello") || userText.includes("hi") || userText.includes("hey")) {
-        botResponse = "Hello! How can I assist you with your digital project today?"
-      } else {
-        botResponse =
-          "Thanks for reaching out! Would you like to schedule a free consultation with our team to discuss your project?"
+    if (step === "askName") {
+      if (lowerText === "1" || lowerText.includes("start")) {
+        addBotMessage("Great, let's begin. Please share your name.")
+        return
       }
 
-      setMessages((prev) => [...prev, { text: botResponse, sender: "bot" }])
-      setIsTyping(false)
-    }, 1500)
+      if (lowerText === "2" || lowerText.includes("service") || lowerText.includes("list") || lowerText.includes("option")) {
+        addBotMessage(servicePrompt)
+        addBotMessage("Now share your name to continue.")
+        return
+      }
+
+      if (lowerText === "3") {
+        addBotMessage(`You can contact us at ${CONTACT_EMAIL}.`)
+        addBotMessage("Now share your name to continue.")
+        return
+      }
+
+      if (userText.length < 2) {
+        addBotMessage("Please enter a valid name.")
+        return
+      }
+
+      setLead((prev) => ({ ...prev, name: userText }))
+      setStep("askEmail")
+      addBotMessage(`Nice to meet you, ${userText}. What's your email address?`)
+      return
+    }
+
+    if (step === "askEmail") {
+      const normalizedEmail = emailFromText || userText
+      if (!EMAIL_REGEX.test(normalizedEmail)) {
+        addBotMessage("Please enter a valid email address (example: name@company.com).")
+        return
+      }
+
+      setLead((prev) => ({ ...prev, email: normalizedEmail }))
+      setStep("askService")
+      addBotMessage(servicePrompt)
+      return
+    }
+
+    if (step === "askService") {
+      if (lowerText.includes("list") || lowerText.includes("service")) {
+        addBotMessage(servicePrompt)
+        return
+      }
+
+      const selectedServices = parseServicesFromInput(userText)
+      if (selectedServices.length === 0) {
+        addBotMessage(`I couldn't identify the service. ${servicePrompt}`)
+        return
+      }
+
+      const serviceText = selectedServices.join(", ")
+      setLead((prev) => ({ ...prev, service: serviceText }))
+      setStep("askDetails")
+      addBotMessage(`Great choice: ${serviceText}. Now tell me a short project requirement.`)
+      return
+    }
+
+    if (step === "askDetails") {
+      if (userText.length < 8) {
+        addBotMessage("Please add a bit more detail so our team can help better.")
+        return
+      }
+
+      const currentLead = { ...lead, details: userText }
+      setLead(currentLead)
+      setStep("confirmSend")
+      addBotMessage(
+        `Perfect. Please confirm:\nName: ${currentLead.name}\nEmail: ${currentLead.email}\nService: ${currentLead.service}\nRequirement: ${currentLead.details}\n\nType SEND to submit or CHANGE to update details.`,
+      )
+      return
+    }
+
+    if (step === "confirmSend") {
+      if (lowerText.includes("change") || lowerText.includes("edit")) {
+        setStep("askDetails")
+        addBotMessage("Please share the updated project requirement.")
+        return
+      }
+
+      if (!(lowerText === "send" || lowerText.includes("confirm") || lowerText.includes("yes"))) {
+        addBotMessage("Please type SEND to submit or CHANGE to edit.")
+        return
+      }
+
+      const subject = `Via RayonBot | ${lead.name} | ${lead.email} | ${lead.service || "General Inquiry"}`
+      const message = `Name: ${lead.name}\nEmail: ${lead.email}\nService: ${lead.service}\nRequirement:\n${lead.details}`
+
+      setIsTyping(true)
+      fetch("/api/send-email", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          subject,
+          message,
+          name: lead.name,
+          email: lead.email,
+          replyTo: lead.email,
+        }),
+      })
+        .then(async (res) => {
+          if (!res.ok) {
+            const data = await res.json().catch(() => ({}))
+            throw new Error(data?.message || "Failed to send")
+          }
+
+          setStep("done")
+          setMessages((prev) => [
+            ...prev,
+            {
+              text: "Thanks! Your request has been sent to our team. We will contact you shortly.",
+              sender: "bot",
+            },
+          ])
+        })
+        .catch(() => {
+          setMessages((prev) => [
+            ...prev,
+            {
+              text: `I couldn't send your request right now. Please email us directly at ${CONTACT_EMAIL}.`,
+              sender: "bot",
+            },
+          ])
+        })
+        .finally(() => {
+          setIsTyping(false)
+        })
+
+      return
+    }
+
+    if (step === "done") {
+      if (lowerText.includes("new") || lowerText.includes("restart") || lowerText.includes("start")) {
+        setLead({ name: "", email: "", service: "", details: "" })
+        setStep("askName")
+        addBotMessage("Sure, let's start a new request. What's your name?", 300)
+      } else {
+        addBotMessage(`For any quick help, you can also email us at ${CONTACT_EMAIL}.`)
+      }
+    }
   }
 
   if (!isVisible) return null
@@ -116,7 +330,11 @@ export default function FloatingCTA() {
                 </div>
               </div>
               <button
-                onClick={() => setIsOpen(false)}
+                onClick={() => {
+                  setIsOpen(false)
+                  setInputValue("")
+                  setIsTyping(false)
+                }}
                 className="text-white/80 hover:text-white rounded-full p-1 hover:bg-white/10 transition-colors"
                 aria-label="Close chat"
               >
@@ -140,7 +358,7 @@ export default function FloatingCTA() {
                         : "bg-gradient-to-r from-cyan-500 to-blue-600 text-white ml-2"
                     }`}
                   >
-                    <p className="text-sm">{message.text}</p>
+                    <p className="text-sm whitespace-pre-line">{message.text}</p>
                   </div>
                 </div>
               ))}
@@ -180,11 +398,13 @@ export default function FloatingCTA() {
                 placeholder="Type your message..."
                 value={inputValue}
                 onChange={(e) => setInputValue(e.target.value)}
+                disabled={isTyping}
                 className="text-white"
               />
               <Button
                 type="submit"
                 size="icon"
+                disabled={isTyping || !inputValue.trim()}
                 className="bg-gradient-to-r from-cyan-500 to-blue-600 hover:from-cyan-400 hover:to-blue-500"
               >
                 <Send className="h-4 w-4" />
@@ -198,7 +418,14 @@ export default function FloatingCTA() {
             exit={{ opacity: 0, scale: 0.9 }}
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
-            onClick={() => setIsOpen(true)}
+            onClick={() => {
+              setMessages([])
+              setLead({ name: "", email: "", service: "", details: "" })
+              setStep("askName")
+              setInputValue("")
+              setIsTyping(false)
+              setIsOpen(true)
+            }}
             className="bg-gradient-to-r from-cyan-500 to-blue-600 hover:from-cyan-400 hover:to-blue-500 text-white rounded-full p-4 shadow-lg flex items-center justify-center neon-glow"
             aria-label="Open chat"
           >
