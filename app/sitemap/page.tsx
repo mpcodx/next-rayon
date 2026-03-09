@@ -53,6 +53,15 @@ export default function SitemapPage() {
               </li>
               <li>
                 <Link
+                  href="/software-development-company"
+                  className="flex items-center text-purple-500 hover:text-purple-600 transition-colors"
+                >
+                  <ChevronRight className="h-4 w-4 mr-2" />
+                  Software Development Company
+                </Link>
+              </li>
+              <li>
+                <Link
                   href="/projects"
                   className="flex items-center text-purple-500 hover:text-purple-600 transition-colors"
                 >

@@ -96,6 +96,9 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en" suppressHydrationWarning>
+      <head>
+        <meta name="msvalidate.01" content="748E26A926DC8DFC1F0DE9D34CBBBA2C" />
+      </head>
       <body
         className={`${manrope.variable} ${spaceGrotesk.variable} font-sans antialiased text-gray-100 min-h-screen`}
       >
