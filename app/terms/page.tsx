@@ -1,5 +1,8 @@
 import LegalHero from "@/components/legal/legal-hero"
 import LegalContent from "@/components/legal/legal-content"
+import { getPageMetadata } from "@/lib/seo"
+
+export const metadata = getPageMetadata("/terms")
 
 export default function TermsPage() {
   const pageData = {

@@ -3,6 +3,9 @@ import CareersOpenings from "@/components/careers/careers-openings"
 import CareersPerks from "@/components/careers/careers-perks"
 import CareersValues from "@/components/careers/careers-values"
 import CareersCTA from "@/components/careers/careers-cta"
+import { getPageMetadata } from "@/lib/seo"
+
+export const metadata = getPageMetadata("/careers")
 
 export default function CareersPage() {
   return (

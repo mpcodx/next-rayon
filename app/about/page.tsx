@@ -5,6 +5,9 @@ import MissionValues from "@/components/about/mission-values"
 import CerberSection from "@/components/about/cerber-section"
 import AchievementsSection from "@/components/about/achievements-section"
 import ExpertiseSection from "@/components/about/expertise-section"
+import { getPageMetadata } from "@/lib/seo"
+
+export const metadata = getPageMetadata("/about")
 
 export default function AboutPage() {
   return (

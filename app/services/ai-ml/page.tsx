@@ -5,6 +5,9 @@ import ServiceCaseStudies from "@/components/services/service-case-studies"
 import ServiceFAQ from "@/components/services/service-faq"
 import ServiceCTA from "@/components/services/service-cta"
 import { Brain, Cpu, Database, Code, Bot, Eye, LineChart, ShieldCheck } from "lucide-react"
+import { getPageMetadata } from "@/lib/seo"
+
+export const metadata = getPageMetadata("/services/ai-ml")
 
 export default function AIMLPage() {
   const serviceData = {

@@ -8,39 +8,9 @@ import FeaturedServices from "@/components/home/featured-services"
 import Testimonials from "@/components/home/testimonials"
 import ClientLogos from "@/components/home/client-logos"
 import CTASection from "@/components/home/cta-section"
+import { DEFAULT_OG_IMAGE_URL, SITE_NAME, SITE_URL, getPageMetadata } from "@/lib/seo"
 
-export const metadata: Metadata = {
-  title: "Web, App, AI & Cloud Development Company",
-  description:
-    "Rayon Web Solutions builds high-performance web apps, mobile apps, AI/ML systems, DevOps pipelines, and UX-led digital products for growing businesses.",
-  alternates: {
-    canonical: "/",
-  },
-  openGraph: {
-    title: "Web, App, AI & Cloud Development Company | Rayon Web Solutions",
-    description:
-      "Engineering-first partner for web platforms, mobile apps, DevOps, and AI/ML product development.",
-    url: "https://rayonweb.com",
-    siteName: "Rayon Web Solutions",
-    images: [
-      {
-        url: "https://rayonweb.com/images/new-1.png",
-        width: 1200,
-        height: 630,
-        alt: "Rayon Web Solutions - Software Development Partner",
-      },
-    ],
-    locale: "en_US",
-    type: "website",
-  },
-  twitter: {
-    card: "summary_large_image",
-    title: "Web, App, AI & Cloud Development Company | Rayon Web Solutions",
-    description:
-      "Build secure and scalable digital products with Rayon Web Solutions.",
-    images: ["https://rayonweb.com/images/new-1.png"],
-  },
-}
+export const metadata: Metadata = getPageMetadata("/")
 
 // Dynamically import the heavy Hero component
 const Hero = dynamic(() => import("@/components/home/hero"), {
@@ -61,10 +31,10 @@ export default function Home() {
   const organizationSchema = {
     "@context": "https://schema.org",
     "@type": "Organization",
-    name: "Rayon Web Solutions",
-    url: "https://rayonweb.com",
+    name: SITE_NAME,
+    url: SITE_URL,
     email: "info@rayonweb.com",
-    logo: "https://rayonweb.com/images/new-1.png",
+    logo: DEFAULT_OG_IMAGE_URL,
     description:
       "Software development company delivering web, app, AI/ML, DevOps, and UI/UX services.",
   }
@@ -72,8 +42,8 @@ export default function Home() {
   const websiteSchema = {
     "@context": "https://schema.org",
     "@type": "WebSite",
-    name: "Rayon Web Solutions",
-    url: "https://rayonweb.com",
+    name: SITE_NAME,
+    url: SITE_URL,
   }
 
   return (

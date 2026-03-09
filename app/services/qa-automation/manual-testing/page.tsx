@@ -4,6 +4,9 @@ import SubServiceProcess from "@/components/services/sub-service-process"
 import SubServiceTechnologies from "@/components/services/sub-service-technologies"
 import SubServiceFAQ from "@/components/services/sub-service-faq"
 import SubServiceCTA from "@/components/services/sub-service-cta"
+import { getPageMetadata } from "@/lib/seo"
+
+export const metadata = getPageMetadata("/services/qa-automation/manual-testing")
 
 export default function ManualTestingPage() {
   const serviceData = {

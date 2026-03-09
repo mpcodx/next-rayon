@@ -4,6 +4,9 @@ import EnhancedContactInfo from "@/components/contact/enhanced-contact-info"
 import ContactMap from "@/components/contact/contact-map"
 import ContactFAQ from "@/components/contact/contact-faq"
 import ContactCTA from "@/components/contact/contact-cta"
+import { getPageMetadata } from "@/lib/seo"
+
+export const metadata = getPageMetadata("/contact")
 
 export default function ContactPage() {
   return (

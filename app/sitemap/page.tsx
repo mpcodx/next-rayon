@@ -3,11 +3,9 @@ import Link from "next/link"
 import { ArrowRight, ChevronRight } from "lucide-react"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { blogPosts } from "@/lib/blog-data"
+import { getPageMetadata } from "@/lib/seo"
 
-export const metadata: Metadata = {
-  title: "Sitemap | Rayon Web Solutions",
-  description: "Complete sitemap of Rayon Web Solutions website with links to all pages and services.",
-}
+export const metadata: Metadata = getPageMetadata("/sitemap")
 
 export default function SitemapPage() {
   return (

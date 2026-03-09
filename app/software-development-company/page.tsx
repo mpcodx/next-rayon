@@ -16,11 +16,12 @@ import {
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
+import { DEFAULT_OG_IMAGE_URL, SITE_NAME, SITE_URL, buildPageMetadata } from "@/lib/seo"
 
 const pageTitle = "Web, AI & Software Development Company | Rayon Web Solutions"
 const pageDescription =
   "Rayon Web Solutions delivers web development, AI solutions, and custom software for startups, businesses, and enterprises worldwide with expert delivery."
-const pageUrl = "https://rayonweb.com/software-development-company/"
+const pageUrl = `${SITE_URL}/software-development-company`
 const inlineLinkClass = "text-cyan-300 underline-offset-4 hover:text-cyan-200 hover:underline"
 
 const servicePillars = [
@@ -133,11 +134,10 @@ const relatedPages = [
   { label: "About Us", href: "/about" },
 ] as const
 
-export const metadata: Metadata = {
-  title: {
-    absolute: pageTitle,
-  },
+export const metadata: Metadata = buildPageMetadata({
+  title: pageTitle,
   description: pageDescription,
+  path: "/software-development-company",
   keywords: [
     "software development company",
     "web development company",
@@ -153,42 +153,18 @@ export const metadata: Metadata = {
     "mobile app development",
     "technical SEO web development",
   ],
-  alternates: {
-    canonical: "/software-development-company/",
-  },
-  openGraph: {
-    title: pageTitle,
-    description: pageDescription,
-    url: pageUrl,
-    siteName: "Rayon Web Solutions",
-    images: [
-      {
-        url: "https://rayonweb.com/images/new-1.png",
-        width: 1200,
-        height: 630,
-        alt: "Rayon Web Solutions web, AI, and software development services",
-      },
-    ],
-    locale: "en_US",
-    type: "website",
-  },
-  twitter: {
-    card: "summary_large_image",
-    title: pageTitle,
-    description: pageDescription,
-    images: ["https://rayonweb.com/images/new-1.png"],
-  },
-}
+  imageAlt: "Rayon Web Solutions web, AI, and software development services",
+})
 
 const structuredData = {
   "@context": "https://schema.org",
   "@graph": [
     {
       "@type": "Organization",
-      "@id": "https://rayonweb.com/#organization",
-      name: "Rayon Web Solutions",
-      url: "https://rayonweb.com",
-      logo: "https://rayonweb.com/images/new-1.png",
+      "@id": `${SITE_URL}/#organization`,
+      name: SITE_NAME,
+      url: SITE_URL,
+      logo: DEFAULT_OG_IMAGE_URL,
       email: "info@rayonweb.com",
       description:
         "Global software development company delivering web development, AI solutions, and custom software services.",
@@ -196,11 +172,11 @@ const structuredData = {
     },
     {
       "@type": "WebSite",
-      "@id": "https://rayonweb.com/#website",
-      url: "https://rayonweb.com",
-      name: "Rayon Web Solutions",
+      "@id": `${SITE_URL}/#website`,
+      url: SITE_URL,
+      name: SITE_NAME,
       publisher: {
-        "@id": "https://rayonweb.com/#organization",
+        "@id": `${SITE_URL}/#organization`,
       },
     },
     {
@@ -211,7 +187,7 @@ const structuredData = {
           "@type": "ListItem",
           position: 1,
           name: "Home",
-          item: "https://rayonweb.com/",
+          item: SITE_URL,
         },
         {
           "@type": "ListItem",
@@ -228,10 +204,10 @@ const structuredData = {
       name: pageTitle,
       description: pageDescription,
       isPartOf: {
-        "@id": "https://rayonweb.com/#website",
+        "@id": `${SITE_URL}/#website`,
       },
       about: {
-        "@id": "https://rayonweb.com/#organization",
+        "@id": `${SITE_URL}/#organization`,
       },
       inLanguage: "en",
       breadcrumb: {
@@ -244,7 +220,7 @@ const structuredData = {
       name: "Web, AI & Software Development Services",
       url: pageUrl,
       provider: {
-        "@id": "https://rayonweb.com/#organization",
+        "@id": `${SITE_URL}/#organization`,
       },
       areaServed: "Worldwide",
       serviceType: ["Web Development", "AI Solutions", "Custom Software Development"],

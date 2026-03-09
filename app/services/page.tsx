@@ -3,6 +3,9 @@ import ServicesList from "@/components/services/services-list"
 import ProcessSection from "@/components/services/process-section"
 import TechnologiesSection from "@/components/services/technologies-section"
 import ServicesCTA from "@/components/services/services-cta"
+import { getPageMetadata } from "@/lib/seo"
+
+export const metadata = getPageMetadata("/services")
 
 export default function ServicesPage() {
   return (

@@ -18,12 +18,9 @@ import {
   Users,
 } from "lucide-react"
 import { trainingContactDetails, trainingCourseCategories } from "@/lib/training-course-data"
+import { getPageMetadata } from "@/lib/seo"
 
-export const metadata: Metadata = {
-  title: "Training Courses | Rayon Web Solutions",
-  description:
-    "Explore detailed training programs in Full-Stack, MEAN/MERN, Mobile, DevOps, UI/UX, AI, and Cybersecurity with live mentorship.",
-}
+export const metadata: Metadata = getPageMetadata("/training/courses")
 
 const iconByCategory = {
   web: Code,

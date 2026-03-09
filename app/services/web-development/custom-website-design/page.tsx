@@ -3,6 +3,9 @@ import SubServiceFeatures from "@/components/services/sub-service-features"
 import SubServiceProcess from "@/components/services/sub-service-process"
 import SubServiceTechnologies from "@/components/services/sub-service-technologies"
 import SubServiceCTA from "@/components/services/sub-service-cta"
+import { getPageMetadata } from "@/lib/seo"
+
+export const metadata = getPageMetadata("/services/web-development/custom-website-design")
 
 export default function CustomWebsiteDesignPage() {
   const serviceData = {

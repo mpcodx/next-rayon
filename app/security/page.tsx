@@ -5,11 +5,9 @@ import SecurityCertifications from "@/components/security/security-certification
 import SecurityProcess from "@/components/security/security-process"
 import SecurityFAQ from "@/components/security/security-faq"
 import SecurityCTA from "@/components/security/security-cta"
+import { getPageMetadata } from "@/lib/seo"
 
-export const metadata: Metadata = {
-  title: "Security | Rayon Web Solutions",
-  description: "Learn about our comprehensive security measures and how we protect your data and applications.",
-}
+export const metadata: Metadata = getPageMetadata("/security")
 
 export default function SecurityPage() {
   return (

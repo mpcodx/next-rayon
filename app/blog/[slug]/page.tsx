@@ -4,6 +4,7 @@ import Link from "next/link"
 import { notFound } from "next/navigation"
 import { ArrowLeft, CalendarDays, Clock3, User } from "lucide-react"
 import { blogPosts, getBlogPostBySlug } from "@/lib/blog-data"
+import { SITE_NAME, buildPageMetadata } from "@/lib/seo"
 
 interface BlogDetailPageProps {
   params: Promise<{
@@ -27,8 +28,31 @@ export async function generateMetadata({ params }: BlogDetailPageProps): Promise
   }
 
   return {
-    title: post.title,
-    description: post.excerpt,
+    ...buildPageMetadata({
+      title: `${post.title} | ${SITE_NAME}`,
+      description: post.excerpt,
+      path: `/blog/${post.slug}`,
+      image: post.image,
+      imageAlt: post.title,
+    }),
+    openGraph: {
+      title: `${post.title} | ${SITE_NAME}`,
+      description: post.excerpt,
+      url: `/blog/${post.slug}`,
+      siteName: SITE_NAME,
+      images: [
+        {
+          url: post.image,
+          width: 1200,
+          height: 630,
+          alt: post.title,
+        },
+      ],
+      locale: "en_US",
+      type: "article",
+      publishedTime: new Date(post.date).toISOString(),
+      authors: [post.author],
+    },
   }
 }
 

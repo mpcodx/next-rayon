@@ -1,4 +1,5 @@
 import type { MetadataRoute } from "next"
+import { SITE_URL } from "@/lib/seo"
 
 export default function robots(): MetadataRoute.Robots {
   return {
@@ -6,7 +7,7 @@ export default function robots(): MetadataRoute.Robots {
       userAgent: "*",
       allow: "/",
     },
-    host: "https://rayonweb.com",
-    sitemap: "https://rayonweb.com/sitemap.xml",
+    host: SITE_URL,
+    sitemap: `${SITE_URL}/sitemap.xml`,
   }
 }

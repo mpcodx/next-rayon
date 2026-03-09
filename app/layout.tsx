@@ -6,6 +6,7 @@ import Navbar from "@/components/navbar"
 import Footer from "@/components/footer"
 import FloatingCTA from "@/components/floating-cta"
 import Script from "next/script"
+import { DEFAULT_OG_IMAGE_URL, SITE_NAME, SITE_URL } from "@/lib/seo"
 
 // Optimize font loading
 const manrope = Manrope({
@@ -22,8 +23,8 @@ const spaceGrotesk = Space_Grotesk({
 
 export const metadata: Metadata = {
   title: {
-    default: "Rayon Web Solutions | Your Vision, Our Code",
-    template: "%s | Rayon Web Solutions",
+    default: `${SITE_NAME} | Your Vision, Our Code`,
+    template: `%s | ${SITE_NAME}`,
   },
   description:
     "Software development company for web, mobile, AI/ML, DevOps, QA, and UI/UX services. We design and build scalable digital products for startups and enterprises.",
@@ -44,13 +45,10 @@ export const metadata: Metadata = {
     "AI Development",
     "Machine Learning Services",
   ],
-  authors: [{ name: "Rayon Web Solutions", url: "https://rayonweb.com" }],
-  creator: "Rayon Web Solutions",
-  publisher: "Rayon Web Solutions",
-  metadataBase: new URL("https://rayonweb.com"),
-  alternates: {
-    canonical: "/",
-  },
+  authors: [{ name: SITE_NAME, url: SITE_URL }],
+  creator: SITE_NAME,
+  publisher: SITE_NAME,
+  metadataBase: new URL(SITE_URL),
   robots: {
     index: true,
     follow: true,
@@ -63,17 +61,13 @@ export const metadata: Metadata = {
     },
   },
   openGraph: {
-    title: "Rayon Web Solutions | Your Vision, Our Code",
-    description:
-      "Software development partner for web apps, mobile apps, AI/ML systems, and cloud-native engineering.",
-    url: "https://rayonweb.com",
-    siteName: "Rayon Web Solutions",
+    siteName: SITE_NAME,
     images: [
       {
-        url: "https://rayonweb.com/images/new-1.png",
+        url: DEFAULT_OG_IMAGE_URL,
         width: 1200,
         height: 630,
-        alt: "Rayon Web Solutions Banner",
+        alt: `${SITE_NAME} banner`,
       },
     ],
     locale: "en_US",
@@ -81,10 +75,7 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "Rayon Web Solutions | Your Vision, Our Code",
-    description:
-      "We build modern web, app, cloud, and AI solutions tailored to your business goals.",
-    images: ["https://rayonweb.com/images/new-1.png"],
+    images: [DEFAULT_OG_IMAGE_URL],
     creator: "@rayonweb",
   },
 }

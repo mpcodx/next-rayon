@@ -4,6 +4,9 @@ import ServiceProcess from "@/components/services/service-process"
 import ServiceCaseStudies from "@/components/services/service-case-studies"
 import ServiceFAQ from "@/components/services/service-faq"
 import ServiceCTA from "@/components/services/service-cta"
+import { getPageMetadata } from "@/lib/seo"
+
+export const metadata = getPageMetadata("/services/app-development")
 
 export default function AppDevelopmentPage() {
   const serviceData = {
