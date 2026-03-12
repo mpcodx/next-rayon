@@ -1,7 +1,7 @@
 import type { Metadata } from "next"
 
 export const SITE_NAME = "Rayon Web Solutions"
-export const SITE_URL = (process.env.NEXT_PUBLIC_SITE_URL || "https://rayonweb.com").replace(/\/$/, "")
+export const SITE_URL = (process.env.NEXT_PUBLIC_SITE_URL || "https://www.rayonweb.com").replace(/\/$/, "")
 export const DEFAULT_OG_IMAGE_PATH = "/new-1.png"
 export const DEFAULT_OG_IMAGE_URL = `${SITE_URL}${DEFAULT_OG_IMAGE_PATH}`
 
