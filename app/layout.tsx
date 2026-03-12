@@ -7,6 +7,7 @@ import Footer from "@/components/footer"
 import FloatingCTA from "@/components/floating-cta"
 import Script from "next/script"
 import { DEFAULT_OG_IMAGE_URL, SITE_NAME, SITE_URL } from "@/lib/seo"
+import ScrollToTop from "@/components/scroll-to-top"
 
 // Optimize font loading
 const manrope = Manrope({
@@ -93,6 +94,7 @@ export default function RootLayout({
       <body
         className={`${manrope.variable} ${spaceGrotesk.variable} font-sans antialiased text-gray-100 min-h-screen`}
       >
+        <ScrollToTop />
         {/* Google Analytics */}
         <Script
           strategy="afterInteractive"
