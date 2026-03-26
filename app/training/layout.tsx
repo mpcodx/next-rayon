@@ -4,10 +4,6 @@ import { getPageMetadata } from "@/lib/seo"
 
 export const metadata: Metadata = getPageMetadata("/training")
 
-export default function TrainingLayout({
-  children,
-}: {
-  children: ReactNode
-}) {
+export default function TrainingLayout({ children }: { children: ReactNode }) {
   return children
 }

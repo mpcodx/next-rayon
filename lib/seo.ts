@@ -16,17 +16,17 @@ export const PAGE_SEO: Record<string, PageSeo> = {
   "/": {
     title: "Web, App, AI & Cloud Development Company | Rayon Web Solutions",
     description:
-      "Rayon Web Solutions builds high-performance web apps, mobile apps, AI/ML systems, DevOps pipelines, and UX-led digital products for growing businesses.",
+      "Rayon Web Solutions builds web, mobile, AI/ML, and DevOps products with strategy, design, and engineering that help startups and enterprises grow faster.",
   },
   "/about": {
     title: "About Rayon Web Solutions | Product and Engineering Partner",
     description:
-      "Learn how Rayon Web Solutions helps startups and enterprises build scalable digital products with strategy, design, development, and AI.",
+      "Meet Rayon Web Solutions, product and engineering partners helping startups and enterprises plan, design, build, and scale digital products with AI.",
   },
   "/blog": {
     title: "Software, AI & Product Engineering Insights | Rayon Web Solutions",
     description:
-      "Read practical articles from Rayon Web Solutions on web engineering, mobile delivery, AI integration, DevOps, UX, and product execution.",
+      "Read practical articles on web engineering, mobile delivery, AI integration, DevOps, UX, and product execution from the Rayon Web team and partners.",
   },
   "/careers": {
     title: "Careers | Rayon Web Solutions",
@@ -36,7 +36,7 @@ export const PAGE_SEO: Record<string, PageSeo> = {
   "/contact": {
     title: "Contact Rayon Web Solutions | Start Your Project",
     description:
-      "Talk to Rayon Web Solutions about web development, AI, app development, DevOps, UI/UX, QA, and custom software projects.",
+      "Talk to Rayon Web Solutions about web development, AI, app development, DevOps, UI/UX, QA, and custom software engagements tailored to your goals.",
   },
   "/faq": {
     title: "FAQ | Rayon Web Solutions",
@@ -50,7 +50,7 @@ export const PAGE_SEO: Record<string, PageSeo> = {
   "/projects": {
     title: "Projects | Rayon Web Solutions",
     description:
-      "See selected website, software, and digital product work delivered by Rayon Web Solutions.",
+      "Browse selected projects from Rayon Web Solutions, including web platforms, LMS systems, and product redesigns built for growth, reliability, and conversion.",
   },
   "/security": {
     title: "Security Practices | Rayon Web Solutions",
@@ -60,7 +60,7 @@ export const PAGE_SEO: Record<string, PageSeo> = {
   "/services": {
     title: "Software Development Services | Rayon Web Solutions",
     description:
-      "Explore web development, app development, AI solutions, DevOps, QA, UI/UX, and LMS services built for startups and enterprises.",
+      "Explore web, app, AI, DevOps, QA, UI/UX, and LMS services delivered by cross-functional teams focused on measurable product outcomes and faster releases.",
   },
   "/software-development-company": {
     title: "Web, AI & Software Development Company | Rayon Web Solutions",
@@ -269,6 +269,9 @@ export const PAGE_SEO: Record<string, PageSeo> = {
 }
 
 export const SEO_PAGE_PATHS = Object.keys(PAGE_SEO)
+export const SITEMAP_PATHS = Object.entries(PAGE_SEO)
+  .filter(([, seo]) => !seo.noIndex)
+  .map(([path]) => path)
 
 function normalizePath(path: string) {
   if (!path || path === "/") return "/"

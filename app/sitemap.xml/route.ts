@@ -1,19 +1,15 @@
 import { blogPosts } from "@/lib/blog-data"
-import { SEO_PAGE_PATHS, SITE_URL } from "@/lib/seo"
+import { projects } from "@/lib/projects-data"
+import { SITEMAP_PATHS, SITE_URL } from "@/lib/seo"
 
-const staticRoutes = [
-  ...SEO_PAGE_PATHS,
-  "/projects",
-  "/careers",
-  "/privacy-policy",
-  "/terms",
-]
+const staticRoutes = [...SITEMAP_PATHS]
 
 const blogRoutes = blogPosts.map((post) => `/blog/${post.slug}`)
+const projectRoutes = projects.map((project) => `/projects/${project.slug}`)
 
 export function GET() {
   const now = new Date().toISOString()
-  const allRoutes = [...new Set([...staticRoutes, ...blogRoutes])]
+  const allRoutes = [...new Set([...staticRoutes, ...blogRoutes, ...projectRoutes])]
 
   const xml = `<?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">

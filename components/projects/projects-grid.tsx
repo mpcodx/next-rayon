@@ -3,79 +3,30 @@
 import { motion } from "framer-motion"
 import Image from "next/image"
 import Link from "next/link"
-
-// Sample project data
-const projects = [
-  {
-    id: 1,
-    title: "E-commerce Platform",
-    category: "Web Development",
-    image: "/projects/p1.png?height=600&width=800",
-    description: "A full-featured e-commerce platform with payment integration and inventory management.",
-    link: "#",
-  },
-  {
-    id: 2,
-    title: "E-commerce Platform",
-    category: "Web Development",
-    image: "/projects/p2.png?height=600&width=800",
-    description: "A full-featured e-commerce platform with payment integration and inventory management.",
-    link: "#",
-  },
-  {
-    id: 3,
-    title: "E-commerce Platform",
-    category: "Web Development",
-    image: "/projects/p3.png?height=600&width=800",
-    description: "A full-featured e-commerce platform with payment integration and inventory management.",
-    link: "#",
-  },
-  {
-    id: 4,
-    title: "E-commerce Platform",
-    category: "Web Development",
-    image: "/projects/p4.png?height=600&width=800",
-    description: "A full-featured e-commerce platform with payment integration and inventory management.",
-    link: "#",
-  },
-  {
-    id: 5,
-    title: "E-commerce Platform",
-    category: "Web Development",
-    image: "/projects/p5.png?height=600&width=800",
-    description: "A full-featured e-commerce platform with payment integration and inventory management.",
-    link: "#",
-  },
-  {
-    id: 6,
-    title: "Learning Management System",
-    category: "LMS & Integration",
-    image: "/projects/p6.png?height=600&width=800",
-    description: "A comprehensive LMS with course creation, student management, and payment processing.",
-    link: "#",
-  },
-  {
-    id: 7,
-    title: "E-commerce Platform",
-    category: "Web Development",
-    image: "/projects/p7.png?height=600&width=800",
-    description: "A full-featured e-commerce platform with payment integration and inventory management.",
-    link: "#",
-  },
-  {
-    id: 8,
-    title: "Quizzes Platform",
-    category: "UI/UX Design",
-    image: "/projects/p8.png?height=600&width=800",
-    description: "A full-featured quizzes platform with payment integration management.",
-    link: "#",
-  },
-]
+import { projects } from "@/lib/projects-data"
 
 export default function ProjectsGrid({ activeCategory }) {
   // Filter projects based on the active category
   const filteredProjects =
     activeCategory === "All" ? projects : projects.filter((project) => project.category === activeCategory)
+
+  if (filteredProjects.length === 0) {
+    return (
+      <section className="py-16">
+        <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="glass-card rounded-2xl border border-white/15 p-10 text-center">
+            <h3 className="text-2xl font-semibold mb-2">No projects in this category yet</h3>
+            <p className="text-gray-400 mb-6">
+              We can share relevant examples on request and outline a delivery plan tailored to your goals.
+            </p>
+            <Link href="/contact" className="inline-flex items-center gap-2 text-cyan-300 hover:text-cyan-200 font-medium">
+              {"Request examples ->"}
+            </Link>
+          </div>
+        </div>
+      </section>
+    )
+  }
 
   return (
     <section className="py-16">
@@ -88,7 +39,7 @@ export default function ProjectsGrid({ activeCategory }) {
         >
           {filteredProjects.map((project) => (
             <motion.div
-              key={project.id}
+              key={project.slug}
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5 }}
@@ -108,9 +59,9 @@ export default function ProjectsGrid({ activeCategory }) {
               </div>
               <div className="p-6">
                 <h3 className="text-xl font-bold mb-2">{project.title}</h3>
-                <p className="text-gray-400 mb-4">{project.description}</p>
+                <p className="text-gray-400 mb-4">{project.summary}</p>
                 <Link
-                  href={project.link}
+                  href={`/projects/${project.slug}`}
                   className="inline-block text-purple-500 font-medium hover:text-purple-400 transition-colors"
                 >
                   View Project →

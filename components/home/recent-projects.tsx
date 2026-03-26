@@ -6,30 +6,7 @@ import Link from "next/link"
 import { motion } from "framer-motion"
 import { ArrowRight } from "lucide-react"
 import { Button } from "@/components/ui/button"
-
-const projects = [
-  {
-    title: "E-commerce Platform",
-    category: "Web Development",
-    description: "Conversion-focused commerce platform with catalog management, custom checkout, and secure payment integration.",
-    image: "/projects/p1.png?height=600&width=800",
-    href: "/projects/ecommerce-platform",
-  },
-  {
-    title: "Quizzes Platform",
-    category: "UI/UX Design",
-    description: "Interactive quizzes product with modern UX, seamless payments, and scalable management workflows.",
-    image: "/projects/p8.png?height=600&width=800",
-    href: "/projects/health-fitness-app",
-  },
-  {
-    title: "Learning Management System",
-    category: "LMS & Integration",
-    description: "Custom LMS enabling course delivery, student lifecycle management, and integrated billing operations.",
-    image: "/projects/p6.png?height=600&width=800",
-    href: "/projects/learning-management-system",
-  },
-]
+import { featuredProjects } from "@/lib/projects-data"
 
 export default function RecentProjects() {
   const [hoveredIndex, setHoveredIndex] = useState<number | null>(null)
@@ -85,7 +62,7 @@ export default function RecentProjects() {
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {projects.map((project, index) => (
+          {featuredProjects.map((project, index) => (
             <motion.div
               key={project.title}
               initial={{ opacity: 0, y: 20 }}
@@ -96,7 +73,7 @@ export default function RecentProjects() {
               onMouseLeave={() => setHoveredIndex(null)}
               className="group"
             >
-              <Link href={project.href} className="block">
+              <Link href={`/projects/${project.slug}`} className="block">
                 <article className="rounded-2xl overflow-hidden glass-card border border-white/15 hover:border-cyan-400/35 h-full flex flex-col">
                   <div className="relative h-64 overflow-hidden">
                     <Image
@@ -108,14 +85,16 @@ export default function RecentProjects() {
                     <div className="absolute inset-0 bg-gradient-to-t from-slate-950/90 via-slate-950/25 to-transparent" />
                     <div className="absolute bottom-4 left-4">
                       <span className="px-3 py-1 bg-cyan-500/90 rounded-full text-xs font-medium text-white">
-                        {project.category}
+                      {project.category}
                       </span>
                     </div>
                   </div>
 
                   <div className="p-6 flex-grow flex flex-col">
-                    <h3 className="text-xl font-bold mb-2 group-hover:text-cyan-300 transition-colors">{project.title}</h3>
-                    <p className="text-gray-300/85 mb-5 flex-grow">{project.description}</p>
+                    <h3 className="text-xl font-bold mb-2 group-hover:text-cyan-300 transition-colors">
+                      {project.title}
+                    </h3>
+                    <p className="text-gray-300/85 mb-5 flex-grow">{project.summary}</p>
                     <div className="flex items-center text-cyan-300 font-medium group">
                       <span>View Project</span>
                       <ArrowRight className="ml-2 h-5 w-5 transition-transform group-hover:translate-x-1" />
