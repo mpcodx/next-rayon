@@ -6,9 +6,9 @@ import { projects, getProjectBySlug } from "@/lib/projects-data"
 import { buildPageMetadata, SITE_NAME } from "@/lib/seo"
 
 type ProjectDetailPageProps = {
-  params: {
+  params: Promise<{
     slug: string
-  }
+  }>
 }
 
 export const dynamicParams = false
@@ -17,8 +17,9 @@ export function generateStaticParams() {
   return projects.map((project) => ({ slug: project.slug }))
 }
 
-export function generateMetadata({ params }: ProjectDetailPageProps): Metadata {
-  const project = getProjectBySlug(params.slug)
+export async function generateMetadata({ params }: ProjectDetailPageProps): Promise<Metadata> {
+  const { slug } = await params
+  const project = getProjectBySlug(slug)
   if (!project) {
     return {
       title: "Project Not Found",
@@ -34,8 +35,9 @@ export function generateMetadata({ params }: ProjectDetailPageProps): Metadata {
   })
 }
 
-export default function ProjectDetailPage({ params }: ProjectDetailPageProps) {
-  const project = getProjectBySlug(params.slug)
+export default async function ProjectDetailPage({ params }: ProjectDetailPageProps) {
+  const { slug } = await params
+  const project = getProjectBySlug(slug)
   if (!project) notFound()
 
   return (
@@ -121,6 +123,23 @@ export default function ProjectDetailPage({ params }: ProjectDetailPageProps) {
             </div>
 
             <aside className="space-y-6">
+              {project.liveUrl ? (
+                <div className="glass-card rounded-2xl border border-white/15 p-6">
+                  <h3 className="text-lg font-semibold mb-3">Live Product</h3>
+                  <p className="text-sm text-gray-300 mb-4">
+                    Visit the live product to explore the current experience.
+                  </p>
+                  <a
+                    href={project.liveUrl}
+                    target="_blank"
+                    rel="noreferrer"
+                    className="inline-flex items-center gap-2 text-cyan-300 hover:text-cyan-200 font-medium"
+                  >
+                    {"Open Website ->"}
+                  </a>
+                </div>
+              ) : null}
+
               <div className="glass-card rounded-2xl border border-white/15 p-6">
                 <h3 className="text-lg font-semibold mb-4">Core Services</h3>
                 <div className="flex flex-wrap gap-2">

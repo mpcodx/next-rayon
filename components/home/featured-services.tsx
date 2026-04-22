@@ -1,7 +1,4 @@
-"use client"
-
 import Link from "next/link"
-import { motion } from "framer-motion"
 import { Code, Smartphone, Cloud, Palette, BookOpen, TestTube, Brain, ArrowRight } from "lucide-react"
 
 const services = [
@@ -61,44 +58,22 @@ export default function FeaturedServices() {
     <section className="py-24">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-16">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.4 }}
-            className="inline-flex items-center rounded-full border border-cyan-400/40 bg-cyan-500/10 px-4 py-1.5 text-sm text-cyan-200 mb-5"
-          >
+          <div className="inline-flex items-center rounded-full border border-cyan-400/40 bg-cyan-500/10 px-4 py-1.5 text-sm text-cyan-200 mb-5">
             Service Portfolio
-          </motion.div>
+          </div>
 
-          <motion.h2
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.5 }}
-            className="text-3xl sm:text-4xl md:text-5xl font-bold mb-4"
-          >
+          <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold mb-4">
             High-Impact <span className="gradient-text">Technology Services</span>
-          </motion.h2>
-          <motion.p
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.5, delay: 0.15 }}
-            className="text-xl text-gray-300/85 max-w-3xl mx-auto"
-          >
+          </h2>
+          <p className="text-xl text-gray-300/85 max-w-3xl mx-auto">
             We design, build, and scale digital products with a pragmatic engineering approach and measurable business outcomes.
-          </motion.p>
+          </p>
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {services.map((service, index) => (
-            <motion.div
+          {services.map((service) => (
+            <div
               key={service.title}
-              initial={{ opacity: 0, y: 18 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.45, delay: index * 0.06 }}
               className="h-full"
             >
               <Link href={service.href} className="block h-full">
@@ -118,7 +93,7 @@ export default function FeaturedServices() {
                   </div>
                 </article>
               </Link>
-            </motion.div>
+            </div>
           ))}
         </div>
       </div>

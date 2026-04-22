@@ -1,9 +1,4 @@
-"use client"
-
-import { useRef, useEffect } from "react"
-import { motion } from "framer-motion"
 import Image from "next/image"
-import { useMobile } from "@/hooks/use-mobile"
 
 const clients = [
   { name: "AWS", logo: "/aws-cloud.svg?height=80&width=160" },
@@ -15,34 +10,10 @@ const clients = [
 ]
 
 export default function ClientLogos() {
-  const containerRef = useRef<HTMLDivElement>(null)
-  const isMobile = useMobile()
-
-  useEffect(() => {
-    const container = containerRef.current
-    if (!container) return
-
-    if (isMobile) {
-      container.classList.add("animate-scroll-slow")
-    } else {
-      container.classList.add("animate-scroll")
-    }
-
-    return () => {
-      container.classList.remove("animate-scroll", "animate-scroll-slow")
-    }
-  }, [isMobile])
-
   return (
     <section className="py-20 bg-slate-950/30 overflow-hidden">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: "-100px" }}
-          transition={{ duration: 0.5 }}
-          className="text-center mb-12"
-        >
+        <div className="text-center mb-12">
           <div className="inline-flex items-center rounded-full border border-cyan-400/40 bg-cyan-500/10 px-4 py-1.5 text-sm text-cyan-200 mb-4">
             Trusted Partnerships
           </div>
@@ -52,12 +23,11 @@ export default function ClientLogos() {
           <p className="text-xl text-gray-300/85 max-w-3xl mx-auto">
             Teams across industries trust Rayon Web Solutions for stable delivery and long-term engineering support.
           </p>
-        </motion.div>
+        </div>
 
         <div className="relative overflow-hidden">
           <div
-            ref={containerRef}
-            className="flex space-x-12 py-8 logo-scroll-container"
+            className="flex space-x-12 py-8 logo-scroll-container animate-scroll"
             style={{
               willChange: "transform",
               scrollbarWidth: "none",

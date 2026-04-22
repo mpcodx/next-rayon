@@ -1,25 +1,27 @@
 "use client"
 
-import { useState, useEffect } from "react"
+import { useState } from "react"
 import { motion } from "framer-motion"
 
-const categories = [
+export const projectCategories = [
   "All",
   "Web Development",
-  "App Development",
-  "DevOps & Cloud",
-  "UI/UX Design",
-  "LMS & Integration",
-  "QA & Automation",
+  "Product Owner",
 ]
 
-export default function ProjectsFilter({ onCategoryChange }) {
-  const [activeCategory, setActiveCategory] = useState("All")
+export type ProjectCategory = (typeof projectCategories)[number]
 
-  useEffect(() => {
-    // When activeCategory changes, call the parent component's callback
-    onCategoryChange(activeCategory)
-  }, [activeCategory, onCategoryChange])
+type ProjectsFilterProps = {
+  onCategoryChange: (category: ProjectCategory) => void
+}
+
+export default function ProjectsFilter({ onCategoryChange }: ProjectsFilterProps) {
+  const [activeCategory, setActiveCategory] = useState<ProjectCategory>("All")
+
+  const handleCategoryClick = (category: ProjectCategory) => {
+    setActiveCategory(category)
+    onCategoryChange(category)
+  }
 
   return (
     <section className="py-8">
@@ -30,10 +32,10 @@ export default function ProjectsFilter({ onCategoryChange }) {
           transition={{ duration: 0.5 }}
           className="flex flex-wrap justify-center gap-4"
         >
-          {categories.map((category, index) => (
+          {projectCategories.map((category) => (
             <button
-              key={index}
-              onClick={() => setActiveCategory(category)}
+              key={category}
+              onClick={() => handleCategoryClick(category)}
               className={`px-6 py-3 rounded-full transition-all ${
                 activeCategory === category
                   ? "bg-gradient-to-r from-purple-600 to-blue-600 text-white"

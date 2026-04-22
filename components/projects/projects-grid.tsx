@@ -4,8 +4,13 @@ import { motion } from "framer-motion"
 import Image from "next/image"
 import Link from "next/link"
 import { projects } from "@/lib/projects-data"
+import type { ProjectCategory } from "@/components/projects/projects-filter"
 
-export default function ProjectsGrid({ activeCategory }) {
+type ProjectsGridProps = {
+  activeCategory: ProjectCategory
+}
+
+export default function ProjectsGrid({ activeCategory }: ProjectsGridProps) {
   // Filter projects based on the active category
   const filteredProjects =
     activeCategory === "All" ? projects : projects.filter((project) => project.category === activeCategory)

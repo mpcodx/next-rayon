@@ -2,7 +2,6 @@
 
 import { useState, useEffect, useRef } from "react"
 import Image from "next/image"
-import { motion } from "framer-motion"
 import { ChevronLeft, ChevronRight, Quote } from "lucide-react"
 
 const testimonials = [
@@ -70,13 +69,7 @@ export default function Testimonials() {
   return (
     <section className="py-24">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-        <motion.div
-          initial={{ opacity: 0 }}
-          whileInView={{ opacity: 1 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.5 }}
-          className="text-center mb-16"
-        >
+        <div className="text-center mb-16">
           <div className="inline-flex items-center rounded-full border border-cyan-400/40 bg-cyan-500/10 px-4 py-1.5 text-sm text-cyan-200 mb-4">
             Client Feedback
           </div>
@@ -86,7 +79,7 @@ export default function Testimonials() {
           <p className="text-xl text-gray-300/85 max-w-3xl mx-auto">
             Long-term partnerships built on quality delivery, transparent execution, and strong technical outcomes.
           </p>
-        </motion.div>
+        </div>
 
         <div
           className="relative max-w-4xl mx-auto"

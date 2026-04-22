@@ -4,7 +4,7 @@ import { Manrope, Space_Grotesk } from "next/font/google"
 import "./globals.css"
 import Navbar from "@/components/navbar"
 import Footer from "@/components/footer"
-import FloatingCTA from "@/components/floating-cta"
+import DeferredFloatingCTA from "@/components/deferred-floating-cta"
 import Script from "next/script"
 import { DEFAULT_OG_IMAGE_URL, SITE_NAME, SITE_URL } from "@/lib/seo"
 import ScrollToTop from "@/components/scroll-to-top"
@@ -86,25 +86,26 @@ export default function RootLayout({
 }: {
   children: React.ReactNode
 }) {
+  const chatWidgetUrl = process.env.NEXT_PUBLIC_CHAT_WIDGET_URL
+
   return (
     <html lang="en" suppressHydrationWarning>
       <head>
         <meta name="msvalidate.01" content="748E26A926DC8DFC1F0DE9D34CBBBA2C" />
-        <script src="http://localhost:8000/widget/cc4379b9-2559-4cac-a6ec-5c781f85979c.js"></script>
-
       </head>
       <body
         className={`${manrope.variable} ${spaceGrotesk.variable} font-sans antialiased text-gray-100 min-h-screen`}
       >
         <ScrollToTop />
+        {chatWidgetUrl ? <Script id="chat-widget" strategy="lazyOnload" src={chatWidgetUrl} /> : null}
         {/* Google Analytics */}
         <Script
-          strategy="afterInteractive"
+          strategy="lazyOnload"
           src={`https://www.googletagmanager.com/gtag/js?id=G-68457LHBSZ`}
         />
         <Script
           id="google-analytics"
-          strategy="afterInteractive"
+          strategy="lazyOnload"
           dangerouslySetInnerHTML={{
             __html: `
               window.dataLayer = window.dataLayer || [];
@@ -118,7 +119,7 @@ export default function RootLayout({
         {/* Facebook Pixel */}
         <Script
           id="facebook-pixel"
-          strategy="afterInteractive"
+          strategy="lazyOnload"
           dangerouslySetInnerHTML={{
             __html: `
               !function(f,b,e,v,n,t,s)
@@ -139,7 +140,7 @@ export default function RootLayout({
           <div className="pointer-events-none fixed inset-x-0 top-0 h-72 bg-gradient-to-b from-cyan-400/10 via-transparent to-transparent blur-3xl" />
           <Navbar />
           <main className="pt-20 relative z-10">{children}</main>
-          <FloatingCTA />
+          <DeferredFloatingCTA />
           <Footer />
         </div>
       </body>

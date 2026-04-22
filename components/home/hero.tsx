@@ -1,34 +1,53 @@
 "use client"
 
 import { Button } from "@/components/ui/button"
-import { motion } from "framer-motion"
 import { ArrowRight, CheckCircle2, ShieldCheck, Sparkles } from "lucide-react"
 import dynamic from "next/dynamic"
-import { Suspense, useState, useEffect } from "react"
+import { useState, useEffect } from "react"
 import { useMobile } from "@/hooks/use-mobile"
 import Link from "next/link"
-import BookConsultationModal from "../contact/BookConsultationModal"
 
 const Scene3D = dynamic(() => import("@/components/home/hero-3d"), {
   ssr: false,
-  loading: () => (
-    <div className="absolute inset-0 flex items-center justify-center">
-      <div className="w-32 h-32 rounded-full bg-gradient-to-r from-cyan-500 to-blue-600 animate-pulse opacity-45" />
-    </div>
-  ),
+  loading: () => null,
 })
+
+const BookConsultationModal = dynamic(() => import("../contact/BookConsultationModal"), {
+  ssr: false,
+  loading: () => null,
+})
+
+type IdleWindow = Window &
+  typeof globalThis & {
+    requestIdleCallback?: (callback: () => void, options?: { timeout: number }) => number
+    cancelIdleCallback?: (handle: number) => void
+  }
 
 export default function Hero() {
   const isMobile = useMobile()
-  const [isLoaded, setIsLoaded] = useState(false)
+  const [showScene, setShowScene] = useState(false)
   const [showModal, setShowModal] = useState(false)
 
   useEffect(() => {
-    const timer = setTimeout(() => {
-      setIsLoaded(true)
-    }, 120)
-    return () => clearTimeout(timer)
-  }, [])
+    if (isMobile) {
+      setShowScene(false)
+      return
+    }
+
+    const idleWindow = window as IdleWindow
+    const load = () => setShowScene(true)
+    const handle = idleWindow.requestIdleCallback
+      ? idleWindow.requestIdleCallback(load, { timeout: 2200 })
+      : window.setTimeout(load, 1400)
+
+    return () => {
+      if (idleWindow.cancelIdleCallback) {
+        idleWindow.cancelIdleCallback(handle)
+      } else {
+        window.clearTimeout(handle)
+      }
+    }
+  }, [isMobile])
 
   const handleOpenModal = () => {
     setShowModal(true)
@@ -41,15 +60,8 @@ export default function Hero() {
   return (
     <section className="relative min-h-[90vh] flex items-center overflow-hidden">
       <div className="absolute inset-0 z-0">
-        <Suspense
-          fallback={
-            <div className="absolute inset-0 flex items-center justify-center">
-              <div className="w-32 h-32 rounded-full bg-gradient-to-r from-cyan-500 to-blue-600 animate-pulse opacity-45" />
-            </div>
-          }
-        >
-          {(!isMobile || (isMobile && isLoaded)) && <Scene3D />}
-        </Suspense>
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_70%_35%,rgba(6,182,212,0.28),transparent_32%),radial-gradient(circle_at_32%_70%,rgba(59,130,246,0.18),transparent_36%)]" />
+        {showScene ? <Scene3D /> : null}
       </div>
 
       <div className="absolute inset-0 z-[1] bg-gradient-to-b from-slate-950/35 via-slate-950/70 to-slate-950/95" />
@@ -58,12 +70,7 @@ export default function Hero() {
 
       <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10 pt-10">
         <div className="grid lg:grid-cols-2 gap-10 items-center">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5 }}
-            className="max-w-2xl"
-          >
+          <div className="max-w-2xl">
             <div className="inline-flex items-center rounded-full border border-cyan-400/40 bg-cyan-500/10 px-4 py-1.5 text-sm text-cyan-200 mb-5">
               <Sparkles className="h-4 w-4 mr-2" />
               Software Engineering Partner for Growth Teams
@@ -116,14 +123,9 @@ export default function Hero() {
                 </Button>
               </Link>
             </div>
-          </motion.div>
+          </div>
 
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5, delay: 0.15 }}
-            className="glass-card rounded-3xl p-6 md:p-8 border border-white/15"
-          >
+          <div className="glass-card rounded-3xl p-6 md:p-8 border border-white/15">
             <h2 className="text-2xl font-semibold mb-5">Why Teams Choose Rayon</h2>
 
             <div className="grid grid-cols-2 gap-4 mb-6">
@@ -151,25 +153,17 @@ export default function Hero() {
                 Architecture, security, and deployment standards are built into every project from day one.
               </p>
             </div>
-          </motion.div>
+          </div>
         </div>
       </div>
 
       <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2 z-10">
-        <motion.div
-          animate={{ y: [0, 10, 0] }}
-          transition={{ repeat: Number.POSITIVE_INFINITY, duration: 1.5 }}
-          className="w-6 h-10 rounded-full border-2 border-gray-500 flex justify-center pt-2"
-        >
-          <motion.div
-            animate={{ opacity: [0.2, 1, 0.2], y: [0, 6, 0] }}
-            transition={{ repeat: Number.POSITIVE_INFINITY, duration: 1.5 }}
-            className="w-1 h-1 rounded-full bg-white"
-          />
-        </motion.div>
+        <div className="w-6 h-10 rounded-full border-2 border-gray-500 flex justify-center pt-2 animate-bounce">
+          <div className="w-1 h-1 rounded-full bg-white" />
+        </div>
       </div>
 
-      <BookConsultationModal showModal={showModal} onClose={handleCloseModal} />
+      {showModal ? <BookConsultationModal showModal={showModal} onClose={handleCloseModal} /> : null}
     </section>
   )
 }

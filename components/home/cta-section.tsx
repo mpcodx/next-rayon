@@ -1,11 +1,15 @@
 "use client"
 
 import { useState } from "react"
-import { motion } from "framer-motion"
+import dynamic from "next/dynamic"
 import { Button } from "@/components/ui/button"
 import { ArrowRight } from "lucide-react"
 import Link from "next/link"
-import BookConsultationModal from "../contact/BookConsultationModal"
+
+const BookConsultationModal = dynamic(() => import("../contact/BookConsultationModal"), {
+  ssr: false,
+  loading: () => null,
+})
 
 export default function CTASection() {
   const [showModal, setShowModal] = useState(false)
@@ -21,13 +25,7 @@ export default function CTASection() {
   return (
     <section className="py-24">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.5 }}
-          className="relative rounded-3xl overflow-hidden border border-white/15 glass-card"
-        >
+        <div className="relative rounded-3xl overflow-hidden border border-white/15 glass-card">
           <div className="absolute inset-0 bg-gradient-to-r from-cyan-500/10 to-blue-600/12 z-0" />
 
           <div className="absolute inset-0 z-0 overflow-hidden">
@@ -62,10 +60,10 @@ export default function CTASection() {
               </Link>
             </div>
           </div>
-        </motion.div>
+        </div>
       </div>
 
-      <BookConsultationModal showModal={showModal} onClose={handleCloseModal} />
+      {showModal ? <BookConsultationModal showModal={showModal} onClose={handleCloseModal} /> : null}
     </section>
   )
 }

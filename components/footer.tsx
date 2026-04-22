@@ -1,23 +1,8 @@
-"use client"
-import { Button } from "@/components/ui/button"
-import { Input } from "@/components/ui/input"
 import { Facebook, Twitter, Instagram, Linkedin, Github, Mail, Phone, MapPin } from "lucide-react"
-import { useRouter } from "next/navigation"
 import Link from "next/link"
 import Image from "next/image"
 
-
 export default function Footer() {
-  const router = useRouter()
-
-  const handleNavigation = (href: string) => {
-    router.push(href)
-    // Add a small timeout to ensure navigation completes before scrolling
-    setTimeout(() => {
-      window.scrollTo({ top: 0, behavior: "smooth" })
-    }, 100)
-  }
-
   return (
     <footer className="relative overflow-hidden border-t border-white/10 bg-slate-950/75 pt-24 pb-12">
       <div className="absolute inset-0 pointer-events-none">
@@ -40,6 +25,7 @@ export default function Footer() {
                 <a
                   href="https://www.facebook.com/profile.php?id=61573818253676"
                   target="_blank"
+                  rel="noreferrer"
                   className="text-gray-400 hover:text-cyan-300 transition-colors"
                 >
                   <Facebook size={20} />
@@ -52,6 +38,7 @@ export default function Footer() {
                 <a
                   href="https://www.instagram.com/rayonwebsolutions/"
                   target="_blank"
+                  rel="noreferrer"
                   className="text-gray-400 hover:text-cyan-300 transition-colors"
                 >
                   <Instagram size={20} />
@@ -60,6 +47,7 @@ export default function Footer() {
                 <a
                   href="https://www.linkedin.com/company/rayonwebsolutions/?viewAsMember=true"
                   target="_blank"
+                  rel="noreferrer"
                   className="text-gray-400 hover:text-cyan-300 transition-colors"
                 >
                   <Linkedin size={20} />
@@ -76,112 +64,49 @@ export default function Footer() {
               <h3 className="text-lg font-semibold mb-6 text-white">Quick Links</h3>
               <ul className="space-y-3">
                 <li>
-                  <a
-                    href="/about"
-                    onClick={(e) => {
-                      e.preventDefault()
-                      handleNavigation("/about")
-                    }}
-                    className="text-gray-300/90 hover:text-cyan-300 transition-colors"
-                  >
+                  <Link href="/about" className="text-gray-300/90 hover:text-cyan-300 transition-colors">
                     About Us
-                  </a>
+                  </Link>
                 </li>
                 <li>
-                  <a
-                    href="/services"
-                    onClick={(e) => {
-                      e.preventDefault()
-                      handleNavigation("/services")
-                    }}
-                    className="text-gray-300/90 hover:text-cyan-300 transition-colors"
-                  >
+                  <Link href="/services" className="text-gray-300/90 hover:text-cyan-300 transition-colors">
                     Services
-                  </a>
+                  </Link>
                 </li>
                 <li>
-                  <a
-                    href="/security"
-                    onClick={(e) => {
-                      e.preventDefault()
-                      handleNavigation("/security")
-                    }}
-                    className="text-gray-300/90 hover:text-cyan-300 transition-colors"
-                  >
+                  <Link href="/security" className="text-gray-300/90 hover:text-cyan-300 transition-colors">
                     Security
-                  </a>
+                  </Link>
                 </li>
                 <li>
-                  <a
-                    href="/projects"
-                    onClick={(e) => {
-                      e.preventDefault()
-                      handleNavigation("/projects")
-                    }}
-                    className="text-gray-300/90 hover:text-cyan-300 transition-colors"
-                  >
+                  <Link href="/projects" className="text-gray-300/90 hover:text-cyan-300 transition-colors">
                     Projects
-                  </a>
+                  </Link>
                 </li>
                 <li>
-                  <a
-                    href="/blog"
-                    onClick={(e) => {
-                      e.preventDefault()
-                      handleNavigation("/blog")
-                    }}
-                    className="text-gray-300/90 hover:text-cyan-300 transition-colors"
-                  >
+                  <Link href="/blog" className="text-gray-300/90 hover:text-cyan-300 transition-colors">
                     Blog
-                  </a>
+                  </Link>
                 </li>
                 <li>
-                  <a
-                    href="/careers"
-                    onClick={(e) => {
-                      e.preventDefault()
-                      handleNavigation("/careers")
-                    }}
-                    className="text-gray-300/90 hover:text-cyan-300 transition-colors"
-                  >
+                  <Link href="/careers" className="text-gray-300/90 hover:text-cyan-300 transition-colors">
                     Careers
-                  </a>
+                  </Link>
                 </li>
                 <li>
-                  <a
-                    href="/training"
-                    onClick={(e) => {
-                      e.preventDefault()
-                      handleNavigation("/training")
-                    }}
-                    className="text-gray-300/90 hover:text-cyan-300 transition-colors"
-                  >
+                  <Link href="/training" className="text-gray-300/90 hover:text-cyan-300 transition-colors">
                     Training
-                  </a>
+                  </Link>
                 </li>
                 <li>
-                  <a
-                    href="/contact"
-                    onClick={(e) => {
-                      e.preventDefault()
-                      handleNavigation("/contact")
-                    }}
-                    className="text-gray-300/90 hover:text-cyan-300 transition-colors"
-                  >
+                  <Link href="/contact" className="text-gray-300/90 hover:text-cyan-300 transition-colors">
                     Contact
-                  </a>
+                  </Link>
                 </li>
                 <li>
-                  <a
-                    href="/sitemap"
-                    onClick={(e) => {
-                      e.preventDefault()
-                      handleNavigation("/sitemap")
-                    }}
-                    className="text-gray-300/90 hover:text-cyan-300 transition-colors"
-                  >
+                  <Link href="/sitemap" className="text-gray-300/90 hover:text-cyan-300 transition-colors">
                     Sitemap
-                  </a>
+                  </Link>
                 </li>
               </ul>
             </div>
@@ -212,10 +137,14 @@ export default function Footer() {
               <h3 className="text-lg font-semibold mb-6 text-white">Subscribe</h3>
               <p className="text-gray-300/85 mb-4">Subscribe to our newsletter to receive updates and tech insights.</p>
               <div className="space-y-3">
-                <Input type="email" placeholder="Your email address" className="text-white" />
-                <Button className="w-full bg-gradient-to-r from-cyan-500 to-blue-600 hover:from-cyan-400 hover:to-blue-500 text-white">
+                <input
+                  type="email"
+                  placeholder="Your email address"
+                  className="flex h-11 w-full rounded-xl border border-white/15 bg-white/[0.04] px-3.5 py-2.5 text-base text-white ring-offset-background placeholder:text-slate-400/85 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-cyan-400/70 focus-visible:ring-offset-1 focus-visible:ring-offset-slate-950 focus-visible:border-cyan-300/60 md:text-sm"
+                />
+                <button className="inline-flex h-10 w-full items-center justify-center gap-2 rounded-full bg-gradient-to-r from-cyan-500 to-blue-600 px-4 py-2 text-sm font-semibold text-white transition-all duration-300 hover:from-cyan-400 hover:to-blue-500 active:scale-[0.98]">
                   Subscribe
-                </Button>
+                </button>
               </div>
             </div>
           </div>
@@ -223,26 +152,12 @@ export default function Footer() {
           <div className="border-t border-white/10 mt-16 pt-8 flex flex-col md:flex-row justify-between items-center">
             <p className="text-gray-400 text-sm mb-4 md:mb-0">© {new Date().getFullYear()} Rayon Web Solutions. All rights reserved.</p>
             <div className="flex space-x-6">
-              <a
-                href="/privacy-policy"
-                onClick={(e) => {
-                  e.preventDefault()
-                  handleNavigation("/privacy-policy")
-                }}
-                className="text-gray-400 hover:text-cyan-300 text-sm transition-colors"
-              >
+              <Link href="/privacy-policy" className="text-gray-400 hover:text-cyan-300 text-sm transition-colors">
                 Privacy Policy
-              </a>
-              <a
-                href="/terms"
-                onClick={(e) => {
-                  e.preventDefault()
-                  handleNavigation("/terms")
-                }}
-                className="text-gray-400 hover:text-cyan-300 text-sm transition-colors"
-              >
+              </Link>
+              <Link href="/terms" className="text-gray-400 hover:text-cyan-300 text-sm transition-colors">
                 Terms of Use
-              </a>
+              </Link>
             </div>
           </div>
         </div>

@@ -1,76 +1,41 @@
-"use client"
-
-import { useState } from "react"
 import Image from "next/image"
 import Link from "next/link"
-import { motion } from "framer-motion"
 import { ArrowRight } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { featuredProjects } from "@/lib/projects-data"
 
 export default function RecentProjects() {
-  const [hoveredIndex, setHoveredIndex] = useState<number | null>(null)
-
   return (
     <section className="py-24 bg-slate-950/35">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex flex-col md:flex-row justify-between items-start md:items-end mb-14 gap-6">
           <div>
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.4 }}
-              className="inline-flex items-center rounded-full border border-cyan-400/40 bg-cyan-500/10 px-4 py-1.5 text-sm text-cyan-200 mb-4"
-            >
+            <div className="inline-flex items-center rounded-full border border-cyan-400/40 bg-cyan-500/10 px-4 py-1.5 text-sm text-cyan-200 mb-4">
               Selected Work
-            </motion.div>
+            </div>
 
-            <motion.h2
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.5 }}
-              className="text-3xl sm:text-4xl font-bold mb-4"
-            >
+            <h2 className="text-3xl sm:text-4xl font-bold mb-4">
               Recent <span className="gradient-text">Projects</span>
-            </motion.h2>
-            <motion.p
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.5, delay: 0.15 }}
-              className="text-xl text-gray-300/85 max-w-2xl"
-            >
+            </h2>
+            <p className="text-xl text-gray-300/85 max-w-2xl">
               Explore delivery quality across web products, enterprise workflows, and platform modernization engagements.
-            </motion.p>
+            </p>
           </div>
 
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.5, delay: 0.25 }}
-          >
+          <div>
             <Link href="/projects">
               <Button variant="outline" className="group rounded-full border-white/20 hover:bg-white/[0.08]">
                 View All Projects
                 <ArrowRight className="ml-2 h-5 w-5 transition-transform group-hover:translate-x-1" />
               </Button>
             </Link>
-          </motion.div>
+          </div>
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {featuredProjects.map((project, index) => (
-            <motion.div
+          {featuredProjects.map((project) => (
+            <div
               key={project.title}
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.45, delay: index * 0.07 }}
-              onMouseEnter={() => setHoveredIndex(index)}
-              onMouseLeave={() => setHoveredIndex(null)}
               className="group"
             >
               <Link href={`/projects/${project.slug}`} className="block">
@@ -80,7 +45,8 @@ export default function RecentProjects() {
                       src={project.image || "/placeholder.svg"}
                       alt={project.title}
                       fill
-                      className={`object-cover transition-transform duration-500 ${hoveredIndex === index ? "scale-105" : "scale-100"}`}
+                      sizes="(min-width: 1024px) 33vw, (min-width: 768px) 50vw, 100vw"
+                      className="object-cover transition-transform duration-500 group-hover:scale-105"
                     />
                     <div className="absolute inset-0 bg-gradient-to-t from-slate-950/90 via-slate-950/25 to-transparent" />
                     <div className="absolute bottom-4 left-4">
@@ -102,7 +68,7 @@ export default function RecentProjects() {
                   </div>
                 </article>
               </Link>
-            </motion.div>
+            </div>
           ))}
         </div>
       </div>

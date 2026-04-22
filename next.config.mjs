@@ -13,7 +13,25 @@ const nextConfig = {
   },
 
   images: {
-    unoptimized: true,
+    formats: ["image/avif", "image/webp"],
+    localPatterns: [
+      {
+        pathname: "/**",
+      },
+    ],
+    remotePatterns: [
+      {
+        protocol: "https",
+        hostname: "img.freepik.com",
+        pathname: "/**",
+      },
+      {
+        protocol: "https",
+        hostname: "images.unsplash.com",
+        pathname: "/**",
+      },
+    ],
+    minimumCacheTTL: 31536000,
   },
 
   output: "standalone",
