@@ -1,4 +1,4 @@
-import type React from "react"
+import { Suspense, type ReactNode } from "react"
 import type { Metadata } from "next"
 import { Manrope, Space_Grotesk } from "next/font/google"
 import "./globals.css"
@@ -112,7 +112,7 @@ export const metadata: Metadata = {
 export default function RootLayout({
   children,
 }: {
-  children: React.ReactNode
+  children: ReactNode
 }) {
   return (
     <html lang="en" suppressHydrationWarning>
@@ -148,7 +148,9 @@ export default function RootLayout({
       <body
         className={`${manrope.variable} ${spaceGrotesk.variable} font-sans antialiased text-gray-100 min-h-screen`}
       >
-        <ScrollToTop />
+        <Suspense fallback={null}>
+          <ScrollToTop />
+        </Suspense>
         <Script id="chat-widget" strategy="afterInteractive" src="http://127.0.0.1:8000/widget/embed/2f0912e2-22b8-42d7-8dea-5de9ab35bd6a.js" defer />
         {/* Google Analytics */}
         <Script
