@@ -2,8 +2,48 @@ import type { Metadata } from "next"
 
 export const SITE_NAME = "Rayon Web Solutions"
 export const SITE_URL = (process.env.NEXT_PUBLIC_SITE_URL || "https://www.rayonweb.com").replace(/\/$/, "")
+export const SITE_TAGLINE = "Your Vision, Our Code"
+export const SITE_DESCRIPTION =
+  "Software development company for web, mobile, AI/ML, DevOps, QA, and UI/UX services. We design and build scalable digital products for startups and enterprises."
 export const DEFAULT_OG_IMAGE_PATH = "/new-1.png"
 export const DEFAULT_OG_IMAGE_URL = `${SITE_URL}${DEFAULT_OG_IMAGE_PATH}`
+export const CONTACT_EMAIL = "info@rayonweb.com"
+export const CONTACT_PHONE = "+1 (123) 456-7890"
+export const CONTACT_PHONE_URI = "+11234567890"
+export const BUSINESS_LOCALITY = "Mohali"
+export const BUSINESS_REGION = "Punjab"
+export const BUSINESS_COUNTRY = "India"
+export const BUSINESS_REGION_CODE = "IN-PB"
+export const BUSINESS_COORDINATES = {
+  latitude: "30.7046",
+  longitude: "76.7179",
+} as const
+export const SOCIAL_PROFILES = [
+  "https://www.facebook.com/profile.php?id=61573818253676",
+  "https://www.instagram.com/rayonwebsolutions/",
+  "https://www.linkedin.com/company/rayonwebsolutions/?viewAsMember=true",
+] as const
+export const SERVICE_AREAS = ["Worldwide", "North America", "Europe", "Middle East", "Asia-Pacific", "India"] as const
+export const SITE_KEYWORDS = [
+  "Rayon Web Solutions",
+  "Web Development",
+  "App Development",
+  "Python Django Development",
+  "Backend Development",
+  "DevOps",
+  "Docker",
+  "Kubernetes",
+  "Cloud Services",
+  "UI/UX Design",
+  "LMS Integration",
+  "QA Testing",
+  "Automation",
+  "AI Development",
+  "Machine Learning Services",
+  "LLM Development",
+  "AI Integration Services",
+  "Software Development Company",
+]
 
 type PageSeo = {
   title: string
@@ -31,7 +71,7 @@ export const PAGE_SEO: Record<string, PageSeo> = {
   "/careers": {
     title: "Careers | Rayon Web Solutions",
     description:
-      "Explore engineering, design, and delivery opportunities at Rayon Web Solutions.",
+      "Explore current remote openings at Rayon Web Solutions across frontend development, backend AI/ML, and DevOps engineering.",
   },
   "/contact": {
     title: "Contact Rayon Web Solutions | Start Your Project",
@@ -273,6 +313,8 @@ export const SITEMAP_PATHS = Object.entries(PAGE_SEO)
   .filter(([, seo]) => !seo.noIndex)
   .map(([path]) => path)
 
+type JsonLdNode = Record<string, unknown>
+
 function normalizePath(path: string) {
   if (!path || path === "/") return "/"
   const pathWithLeadingSlash = path.startsWith("/") ? path : `/${path}`
@@ -285,6 +327,121 @@ export function absoluteUrl(path: string) {
   }
 
   return `${SITE_URL}${normalizePath(path)}`
+}
+
+export function serializeJsonLd(node: JsonLdNode | JsonLdNode[]) {
+  return JSON.stringify(node).replace(/</g, "\\u003c")
+}
+
+export function buildOrganizationSchema() {
+  return {
+    "@context": "https://schema.org",
+    "@type": "Organization",
+    "@id": `${SITE_URL}/#organization`,
+    name: SITE_NAME,
+    alternateName: "Rayon Web",
+    url: SITE_URL,
+    logo: DEFAULT_OG_IMAGE_URL,
+    image: DEFAULT_OG_IMAGE_URL,
+    description: SITE_DESCRIPTION,
+    email: CONTACT_EMAIL,
+    telephone: CONTACT_PHONE,
+    sameAs: [...SOCIAL_PROFILES],
+    contactPoint: [
+      {
+        "@type": "ContactPoint",
+        contactType: "sales",
+        email: CONTACT_EMAIL,
+        telephone: CONTACT_PHONE,
+        availableLanguage: ["English"],
+        areaServed: [...SERVICE_AREAS],
+      },
+    ],
+    knowsAbout: [
+      "Web Development",
+      "Mobile App Development",
+      "AI Development",
+      "Machine Learning",
+      "DevOps",
+      "Cloud Engineering",
+      "QA Automation",
+      "UI/UX Design",
+    ],
+  }
+}
+
+export function buildProfessionalServiceSchema() {
+  return {
+    "@context": "https://schema.org",
+    "@type": "ProfessionalService",
+    "@id": `${SITE_URL}/#professional-service`,
+    name: SITE_NAME,
+    url: SITE_URL,
+    image: DEFAULT_OG_IMAGE_URL,
+    description: SITE_DESCRIPTION,
+    slogan: SITE_TAGLINE,
+    email: CONTACT_EMAIL,
+    telephone: CONTACT_PHONE,
+    areaServed: [...SERVICE_AREAS],
+    address: {
+      "@type": "PostalAddress",
+      addressLocality: BUSINESS_LOCALITY,
+      addressRegion: BUSINESS_REGION,
+      addressCountry: BUSINESS_COUNTRY,
+    },
+    geo: {
+      "@type": "GeoCoordinates",
+      latitude: BUSINESS_COORDINATES.latitude,
+      longitude: BUSINESS_COORDINATES.longitude,
+    },
+    openingHoursSpecification: [
+      {
+        "@type": "OpeningHoursSpecification",
+        dayOfWeek: ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"],
+        opens: "09:00",
+        closes: "18:00",
+      },
+    ],
+    sameAs: [...SOCIAL_PROFILES],
+    makesOffer: [
+      {
+        "@type": "Offer",
+        itemOffered: {
+          "@type": "Service",
+          name: "Custom Software Development",
+        },
+      },
+      {
+        "@type": "Offer",
+        itemOffered: {
+          "@type": "Service",
+          name: "AI & Machine Learning Services",
+        },
+      },
+      {
+        "@type": "Offer",
+        itemOffered: {
+          "@type": "Service",
+          name: "DevOps & Cloud Services",
+        },
+      },
+    ],
+  }
+}
+
+export function buildWebsiteSchema() {
+  return {
+    "@context": "https://schema.org",
+    "@type": "WebSite",
+    "@id": `${SITE_URL}/#website`,
+    url: SITE_URL,
+    name: SITE_NAME,
+    description: SITE_DESCRIPTION,
+    publisher: {
+      "@id": `${SITE_URL}/#organization`,
+    },
+    inLanguage: "en-US",
+  }
 }
 
 type BuildPageMetadataOptions = PageSeo & {
@@ -311,6 +468,8 @@ export function buildPageMetadata({
     },
     description,
     keywords,
+    category: "technology",
+    classification: "Software Development Company",
     alternates: {
       canonical,
     },

@@ -6,7 +6,25 @@ import Navbar from "@/components/navbar"
 import Footer from "@/components/footer"
 import DeferredFloatingCTA from "@/components/deferred-floating-cta"
 import Script from "next/script"
-import { DEFAULT_OG_IMAGE_URL, SITE_NAME, SITE_URL } from "@/lib/seo"
+import {
+  BUSINESS_COORDINATES,
+  BUSINESS_COUNTRY,
+  BUSINESS_LOCALITY,
+  BUSINESS_REGION,
+  BUSINESS_REGION_CODE,
+  CONTACT_EMAIL,
+  CONTACT_PHONE,
+  DEFAULT_OG_IMAGE_URL,
+  SITE_DESCRIPTION,
+  SITE_KEYWORDS,
+  SITE_NAME,
+  SITE_TAGLINE,
+  SITE_URL,
+  buildOrganizationSchema,
+  buildProfessionalServiceSchema,
+  buildWebsiteSchema,
+  serializeJsonLd,
+} from "@/lib/seo"
 import ScrollToTop from "@/components/scroll-to-top"
 
 // Optimize font loading
@@ -24,32 +42,35 @@ const spaceGrotesk = Space_Grotesk({
 
 export const metadata: Metadata = {
   title: {
-    default: `${SITE_NAME} | Your Vision, Our Code`,
+    default: `${SITE_NAME} | ${SITE_TAGLINE}`,
     template: `%s | ${SITE_NAME}`,
   },
-  description:
-    "Software development company for web, mobile, AI/ML, DevOps, QA, and UI/UX services. We design and build scalable digital products for startups and enterprises.",
-  keywords: [
-    "Rayon Web Solutions",
-    "Web Development",
-    "App Development",
-    "Python Django Development",
-    "Backend Development",
-    "DevOps",
-    "Docker",
-    "Kubernetes",
-    "Cloud Services",
-    "UI/UX Design",
-    "LMS Integration",
-    "QA Testing",
-    "Automation",
-    "AI Development",
-    "Machine Learning Services",
-  ],
+  description: SITE_DESCRIPTION,
+  keywords: SITE_KEYWORDS,
   authors: [{ name: SITE_NAME, url: SITE_URL }],
   creator: SITE_NAME,
   publisher: SITE_NAME,
+  applicationName: SITE_NAME,
+  category: "technology",
+  classification: "Software Development Company",
   metadataBase: new URL(SITE_URL),
+  alternates: {
+    canonical: "/",
+    languages: {
+      "en-US": "/",
+    },
+  },
+  referrer: "origin-when-cross-origin",
+  verification: {
+    other: {
+      "msvalidate.01": "748E26A926DC8DFC1F0DE9D34CBBBA2C",
+    },
+  },
+  icons: {
+    icon: [{ url: "/favicon.ico" }],
+    shortcut: [{ url: "/favicon.ico" }],
+    apple: [{ url: "/touchicon-180.png", sizes: "180x180" }],
+  },
   robots: {
     index: true,
     follow: true,
@@ -62,6 +83,9 @@ export const metadata: Metadata = {
     },
   },
   openGraph: {
+    title: `${SITE_NAME} | ${SITE_TAGLINE}`,
+    description: SITE_DESCRIPTION,
+    url: SITE_URL,
     siteName: SITE_NAME,
     images: [
       {
@@ -72,11 +96,15 @@ export const metadata: Metadata = {
       },
     ],
     locale: "en_US",
+    countryName: BUSINESS_COUNTRY,
     type: "website",
   },
   twitter: {
     card: "summary_large_image",
+    title: `${SITE_NAME} | ${SITE_TAGLINE}`,
+    description: SITE_DESCRIPTION,
     images: [DEFAULT_OG_IMAGE_URL],
+    site: "@rayonweb",
     creator: "@rayonweb",
   },
 }
@@ -86,18 +114,42 @@ export default function RootLayout({
 }: {
   children: React.ReactNode
 }) {
-  const chatWidgetUrl = process.env.NEXT_PUBLIC_CHAT_WIDGET_URL
-
   return (
     <html lang="en" suppressHydrationWarning>
       <head>
-        <meta name="msvalidate.01" content="748E26A926DC8DFC1F0DE9D34CBBBA2C" />
+        <meta name="geo.region" content={BUSINESS_REGION_CODE} />
+        <meta name="geo.placename" content={`${BUSINESS_LOCALITY}, ${BUSINESS_REGION}, ${BUSINESS_COUNTRY}`} />
+        <meta name="geo.position" content={`${BUSINESS_COORDINATES.latitude};${BUSINESS_COORDINATES.longitude}`} />
+        <meta name="ICBM" content={`${BUSINESS_COORDINATES.latitude}, ${BUSINESS_COORDINATES.longitude}`} />
+        <meta name="distribution" content="global" />
+        <meta name="coverage" content="Worldwide" />
+        <meta name="target" content="businesses, startups, enterprises" />
+        <meta name="contact" content={CONTACT_EMAIL} />
+        <meta name="telephone" content={CONTACT_PHONE} />
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: serializeJsonLd(buildWebsiteSchema()),
+          }}
+        />
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: serializeJsonLd(buildOrganizationSchema()),
+          }}
+        />
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: serializeJsonLd(buildProfessionalServiceSchema()),
+          }}
+        />
       </head>
       <body
         className={`${manrope.variable} ${spaceGrotesk.variable} font-sans antialiased text-gray-100 min-h-screen`}
       >
         <ScrollToTop />
-        {chatWidgetUrl ? <Script id="chat-widget" strategy="lazyOnload" src={chatWidgetUrl} /> : null}
+        <Script id="chat-widget" strategy="afterInteractive" src="http://127.0.0.1:8000/widget/embed/2f0912e2-22b8-42d7-8dea-5de9ab35bd6a.js" defer />
         {/* Google Analytics */}
         <Script
           strategy="lazyOnload"

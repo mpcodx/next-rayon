@@ -9,62 +9,33 @@ import JobApplicationForm from "@/components/careers/job-application-form"
 
 const jobOpenings = [
   {
-    title: "Senior Frontend Developer",
+    title: "Frontend Developer",
     department: "Engineering",
-    location: "Mohali/Remote",
+    location: "Remote Only",
     type: "Full-time",
     // salary: "$90,000 - $120,000",
     description:
-      "We're looking for a Senior Frontend Developer with expertise in React, Next.js, and modern frontend technologies to join our team.",
-    href: "/careers/senior-frontend-developer",
+      "We're looking for a Frontend Developer with strong React, Next.js, and modern UI engineering skills to build fast, polished web experiences.",
+    href: "/careers/frontend-developer",
   },
   {
-    title: "Backend Developer",
+    title: "Backend AI/ML Developer",
     department: "Engineering",
-    location: "Mohali/Remote",
+    location: "Remote Only",
     type: "Full-time",
     // salary: "$85,000 - $110,000",
     description:
-      "Join our backend team to build scalable, secure, and high-performance APIs and services using Node.js and Python.",
-    href: "/careers/backend-developer",
-  },
-  {
-    title: "UI/UX Designer",
-    department: "Design",
-    location: "Mohali/Remote",
-    type: "Full-time",
-    // salary: "$80,000 - $100,000",
-    description:
-      "We're seeking a talented UI/UX Designer to create beautiful, intuitive interfaces for web and mobile applications.",
-    href: "/careers/ui-ux-designer",
+      "Join our backend AI/ML team to build scalable APIs, data workflows, model integrations, and production-ready intelligent features using Python.",
+    href: "/careers/backend-ai-ml-developer",
   },
   {
     title: "DevOps Engineer",
     department: "Operations",
-    location: "Mohali/Remote",
+    location: "Remote Only",
     type: "Full-time",
     // salary: "$95,000 - $125,000",
-    description: "Help us build and maintain our cloud infrastructure, CI/CD pipelines, and monitoring systems.",
+    description: "Help us build and maintain cloud infrastructure, CI/CD pipelines, deployment automation, and monitoring systems.",
     href: "/careers/devops-engineer",
-  },
-  {
-    title: "Project Manager",
-    department: "Management",
-    location: "Mohali/Remote",
-    type: "Full-time",
-    // salary: "$85,000 - $110,000",
-    description: "Lead our project teams to deliver high-quality solutions on time and within budget.",
-    href: "/careers/project-manager",
-  },
-  {
-    title: "QA Engineer",
-    department: "Engineering",
-    location: "Mohali/Remote",
-    type: "Full-time",
-    // salary: "$75,000 - $95,000",
-    description:
-      "Join our QA team to ensure the quality and reliability of our software through manual and automated testing.",
-    href: "/careers/qa-engineer",
   },
 ]
 
@@ -94,7 +65,7 @@ export default function CareersOpenings() {
             Open <span className="gradient-text">Positions</span>
           </h2>
           <p className="text-xl text-gray-400 max-w-3xl mx-auto">
-            Explore our current job openings and find the perfect role for your skills and career goals.
+            We are currently hiring remote talent across frontend, backend AI/ML, and DevOps roles.
           </p>
         </motion.div>
 

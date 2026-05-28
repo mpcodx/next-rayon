@@ -4,7 +4,8 @@ import { SITEMAP_PATHS, SITE_URL } from "@/lib/seo"
 
 const staticRoutes = [...SITEMAP_PATHS]
 
-const blogRoutes = blogPosts.map((post) => `/blog/${post.slug}`)
+const blogLastModified = new Map(blogPosts.map((post) => [`/blog/${post.slug}`, post.updatedAt]))
+const blogRoutes = [...blogLastModified.keys()]
 const projectRoutes = projects.map((project) => `/projects/${project.slug}`)
 
 export function GET() {
@@ -15,8 +16,19 @@ export function GET() {
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 ${allRoutes
   .map((route) => {
-    const priority = route === "/" ? "1.0" : route.startsWith("/blog/") ? "0.7" : "0.8"
-    return `<url><loc>${SITE_URL}${route}</loc><lastmod>${now}</lastmod><changefreq>monthly</changefreq><priority>${priority}</priority></url>`
+    const priority =
+      route === "/"
+        ? "1.0"
+        : route === "/services" || route === "/software-development-company"
+          ? "0.9"
+          : route.startsWith("/blog/")
+            ? "0.7"
+            : route.startsWith("/projects/")
+              ? "0.75"
+              : "0.8"
+    const changefreq = route === "/" || route.startsWith("/blog/") ? "weekly" : "monthly"
+    const lastmod = blogLastModified.get(route) || now
+    return `<url><loc>${SITE_URL}${route}</loc><lastmod>${lastmod}</lastmod><changefreq>${changefreq}</changefreq><priority>${priority}</priority></url>`
   })
   .join("")}
 </urlset>`

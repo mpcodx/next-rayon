@@ -326,7 +326,7 @@ export const projects: Project[] = [
     summary:
       "Toolsy: free tools for SEO, AI workflows, creators, and everyday files.",
     image: "/projects/toolsy.png?height=600&width=800",
-    liveUrl: "https://toolsy.rayonweb.com/",
+    liveUrl: "https://www.toolsylab.xyz/",
     overview: [
       "Toolsy is a Rayon Web product offering free tools for SEO, AI workflows, creators, developers, social media, PDFs, media, and everyday file tasks.",
       "The platform is designed as a fast, searchable utility catalog where each tool solves one focused problem with clear UX and strong SEO intent.",

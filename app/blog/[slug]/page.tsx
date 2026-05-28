@@ -3,8 +3,8 @@ import Image from "next/image"
 import Link from "next/link"
 import { notFound } from "next/navigation"
 import { ArrowLeft, CalendarDays, Clock3, User } from "lucide-react"
-import { blogPosts, getBlogPostBySlug } from "@/lib/blog-data"
-import { SITE_NAME, buildPageMetadata } from "@/lib/seo"
+import { blogPosts, getBlogAuthor, getBlogPostBySlug } from "@/lib/blog-data"
+import { DEFAULT_OG_IMAGE_URL, SITE_NAME, absoluteUrl, buildPageMetadata, serializeJsonLd } from "@/lib/seo"
 
 interface BlogDetailPageProps {
   params: Promise<{
@@ -35,14 +35,17 @@ export async function generateMetadata({ params }: BlogDetailPageProps): Promise
       image: post.image,
       imageAlt: post.title,
     }),
+    keywords: post.tags,
+    authors: [{ name: post.author }],
+    category: post.category,
     openGraph: {
       title: `${post.title} | ${SITE_NAME}`,
       description: post.excerpt,
-      url: `/blog/${post.slug}`,
+      url: absoluteUrl(`/blog/${post.slug}`),
       siteName: SITE_NAME,
       images: [
         {
-          url: post.image,
+          url: absoluteUrl(post.image),
           width: 1200,
           height: 630,
           alt: post.title,
@@ -50,8 +53,11 @@ export async function generateMetadata({ params }: BlogDetailPageProps): Promise
       ],
       locale: "en_US",
       type: "article",
-      publishedTime: new Date(post.date).toISOString(),
+      publishedTime: post.publishedAt,
+      modifiedTime: post.updatedAt,
       authors: [post.author],
+      section: post.category,
+      tags: post.tags,
     },
   }
 }
@@ -60,13 +66,83 @@ export default async function BlogDetailPage({ params }: BlogDetailPageProps) {
   const { slug } = await params
   const post = getBlogPostBySlug(slug)
   if (!post) notFound()
+  const author = getBlogAuthor(post.author)
 
   const relatedPosts = blogPosts
     .filter((candidate) => candidate.slug !== post.slug && candidate.category === post.category)
     .slice(0, 3)
+  const wordCount = [post.excerpt, ...post.sections.flatMap((section) => [...section.paragraphs, ...(section.bullets ?? [])])]
+    .join(" ")
+    .trim()
+    .split(/\s+/).length
+  const blogPostingSchema = {
+    "@context": "https://schema.org",
+    "@type": "BlogPosting",
+    "@id": absoluteUrl(`/blog/${post.slug}#article`),
+    headline: post.title,
+    description: post.excerpt,
+    image: [absoluteUrl(post.image)],
+    datePublished: post.publishedAt,
+    dateModified: post.updatedAt,
+    author: {
+      "@type": "Person",
+      name: post.author,
+      jobTitle: author?.role,
+      description: author?.bio,
+      sameAs: author?.sameAs,
+    },
+    publisher: {
+      "@type": "Organization",
+      name: SITE_NAME,
+      logo: {
+        "@type": "ImageObject",
+        url: DEFAULT_OG_IMAGE_URL,
+      },
+    },
+    mainEntityOfPage: absoluteUrl(`/blog/${post.slug}`),
+    articleSection: post.category,
+    keywords: post.tags.join(", "),
+    wordCount,
+  }
+  const breadcrumbSchema = {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    itemListElement: [
+      {
+        "@type": "ListItem",
+        position: 1,
+        name: "Home",
+        item: absoluteUrl("/"),
+      },
+      {
+        "@type": "ListItem",
+        position: 2,
+        name: "Blog",
+        item: absoluteUrl("/blog"),
+      },
+      {
+        "@type": "ListItem",
+        position: 3,
+        name: post.title,
+        item: absoluteUrl(`/blog/${post.slug}`),
+      },
+    ],
+  }
 
   return (
     <main className="min-h-screen pb-20">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: serializeJsonLd(blogPostingSchema),
+        }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: serializeJsonLd(breadcrumbSchema),
+        }}
+      />
       <section className="pt-24 pb-8">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
           <Link
@@ -148,6 +224,15 @@ export default async function BlogDetailPage({ params }: BlogDetailPageProps) {
             </article>
 
             <aside className="xl:col-span-4 space-y-6">
+              {author && (
+                <div className="glass-card rounded-2xl border border-white/15 p-5">
+                  <h3 className="text-lg font-semibold mb-3">Expert Contributor</h3>
+                  <p className="text-white font-medium">{author.name}</p>
+                  <p className="text-sm text-cyan-300 mt-1">{author.role}</p>
+                  <p className="text-sm text-gray-400 leading-relaxed mt-3">{author.bio}</p>
+                </div>
+              )}
+
               <div className="glass-card rounded-2xl border border-white/15 p-5">
                 <h3 className="text-lg font-semibold mb-3">Tags</h3>
                 <div className="flex flex-wrap gap-2">

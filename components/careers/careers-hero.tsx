@@ -20,13 +20,13 @@ export default function CareersHero() {
               Join Our <span className="gradient-text">Team</span>
             </h1>
             <p className="text-xl text-gray-300 mb-8">
-              Be part of a dynamic team that's passionate about creating impactful solutions and shaping the future.
-              innovative digital solutions and making a difference in the tech world.
+              Join a remote-first team building modern frontend, backend AI/ML, and DevOps solutions for ambitious
+              products and growing businesses.
             </p>
             <p className="text-gray-400 mb-8">
               At Rayon Web Solutions, we believe in fostering a culture of innovation, collaboration, and continuous
-              learning. We're always looking for talented individuals who are passionate about technology and want to
-              grow their careers with us.
+              learning. We are currently hiring for remote-only roles and looking for people who care about strong
+              engineering, clear communication, and real product impact.
             </p>
             <Button className="bg-gradient-to-r from-purple-600 to-blue-600 hover:from-purple-700 hover:to-blue-700 text-white px-8 py-6 text-lg rounded-full">
               View Open Positions
