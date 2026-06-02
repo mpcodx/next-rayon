@@ -255,5 +255,5 @@ export const trainingCourseCategories: TrainingCourseCategory[] = [
 export const trainingContactDetails = {
   email: "info@rayonweb.com",
   phone: "+1 (123) 456-7890",
-  location: "Mohali, Punjab",
+  location: "Online, Worldwide",
 }

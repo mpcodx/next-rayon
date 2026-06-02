@@ -41,7 +41,7 @@ export default function CancelModal({ isOpen, onClose }: CancelModalProps) {
             {/* Alternate Address Info */}
             <div className="bg-yellow-500/10 border border-yellow-500/30 rounded-lg p-4">
               <p className="text-xs font-semibold text-yellow-400 mb-1">ALTERNATE DELIVERY ADDRESS</p>
-              <p className="text-sm text-gray-300">6 GMD, Ganganagar, Rajasthan</p>
+              <p className="text-sm text-gray-300">Online, Worldwide</p>
             </div>
           </div>
 

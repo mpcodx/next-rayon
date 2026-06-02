@@ -17,8 +17,8 @@ const timelineEvents = [
   },
   {
     year: "2019",
-    title: "International Expansion",
-    description: "Opened our first international office and started serving clients across Europe and Asia.",
+    title: "Broader Reach",
+    description: "Opened our first remote delivery office and expanded support across multiple regions.",
   },
   {
     year: "2021",

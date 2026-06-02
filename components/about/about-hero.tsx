@@ -38,9 +38,9 @@ export default function AboutHero() {
               businesses through innovative technology solutions.
             </p>
             <p className="text-gray-400 mb-6 leading-relaxed">
-              Founded in 2015, Rayon Web Solutions has grown from a small startup to a leading digital agency with
-              clients worldwide. Our mission is to bridge the gap between business goals and technological innovation,
-              creating digital experiences that drive growth and success.
+              Founded in 2015, Rayon Web Solutions has grown from a small startup to a leading digital agency. Our
+              mission is to bridge the gap between business goals and technological innovation, creating digital
+              experiences that drive growth and success.
             </p>
             <p className="text-gray-400 mb-8 leading-relaxed">
               With expertise spanning web development, mobile applications, cloud solutions, UI/UX design, and more, we

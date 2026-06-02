@@ -20,7 +20,7 @@ import { DEFAULT_OG_IMAGE_URL, SITE_NAME, SITE_URL, buildPageMetadata } from "@/
 
 const pageTitle = "Web, AI & Software Development Company | Rayon Web Solutions"
 const pageDescription =
-  "Rayon Web Solutions delivers web development, AI solutions, and custom software for startups, businesses, and enterprises worldwide with expert delivery."
+  "Rayon Web Solutions delivers web development, AI solutions, and custom software for startups, businesses, and enterprises."
 const pageUrl = `${SITE_URL}/software-development-company`
 const inlineLinkClass = "text-cyan-300 underline-offset-4 hover:text-cyan-200 hover:underline"
 
@@ -50,7 +50,7 @@ const servicePillars = [
 
 const trustSignals = [
   {
-    title: "Global delivery model",
+    title: "Flexible delivery model",
     description: "Support for startups, growing businesses, and enterprise teams across markets and time zones.",
     icon: Globe,
   },
@@ -117,9 +117,9 @@ const faqItems = [
       "Yes. We support bug fixes, performance tuning, feature expansion, QA, cloud deployment, monitoring, and continuous optimization after launch so your software keeps creating value.",
   },
   {
-    question: "Why choose a global software development company like Rayon Web Solutions?",
+    question: "Why choose a software development partner like Rayon Web Solutions?",
     answer:
-      "A global delivery model gives businesses access to broader technical expertise, flexible execution, and efficient development without sacrificing quality. We pair that reach with structured communication and accountable delivery.",
+      "A distributed delivery model gives businesses access to broader technical expertise, flexible execution, and efficient development without sacrificing quality. We pair that reach with structured communication and accountable delivery.",
   },
 ] as const
 
@@ -142,6 +142,10 @@ export const metadata: Metadata = buildPageMetadata({
     "software development company",
     "web development company",
     "AI solutions company",
+    "global software development company",
+    "USA web development company",
+    "UAE web development company",
+    "Australia web development company",
     "custom software development",
     "global software development services",
     "custom website development",
@@ -168,7 +172,7 @@ const structuredData = {
       email: "info@rayonweb.com",
       description:
         "Global software development company delivering web development, AI solutions, and custom software services.",
-      areaServed: "Worldwide",
+      areaServed: ["Worldwide"],
     },
     {
       "@type": "WebSite",
@@ -222,14 +226,14 @@ const structuredData = {
       provider: {
         "@id": `${SITE_URL}/#organization`,
       },
-      areaServed: "Worldwide",
+      areaServed: ["Worldwide"],
       serviceType: ["Web Development", "AI Solutions", "Custom Software Development"],
       audience: {
         "@type": "Audience",
         audienceType: "Startups, Businesses, and Enterprises",
       },
       description:
-        "Rayon Web Solutions builds scalable websites, AI products, and custom software platforms for startups, businesses, and enterprises worldwide.",
+        "Rayon Web Solutions builds scalable websites, AI products, and custom software platforms for startups, businesses, and enterprises.",
     },
     {
       "@type": "FAQPage",
@@ -260,8 +264,8 @@ export default function SoftwareDevelopmentCompanyPage() {
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid gap-8 lg:grid-cols-[minmax(0,1.35fr)_minmax(320px,0.65fr)] lg:items-start">
             <div className="space-y-6">
-              <span className="inline-flex rounded-full border border-cyan-400/20 bg-cyan-400/10 px-4 py-1 text-sm font-medium text-cyan-200">
-                Global delivery for startups, businesses, and enterprises
+                <span className="inline-flex rounded-full border border-cyan-400/20 bg-cyan-400/10 px-4 py-1 text-sm font-medium text-cyan-200">
+                Delivery for startups, businesses, and enterprises
               </span>
               <div className="space-y-4">
                 <h1 className="max-w-5xl text-4xl font-bold tracking-tight text-white sm:text-5xl lg:text-6xl">
@@ -270,7 +274,7 @@ export default function SoftwareDevelopmentCompanyPage() {
                 <p className="max-w-4xl text-lg leading-8 text-slate-300 sm:text-xl">
                   Rayon Web Solutions helps organizations build high-performance websites, intelligent applications,
                   and custom software systems that improve customer experience, streamline operations, and support
-                  sustainable growth across global markets.
+                  sustainable growth.
                 </p>
                 <p className="max-w-4xl text-lg leading-8 text-slate-300">
                   We combine strategy, UX, engineering, QA, deployment, and optimization in one delivery process so
@@ -295,18 +299,18 @@ export default function SoftwareDevelopmentCompanyPage() {
               <CardHeader>
                 <CardTitle className="text-2xl text-white">SEO positioning built into the page</CardTitle>
                 <CardDescription className="text-slate-300">
-                  This landing page targets high-intent searches around web development, AI solutions, and custom
-                  software delivery.
+                  This landing page targets high-intent searches around web development, AI solutions, custom
+                  software delivery, and broader service discovery.
                 </CardDescription>
               </CardHeader>
               <CardContent className="space-y-4 text-sm text-slate-300">
                 <div>
                   <p className="font-semibold text-white">Focus keywords</p>
-                  <p>software development company, web development company, AI solutions company</p>
+                  <p>software development company, web development company, custom software development</p>
                 </div>
                 <div>
                   <p className="font-semibold text-white">Secondary keywords</p>
-                  <p>custom software development, enterprise software development, AI integration services</p>
+                  <p>custom software development, AI integration services, enterprise software development</p>
                 </div>
                 <div>
                   <p className="font-semibold text-white">Primary CTA</p>

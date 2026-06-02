@@ -1,6 +1,5 @@
-import { Suspense, type ReactNode } from "react"
+import { Suspense, type CSSProperties, type ReactNode } from "react"
 import type { Metadata } from "next"
-import { Manrope, Space_Grotesk } from "next/font/google"
 import "./globals.css"
 import Navbar from "@/components/navbar"
 import Footer from "@/components/footer"
@@ -26,19 +25,12 @@ import {
   serializeJsonLd,
 } from "@/lib/seo"
 import ScrollToTop from "@/components/scroll-to-top"
+const fontVariables = {
+  "--font-manrope": '"Manrope", "Segoe UI", -apple-system, BlinkMacSystemFont, system-ui, sans-serif',
+  "--font-space-grotesk": '"Space Grotesk", "Trebuchet MS", "Aptos", "Segoe UI", sans-serif',
+} as CSSProperties
 
-// Optimize font loading
-const manrope = Manrope({
-  subsets: ["latin"],
-  variable: "--font-manrope",
-  display: "swap",
-})
-
-const spaceGrotesk = Space_Grotesk({
-  subsets: ["latin"],
-  variable: "--font-space-grotesk",
-  display: "swap",
-})
+const chatWidgetSrc = process.env.NEXT_PUBLIC_CHAT_WIDGET_URL
 
 export const metadata: Metadata = {
   title: {
@@ -145,13 +137,11 @@ export default function RootLayout({
           }}
         />
       </head>
-      <body
-        className={`${manrope.variable} ${spaceGrotesk.variable} font-sans antialiased text-gray-100 min-h-screen`}
-      >
+      <body style={fontVariables} className="font-sans antialiased text-gray-100 min-h-screen">
         <Suspense fallback={null}>
           <ScrollToTop />
         </Suspense>
-        <Script id="chat-widget" strategy="afterInteractive" src="http://127.0.0.1:8000/widget/embed/2f0912e2-22b8-42d7-8dea-5de9ab35bd6a.js" defer />
+        {chatWidgetSrc ? <Script id="chat-widget" strategy="afterInteractive" src={chatWidgetSrc} defer /> : null}
         {/* Google Analytics */}
         <Script
           strategy="lazyOnload"

@@ -1,6 +1,7 @@
 import { Facebook, Twitter, Instagram, Linkedin, Github, Mail, Phone, MapPin } from "lucide-react"
 import Link from "next/link"
 import Image from "next/image"
+import { CONTACT_EMAIL, CONTACT_PHONE, CONTACT_PHONE_URI } from "@/lib/seo"
 
 export default function Footer() {
   return (
@@ -19,7 +20,7 @@ export default function Footer() {
               </Link>
               <p className="text-gray-300/85 mb-6">
                 Your Vision, Our Code - Turning Ideas into Reality. We build high-performance digital solutions for
-                businesses worldwide.
+                businesses of all sizes.
               </p>
               <div className="flex space-x-4">
                 <a
@@ -109,6 +110,7 @@ export default function Footer() {
                   </Link>
                 </li>
               </ul>
+
             </div>
 
             <div>
@@ -116,18 +118,18 @@ export default function Footer() {
               <ul className="space-y-4">
                 <li className="flex items-start">
                   <MapPin className="h-5 w-5 text-cyan-300 mr-3 mt-0.5" />
-                  <span className="text-gray-300/90">Mohali</span>
+                  <span className="text-gray-300/90">Mohali, Punjab, India</span>
                 </li>
                 <li className="flex items-center">
                   <Phone className="h-5 w-5 text-cyan-300 mr-3" />
-                  <a href="tel:+11234567890" className="text-gray-300/90 hover:text-cyan-300 transition-colors">
-                    +1 (123) 456-7890
+                  <a href={`tel:${CONTACT_PHONE_URI}`} className="text-gray-300/90 hover:text-cyan-300 transition-colors">
+                    {CONTACT_PHONE}
                   </a>
                 </li>
                 <li className="flex items-center">
                   <Mail className="h-5 w-5 text-cyan-300 mr-3" />
-                  <a href="mailto:info@rayonweb.com" className="text-gray-300/90 hover:text-cyan-300 transition-colors">
-                    info@rayonweb.com
+                  <a href={`mailto:${CONTACT_EMAIL}`} className="text-gray-300/90 hover:text-cyan-300 transition-colors">
+                    {CONTACT_EMAIL}
                   </a>
                 </li>
               </ul>

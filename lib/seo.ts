@@ -4,7 +4,7 @@ export const SITE_NAME = "Rayon Web Solutions"
 export const SITE_URL = (process.env.NEXT_PUBLIC_SITE_URL || "https://www.rayonweb.com").replace(/\/$/, "")
 export const SITE_TAGLINE = "Your Vision, Our Code"
 export const SITE_DESCRIPTION =
-  "Software development company for web, mobile, AI/ML, DevOps, QA, and UI/UX services. We design and build scalable digital products for startups and enterprises."
+  "Software development company building web, mobile, AI/ML, DevOps, QA, and UI/UX products for startups and enterprises."
 export const DEFAULT_OG_IMAGE_PATH = "/new-1.png"
 export const DEFAULT_OG_IMAGE_URL = `${SITE_URL}${DEFAULT_OG_IMAGE_PATH}`
 export const CONTACT_EMAIL = "info@rayonweb.com"
@@ -23,7 +23,9 @@ export const SOCIAL_PROFILES = [
   "https://www.instagram.com/rayonwebsolutions/",
   "https://www.linkedin.com/company/rayonwebsolutions/?viewAsMember=true",
 ] as const
-export const SERVICE_AREAS = ["Worldwide", "North America", "Europe", "Middle East", "Asia-Pacific", "India"] as const
+export const SERVICE_AREAS = [
+  "Worldwide",
+] as const
 export const SITE_KEYWORDS = [
   "Rayon Web Solutions",
   "Web Development",
@@ -43,6 +45,16 @@ export const SITE_KEYWORDS = [
   "LLM Development",
   "AI Integration Services",
   "Software Development Company",
+  "global software development company",
+  "USA web development company",
+  "UAE web development company",
+  "Australia web development company",
+  "worldwide web development",
+  "offshore web development partner",
+  "web development training",
+  "full stack development training",
+  "software development training",
+  "international software development services",
 ]
 
 type PageSeo = {
@@ -55,8 +67,18 @@ type PageSeo = {
 export const PAGE_SEO: Record<string, PageSeo> = {
   "/": {
     title: "Web, App, AI & Cloud Development Company | Rayon Web Solutions",
-    description:
-      "Rayon Web Solutions builds web, mobile, AI/ML, and DevOps products with strategy, design, and engineering that help startups and enterprises grow faster.",
+    description: "Rayon Web Solutions builds web, mobile, AI/ML, and DevOps products for startups and enterprises.",
+    keywords: [
+      "web development company",
+      "software development company",
+      "global software development company",
+      "USA web development",
+      "UAE web development",
+      "Australia web development",
+      "worldwide web development",
+      "web development training",
+      "full stack development training",
+    ],
   },
   "/about": {
     title: "About Rayon Web Solutions | Product and Engineering Partner",
@@ -76,12 +98,21 @@ export const PAGE_SEO: Record<string, PageSeo> = {
   "/contact": {
     title: "Contact Rayon Web Solutions | Start Your Project",
     description:
-      "Talk to Rayon Web Solutions about web development, AI, app development, DevOps, UI/UX, QA, and custom software engagements tailored to your goals.",
+      "Talk to Rayon Web Solutions about web development, AI, app development, DevOps, UI/UX, QA, and training support.",
+    keywords: [
+      "contact web development company",
+      "global software development company contact",
+      "USA web development company",
+      "UAE web development company",
+      "Australia web development company",
+      "book discovery call",
+      "web development consultation",
+    ],
   },
   "/faq": {
     title: "FAQ | Rayon Web Solutions",
     description:
-      "Find answers to common questions about services, timelines, pricing, global delivery, and working with Rayon Web Solutions.",
+      "Find answers to common questions about services, timelines, pricing, and working with Rayon Web Solutions.",
   },
   "/privacy-policy": {
     title: "Privacy Policy | Rayon Web Solutions",
@@ -100,16 +131,30 @@ export const PAGE_SEO: Record<string, PageSeo> = {
   "/services": {
     title: "Software Development Services | Rayon Web Solutions",
     description:
-      "Explore web, app, AI, DevOps, QA, UI/UX, and LMS services delivered by cross-functional teams focused on measurable product outcomes and faster releases.",
+      "Explore web, app, AI, DevOps, QA, UI/UX, and LMS services delivered by a team focused on measurable product outcomes and faster releases.",
+    keywords: [
+      "software development services",
+      "web development services",
+      "app development services",
+      "global web development services",
+      "USA web development services",
+      "UAE web development services",
+      "Australia web development services",
+      "international software development services",
+    ],
   },
   "/software-development-company": {
     title: "Web, AI & Software Development Company | Rayon Web Solutions",
     description:
-      "Rayon Web Solutions delivers web development, AI solutions, and custom software for startups, businesses, and enterprises worldwide.",
+      "Web, AI, and custom software development company for startups, businesses, and enterprises.",
     keywords: [
       "software development company",
       "web development company",
       "AI solutions company",
+      "global software development company",
+      "USA web development company",
+      "UAE web development company",
+      "Australia web development company",
       "custom software development",
       "global software development services",
       "custom website development",
@@ -134,12 +179,29 @@ export const PAGE_SEO: Record<string, PageSeo> = {
   "/training": {
     title: "Technology Training Programs | Rayon Web Solutions",
     description:
-      "Explore practical training programs in full-stack development, mobile, DevOps, UI/UX, AI, and cybersecurity.",
+      "Explore practical web development training, full-stack bootcamps, mobile, DevOps, UI/UX, AI, and cybersecurity programs online.",
+    keywords: [
+      "web development training",
+      "full stack development training",
+      "software development training",
+      "online training programs",
+      "React Next.js training",
+      "DevOps training",
+      "AI training",
+    ],
   },
   "/training/courses": {
     title: "Training Courses | Rayon Web Solutions",
     description:
-      "Explore detailed training programs in Full-Stack, MEAN/MERN, Mobile, DevOps, UI/UX, AI, and Cybersecurity with live mentorship.",
+      "Explore detailed training programs in full-stack, MEAN/MERN, mobile, DevOps, UI/UX, AI, and cybersecurity with live mentorship.",
+    keywords: [
+      "web development courses",
+      "full stack courses",
+      "software training courses",
+      "online React Next.js course",
+      "DevOps course",
+      "AI course",
+    ],
   },
   "/services/ai-ml": {
     title: "AI & Machine Learning Services | Rayon Web Solutions",
@@ -190,6 +252,15 @@ export const PAGE_SEO: Record<string, PageSeo> = {
     title: "App Development Services | Rayon Web Solutions",
     description:
       "Mobile apps, progressive web apps, and cross-platform products built for growth-focused teams.",
+    keywords: [
+      "app development services",
+      "mobile app development company",
+      "cross-platform app development",
+      "global app development company",
+      "USA app development company",
+      "UAE app development company",
+      "Australia app development company",
+    ],
   },
   "/services/app-development/cross-platform-apps": {
     title: "Cross-Platform App Development | Rayon Web Solutions",
@@ -290,6 +361,16 @@ export const PAGE_SEO: Record<string, PageSeo> = {
     title: "Web Development Services | Rayon Web Solutions",
     description:
       "Custom websites, web apps, ecommerce, and CMS development built for performance, SEO, and conversion.",
+    keywords: [
+      "web development services",
+      "custom website development",
+      "SEO friendly web design",
+      "global web development company",
+      "ecommerce website development",
+      "USA web development services",
+      "UAE web development services",
+      "Australia web development services",
+    ],
   },
   "/services/web-development/cms-integration": {
     title: "CMS Integration Services | Rayon Web Solutions",
@@ -441,6 +522,21 @@ export function buildWebsiteSchema() {
       "@id": `${SITE_URL}/#organization`,
     },
     inLanguage: "en-US",
+  }
+}
+
+export function buildFaqSchema(faqs: { question: string; answer: string }[]) {
+  return {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    mainEntity: faqs.map((faq) => ({
+      "@type": "Question",
+      name: faq.question,
+      acceptedAnswer: {
+        "@type": "Answer",
+        text: faq.answer,
+      },
+    })),
   }
 }
 

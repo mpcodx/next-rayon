@@ -11,9 +11,9 @@ const faqs = [
       "We typically respond to all inquiries within 24 hours during business days. For urgent matters, please indicate so in your message and we'll prioritize your request.",
   },
   {
-    question: "Do you work with clients internationally?",
+    question: "Do you work with clients remotely?",
     answer:
-      "Yes, we work with clients from all over the world. Our team is distributed across multiple time zones, allowing us to provide support and services globally.",
+      "Yes, we work with clients remotely. Our team is distributed across multiple time zones, allowing us to provide flexible support and services.",
   },
   {
     question: "What information should I include in my project inquiry?",

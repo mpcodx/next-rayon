@@ -21,10 +21,12 @@ ${allRoutes
         ? "1.0"
         : route === "/services" || route === "/software-development-company"
           ? "0.9"
-          : route.startsWith("/blog/")
-            ? "0.7"
-            : route.startsWith("/projects/")
-              ? "0.75"
+          : route.startsWith("/web-development-")
+            ? "0.85"
+            : route.startsWith("/blog/")
+              ? "0.7"
+              : route.startsWith("/projects/")
+                ? "0.75"
               : "0.8"
     const changefreq = route === "/" || route.startsWith("/blog/") ? "weekly" : "monthly"
     const lastmod = blogLastModified.get(route) || now

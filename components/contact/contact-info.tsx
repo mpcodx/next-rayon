@@ -2,6 +2,7 @@
 
 import { motion } from "framer-motion"
 import { MapPin, Phone, Mail, Clock, Globe } from "lucide-react"
+import { CONTACT_EMAIL, CONTACT_PHONE, CONTACT_PHONE_URI } from "@/lib/seo"
 
 export default function ContactInfo() {
   return (
@@ -20,7 +21,7 @@ export default function ContactInfo() {
           </div>
           <div>
             <h3 className="text-lg font-semibold mb-1">Office Address</h3>
-            <p className="text-gray-400">Mohali</p>
+            <p className="text-gray-400">Mohali, Punjab, India</p>
           </div>
         </div>
 
@@ -31,8 +32,8 @@ export default function ContactInfo() {
           <div>
             <h3 className="text-lg font-semibold mb-1">Phone Number</h3>
             <p className="text-gray-400">
-              <a href="tel:+11234567890" className="hover:text-white transition-colors">
-                +1 (123) 456-7890
+              <a href={`tel:${CONTACT_PHONE_URI}`} className="hover:text-white transition-colors">
+                {CONTACT_PHONE}
               </a>
             </p>
           </div>
@@ -45,8 +46,8 @@ export default function ContactInfo() {
           <div>
             <h3 className="text-lg font-semibold mb-1">Email Address</h3>
             <p className="text-gray-400">
-              <a href="mailto:info@rayonweb.com" className="hover:text-white transition-colors">
-                info@rayonweb.com
+              <a href={`mailto:${CONTACT_EMAIL}`} className="hover:text-white transition-colors">
+                {CONTACT_EMAIL}
               </a>
             </p>
           </div>
@@ -69,7 +70,7 @@ export default function ContactInfo() {
           </div>
           <div>
             <h3 className="text-lg font-semibold mb-1">Global Presence</h3>
-            <p className="text-gray-400">With remote teams across North America, Europe, and Asia</p>
+            <p className="text-gray-400">With remote teams across North America, the Middle East, Europe, and Asia-Pacific</p>
           </div>
         </div>
       </div>

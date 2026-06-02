@@ -53,7 +53,7 @@ export default function CerberSection() {
                 <div>
                   <h3 className="text-lg font-semibold mb-1">Compliance & Certification</h3>
                   <p className="text-gray-400">
-                    Our security measures comply with international standards including GDPR, HIPAA, and ISO 27001.
+                    Our security measures align with recognized standards including GDPR, HIPAA, and ISO 27001.
                   </p>
                 </div>
               </div>

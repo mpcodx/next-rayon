@@ -29,6 +29,9 @@ export default function TrainingHero() {
               Learn full-stack development, MEAN/MERN architecture, AI workflows, and cybersecurity with live mentors,
               portfolio projects, and structured career support.
             </p>
+            <p className="text-sm text-cyan-300/90 mb-8 max-w-2xl mx-auto lg:mx-0">
+              We support learners through live online cohorts and practical mentorship.
+            </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start">
               <Button
                 size="lg"

@@ -19,7 +19,7 @@ export default function ContactMap() {
             Find <span className="gradient-text">Us</span>
           </h2>
           <p className="text-xl text-gray-400 max-w-3xl mx-auto">
-            Visit our office or reach out to us online. We're always happy to connect.
+            Visit our office or reach out to us online. We support clients remotely across time zones.
           </p>
         </motion.div>
 

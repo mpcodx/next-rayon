@@ -4,7 +4,8 @@ import ServiceProcess from "@/components/services/service-process"
 import ServiceCaseStudies from "@/components/services/service-case-studies"
 import ServiceFAQ from "@/components/services/service-faq"
 import ServiceCTA from "@/components/services/service-cta"
-import { getPageMetadata } from "@/lib/seo"
+import Script from "next/script"
+import { buildFaqSchema, getPageMetadata, serializeJsonLd } from "@/lib/seo"
 
 export const metadata = getPageMetadata("/services/web-development")
 
@@ -78,9 +79,15 @@ export default function WebDevelopmentPage() {
       },
     ],
   }
+  const faqSchema = buildFaqSchema(serviceData.faqs)
 
   return (
     <div className="flex flex-col gap-20 pb-20">
+      <Script
+        id="web-development-faq-schema"
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: serializeJsonLd(faqSchema) }}
+      />
       <ServiceDetailHero
         title={serviceData.title}
         description={serviceData.description}

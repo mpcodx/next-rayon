@@ -5,6 +5,7 @@ import { Mail, Phone, MapPin, Clock, MessageSquare } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { useState } from "react"
 import BookConsultationModal from "@/components/book-consultation-modal"
+import { CONTACT_EMAIL, CONTACT_PHONE } from "@/lib/seo"
 
 export default function EnhancedContactInfo() {
   const [isModalOpen, setIsModalOpen] = useState(false)
@@ -13,22 +14,22 @@ export default function EnhancedContactInfo() {
     {
       icon: Mail,
       title: "Email Us",
-      value: "info@rayonweb.com",
+      value: CONTACT_EMAIL,
       description: "For general inquiries and support",
       color: "from-purple-600/20 to-blue-600/20",
     },
     {
       icon: Phone,
       title: "Call Us",
-      value: "+1 (555) 000-0000",
-      description: "Mon-Fri, 9AM-6PM EST",
+      value: CONTACT_PHONE,
+      description: "Mon-Fri, 9AM-6PM IST",
       color: "from-blue-600/20 to-cyan-600/20",
     },
     {
       icon: MapPin,
       title: "Visit Us",
-      value: "Mohali, Punjab",
-      description: "Our office location for in-person meetings",
+      value: "Mohali, Punjab, India",
+      description: "Available for remote projects and consultations",
       color: "from-cyan-600/20 to-green-600/20",
     },
     {
@@ -90,8 +91,8 @@ export default function EnhancedContactInfo() {
               <h3 className="text-xl font-bold text-white mb-2">Looking for Freelance Services?</h3>
               <p className="text-gray-300 mb-4">
                 We also provide freelance support. If you want to hire a freelancer, send your query to{" "}
-                <a href="mailto:info@rayonweb.com" className="text-cyan-300 hover:text-cyan-200 underline">
-                  info@rayonweb.com
+                <a href={`mailto:${CONTACT_EMAIL}`} className="text-cyan-300 hover:text-cyan-200 underline">
+                  {CONTACT_EMAIL}
                 </a>
                 .
               </p>
@@ -106,7 +107,7 @@ export default function EnhancedContactInfo() {
                 asChild
                 className="bg-gradient-to-r from-cyan-600 to-blue-600 hover:from-cyan-700 hover:to-blue-700 text-white whitespace-nowrap h-fit"
               >
-                <a href="mailto:info@rayonweb.com">Send Freelance Query</a>
+                <a href={`mailto:${CONTACT_EMAIL}`}>Send Freelance Query</a>
               </Button>
               <Button
                 onClick={() => setIsModalOpen(true)}

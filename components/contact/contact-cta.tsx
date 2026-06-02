@@ -4,6 +4,7 @@ import { motion } from "framer-motion"
 import { Button } from "@/components/ui/button"
 import { Mail, Phone, MapPin } from "lucide-react"
 import Link from "next/link"
+import { CONTACT_EMAIL, CONTACT_PHONE, CONTACT_PHONE_URI } from "@/lib/seo"
 
 export default function ContactCTA() {
   return (
@@ -33,7 +34,7 @@ export default function ContactCTA() {
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5, delay: 0 }}
             viewport={{ once: true }}
-            href="mailto:info@rayonweb.com"
+            href={`mailto:${CONTACT_EMAIL}`}
             whileHover={{ y: -5 }}
             className="text-center p-8 glass-card rounded-xl hover:border-purple-500/50 transition-all group"
           >
@@ -41,7 +42,7 @@ export default function ContactCTA() {
               <Mail className="w-8 h-8 text-purple-400" />
             </div>
             <h3 className="font-semibold text-white mb-2">Email</h3>
-            <p className="text-purple-300 font-medium mb-4">info@rayonweb.com</p>
+            <p className="text-purple-300 font-medium mb-4">{CONTACT_EMAIL}</p>
             <p className="text-gray-400 text-sm">General inquiries and support</p>
           </motion.a>
 
@@ -50,7 +51,7 @@ export default function ContactCTA() {
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5, delay: 0.1 }}
             viewport={{ once: true }}
-            href="tel:+15550000000"
+            href={`tel:${CONTACT_PHONE_URI}`}
             whileHover={{ y: -5 }}
             className="text-center p-8 glass-card rounded-xl hover:border-purple-500/50 transition-all group"
           >
@@ -58,8 +59,8 @@ export default function ContactCTA() {
               <Phone className="w-8 h-8 text-blue-400" />
             </div>
             <h3 className="font-semibold text-white mb-2">Phone</h3>
-            <p className="text-blue-300 font-medium mb-4">+1 (555) 000-0000</p>
-            <p className="text-gray-400 text-sm">Mon-Fri, 9AM-6PM EST</p>
+            <p className="text-blue-300 font-medium mb-4">{CONTACT_PHONE}</p>
+            <p className="text-gray-400 text-sm">Mon-Fri, 9AM-6PM IST</p>
           </motion.a>
 
           <motion.div
@@ -73,8 +74,8 @@ export default function ContactCTA() {
               <MapPin className="w-8 h-8 text-cyan-400" />
             </div>
             <h3 className="font-semibold text-white mb-2">Office</h3>
-            <p className="text-cyan-300 font-medium mb-4">New York, USA</p>
-            <p className="text-gray-400 text-sm">6 GMD, Ganganagar, Rajasthan</p>
+            <p className="text-cyan-300 font-medium mb-4">Mohali, Punjab, India</p>
+            <p className="text-gray-400 text-sm">Available for remote projects and consultations</p>
           </motion.div>
         </div>
 
