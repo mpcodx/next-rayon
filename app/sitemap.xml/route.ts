@@ -1,5 +1,6 @@
 import { blogPosts } from "@/lib/blog-data"
 import { projects } from "@/lib/projects-data"
+import { locationsList } from "@/lib/locations"
 import { SITEMAP_PATHS, SITE_URL } from "@/lib/seo"
 
 const staticRoutes = [...SITEMAP_PATHS]
@@ -7,10 +8,11 @@ const staticRoutes = [...SITEMAP_PATHS]
 const blogLastModified = new Map(blogPosts.map((post) => [`/blog/${post.slug}`, post.updatedAt]))
 const blogRoutes = [...blogLastModified.keys()]
 const projectRoutes = projects.map((project) => `/projects/${project.slug}`)
+const locationRoutes = locationsList.map((loc) => `/${loc.slug}`)
 
 export function GET() {
   const now = new Date().toISOString()
-  const allRoutes = [...new Set([...staticRoutes, ...blogRoutes, ...projectRoutes])]
+  const allRoutes = [...new Set([...staticRoutes, ...locationRoutes, ...blogRoutes, ...projectRoutes])]
 
   const xml = `<?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">

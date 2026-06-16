@@ -11,15 +11,7 @@ import { getPageMetadata } from "@/lib/seo"
 
 export const metadata: Metadata = getPageMetadata("/")
 
-// Dynamically import the heavy Hero component
-const Hero = dynamic(() => import("@/components/home/hero"), {
-  loading: () => (
-    <div className="min-h-[90vh] flex items-center justify-center">
-      <div className="w-32 h-32 rounded-full bg-gradient-to-r from-cyan-500 to-blue-600 animate-pulse"></div>
-    </div>
-  ),
-  ssr: true,
-})
+import Hero from "@/components/home/hero"
 
 // Dynamically import the RecentProjects component with images
 const RecentProjects = dynamic(() => import("@/components/home/recent-projects"), {
