@@ -5,6 +5,8 @@ import Navbar from "@/components/navbar"
 import Footer from "@/components/footer"
 import DeferredFloatingCTA from "@/components/deferred-floating-cta"
 import Script from "next/script"
+import { Manrope, Space_Grotesk } from "next/font/google"
+import ThirdPartyScripts from "@/components/third-party-scripts"
 import {
   BUSINESS_COORDINATES,
   BUSINESS_COUNTRY,
@@ -25,10 +27,18 @@ import {
   serializeJsonLd,
 } from "@/lib/seo"
 import ScrollToTop from "@/components/scroll-to-top"
-const fontVariables = {
-  "--font-manrope": '"Manrope", "Segoe UI", -apple-system, BlinkMacSystemFont, system-ui, sans-serif',
-  "--font-space-grotesk": '"Space Grotesk", "Trebuchet MS", "Aptos", "Segoe UI", sans-serif',
-} as CSSProperties
+
+const manrope = Manrope({
+  subsets: ["latin"],
+  variable: "--font-manrope",
+  display: "swap",
+})
+
+const spaceGrotesk = Space_Grotesk({
+  subsets: ["latin"],
+  variable: "--font-space-grotesk",
+  display: "swap",
+})
 
 const chatWidgetSrc = process.env.NEXT_PUBLIC_CHAT_WIDGET_URL
 
@@ -137,48 +147,12 @@ export default function RootLayout({
           }}
         />
       </head>
-      <body style={fontVariables} className="font-sans antialiased text-gray-100 min-h-screen">
+      <body className={`${manrope.variable} ${spaceGrotesk.variable} font-sans antialiased text-gray-100 min-h-screen`}>
         <Suspense fallback={null}>
           <ScrollToTop />
         </Suspense>
         {chatWidgetSrc ? <Script id="chat-widget" strategy="afterInteractive" src={chatWidgetSrc} defer /> : null}
-        {/* Google Analytics */}
-        <Script
-          strategy="lazyOnload"
-          src={`https://www.googletagmanager.com/gtag/js?id=G-68457LHBSZ`}
-        />
-        <Script
-          id="google-analytics"
-          strategy="lazyOnload"
-          dangerouslySetInnerHTML={{
-            __html: `
-              window.dataLayer = window.dataLayer || [];
-              function gtag(){dataLayer.push(arguments);}
-              gtag('js', new Date());
-              gtag('config', 'G-68457LHBSZ');
-            `,
-          }}
-        />
-
-        {/* Facebook Pixel */}
-        <Script
-          id="facebook-pixel"
-          strategy="lazyOnload"
-          dangerouslySetInnerHTML={{
-            __html: `
-              !function(f,b,e,v,n,t,s)
-              {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
-              n.callMethod.apply(n,arguments):n.queue.push(arguments)};
-              if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
-              n.queue=[];t=b.createElement(e);t.async=!0;
-              t.src=v;s=b.getElementsByTagName(e)[0];
-              s.parentNode.insertBefore(t,s)}(window, document,'script',
-              'https://connect.facebook.net/en_US/fbevents.js');
-              fbq('init', '23863632866572138');
-              fbq('track', 'PageView');
-            `,
-          }}
-        />
+        <ThirdPartyScripts />
 
         <div className="relative">
           <div className="pointer-events-none fixed inset-x-0 top-0 h-72 bg-gradient-to-b from-cyan-400/10 via-transparent to-transparent blur-3xl" />

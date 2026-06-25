@@ -46,6 +46,8 @@ export default function CareersHero() {
                   src="https://img.freepik.com/free-photo/hiring-concept-with-people-coming-together_23-2149519873.jpg?height=600&width=800"
                   alt="Rayon Web Solutions Team"
                   fill
+                  priority
+                  sizes="(max-width: 1024px) 100vw, 600px"
                   className="object-cover"
                 />
               </div>

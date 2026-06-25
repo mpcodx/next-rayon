@@ -277,6 +277,7 @@ export default function Navbar() {
                       <Link
                         href={item.href}
                         onClick={closeAllMenus}
+                        prefetch={false}
                         className="flex items-center gap-2 text-sm font-semibold text-white hover:text-cyan-200"
                       >
                         <span className="text-cyan-300">{item.icon}</span>
@@ -289,6 +290,7 @@ export default function Navbar() {
                             <Link
                               href={subService.href}
                               onClick={closeAllMenus}
+                              prefetch={false}
                               className="text-xs text-gray-400 hover:text-cyan-200 transition-colors"
                             >
                               {subService.name}
@@ -337,6 +339,7 @@ export default function Navbar() {
                             <Link
                               href={item.href}
                               onClick={closeAllMenus}
+                              prefetch={false}
                               className="flex items-center gap-2 px-1 py-1 text-sm font-medium text-gray-100"
                             >
                               <span className="text-cyan-300">{item.icon}</span>
@@ -349,6 +352,7 @@ export default function Navbar() {
                                   <Link
                                     href={subService.href}
                                     onClick={closeAllMenus}
+                                    prefetch={false}
                                     className="block py-0.5 text-xs text-gray-400 hover:text-white"
                                   >
                                     {subService.name}
