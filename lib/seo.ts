@@ -8,8 +8,8 @@ export const SITE_DESCRIPTION =
 export const DEFAULT_OG_IMAGE_PATH = "/new-1.png"
 export const DEFAULT_OG_IMAGE_URL = `${SITE_URL}${DEFAULT_OG_IMAGE_PATH}`
 export const CONTACT_EMAIL = "info@rayonweb.com"
-export const CONTACT_PHONE = "+1 (123) 456-7890"
-export const CONTACT_PHONE_URI = "+11234567890"
+export const CONTACT_PHONE = "+91 7073-12-7076"
+export const CONTACT_PHONE_URI = "+917073127076"
 export const BUSINESS_LOCALITY = "Mohali"
 export const BUSINESS_REGION = "Punjab"
 export const BUSINESS_COUNTRY = "India"
@@ -452,6 +452,8 @@ export function buildOrganizationSchema() {
 }
 
 export function buildProfessionalServiceSchema() {
+  // Local SEO / AEO: keep schema specific and consistent.
+  // Google can use these cues for entity understanding; it also improves clarity for AI crawlers.
   return {
     "@context": "https://schema.org",
     "@type": "ProfessionalService",
@@ -461,9 +463,11 @@ export function buildProfessionalServiceSchema() {
     image: DEFAULT_OG_IMAGE_URL,
     description: SITE_DESCRIPTION,
     slogan: SITE_TAGLINE,
+
     email: CONTACT_EMAIL,
     telephone: CONTACT_PHONE,
-    areaServed: [...SERVICE_AREAS],
+
+    // Geography
     address: {
       "@type": "PostalAddress",
       addressLocality: BUSINESS_LOCALITY,
@@ -475,6 +479,11 @@ export function buildProfessionalServiceSchema() {
       latitude: BUSINESS_COORDINATES.latitude,
       longitude: BUSINESS_COORDINATES.longitude,
     },
+
+    // Service area signals (use both city/region and a generic worldwide area)
+    areaServed: [BUSINESS_LOCALITY, BUSINESS_REGION, ...SERVICE_AREAS],
+
+    // Hours (useful for some assistants/search features)
     openingHoursSpecification: [
       {
         "@type": "OpeningHoursSpecification",
@@ -483,7 +492,9 @@ export function buildProfessionalServiceSchema() {
         closes: "18:00",
       },
     ],
+
     sameAs: [...SOCIAL_PROFILES],
+
     makesOffer: [
       {
         "@type": "Offer",
@@ -509,6 +520,7 @@ export function buildProfessionalServiceSchema() {
     ],
   }
 }
+
 
 export function buildWebsiteSchema() {
   return {
