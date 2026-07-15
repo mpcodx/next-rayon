@@ -2,14 +2,23 @@ import { Button } from "@/components/ui/button"
 import Link from "next/link"
 import ContactCTA from "@/components/contact/contact-cta"
 import ContactFAQ from "@/components/contact/contact-faq"
-import { getPageMetadata } from "@/lib/seo"
+import { faqs } from "@/lib/faq-data"
+import { getPageMetadata, buildFaqSchema, serializeJsonLd } from "@/lib/seo"
+
 
 export const metadata = getPageMetadata("/faq")
 
 export default function FAQPage() {
   return (
     <main className="min-h-screen">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: serializeJsonLd(buildFaqSchema(faqs)),
+        }}
+      />
       <section className="pt-32 pb-10">
+
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
           <div className="max-w-3xl mx-auto text-center glass-card rounded-3xl p-8 sm:p-10 md:p-12 border border-white/15">
             <p className="text-sm uppercase tracking-[0.3em] text-cyan-300 mb-4">FAQ</p>

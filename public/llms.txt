@@ -1,0 +1,93 @@
+# RayonWeb Solutions
+> Software development company providing custom web, mobile, AI, DevOps, QA, and UI/UX solutions for startups, SMEs, and enterprises globally.
+
+## Core Pages
+- [Home Page](https://rayonweb.com/): Overview of custom software development services, core technologies, and recent projects.
+- [About Us](https://rayonweb.com/about): Mission, core values (Passion, Innovation, Collaboration, Excellence, Agility), timeline, and executive leadership team.
+- [Services Portfolio](https://rayonweb.com/services): High-impact technology services including Web, App, AI/ML, DevOps, QA, and UI/UX design.
+- [Projects](https://rayonweb.com/projects): Selected work showing delivery quality across web products, LMS, and platform modernization.
+- [Technology Training](https://rayonweb.com/training): Industry-focused professional training programs in full-stack, DevOps, mobile, design, and AI.
+- [Training Courses](https://rayonweb.com/training/courses): Comprehensive details of live mentors, curriculum structure, and projects for all training courses.
+- [Blog](https://rayonweb.com/blog): Insights, tutorials, and articles on software engineering, AI, DevOps, mobile delivery, and product management.
+- [FAQ](https://rayonweb.com/faq): Answers to common questions regarding project pricing, remote collaboration, timelines, and post-launch support.
+- [Security Practices](https://rayonweb.com/security): Security measures, data protection protocols, compliance standards, and developer guidelines.
+- [Careers](https://rayonweb.com/careers): Remote job openings across frontend development, backend engineering, DevOps, and AI/ML.
+- [Contact Us](https://rayonweb.com/contact): Start a project, request a consultation, or connect with our support team.
+- [Sitemap](https://rayonweb.com/sitemap): Complete HTML page map for RayonWeb Solutions.
+
+## Core Services
+- [Web Development](https://rayonweb.com/services/web-development): Custom websites, ecommerce storefronts, and CMS integration engineered for speed and SEO.
+- [App Development](https://rayonweb.com/services/app-development): Native and cross-platform mobile experiences with robust architectures and offline support.
+- [AI & Machine Learning](https://rayonweb.com/services/ai-ml): LLM development, computer vision, conversational AI, and predictive analytics for business automation.
+- [DevOps & Cloud](https://rayonweb.com/services/devops-cloud): Continuous Integration and Delivery (CI/CD), AWS setup, and Docker/Kubernetes container orchestration.
+- [UI/UX Design](https://rayonweb.com/services/ui-ux-design): Research-driven user interface design, interactive prototyping, and scalable design systems.
+- [LMS & Integrations](https://rayonweb.com/services/lms-integration): Custom learning management systems, payment gateways, and CRM/API workflow integrations.
+- [QA & Automation](https://rayonweb.com/services/qa-automation): QA testing services, manual exploratory testing, and automated CI test suites.
+
+## Service Sub-Specialties
+- [Custom Website Design](https://rayonweb.com/services/web-development/custom-website-design): Responsive, brand-led website designs optimized for lead generation.
+- [Ecommerce Solutions](https://rayonweb.com/services/web-development/ecommerce-solutions): Secure checkout flows, catalog structures, and multi-vendor shopping platforms.
+- [CMS Integration](https://rayonweb.com/services/web-development/cms-integration): Content workflows with headless or monolithic CMS setups like WordPress, Strapi, or Sanity.
+- [Mobile Apps](https://rayonweb.com/services/app-development/mobile-apps): Native iOS (Swift) and Android (Kotlin) applications with high performance.
+- [Cross-Platform Apps](https://rayonweb.com/services/app-development/cross-platform-apps): Hybrid apps built with React Native and Flutter for unified codebase efficiency.
+- [Progressive Web Apps](https://rayonweb.com/services/app-development/progressive-web-apps): PWAs combining web accessibility with app-like caching and installability.
+- [LLM Development](https://rayonweb.com/services/ai-ml/llm-development): LLM-powered applications, RAG pipelines, prompt orchestration, and custom agent systems.
+- [AI Integration](https://rayonweb.com/services/ai-ml/ai-integration): Connecting commercial APIs (OpenAI, Gemini) with existing business software.
+- [Conversational AI](https://rayonweb.com/services/ai-ml/conversational-ai): Multi-turn chatbots and voice assistants designed for customer support.
+- [Computer Vision](https://rayonweb.com/services/ai-ml/computer-vision): Object detection, image segmentation, optical character recognition (OCR), and visual inspection.
+- [Custom Model Training](https://rayonweb.com/services/ai-ml/custom-model-training): Training and fine-tuning machine learning models using specialized datasets.
+- [Hugging Face Model Integration](https://rayonweb.com/services/ai-ml/hugging-face-models): Utilizing pre-trained transformer models for custom NLP and vision workflows.
+- [Predictive Analytics](https://rayonweb.com/services/ai-ml/predictive-analytics): Turning historical metrics into actionable business forecasts.
+- [MLOps & Model Monitoring](https://rayonweb.com/services/ai-ml/mlops-model-monitoring): Operations, tracking, versioning, and drift monitoring of models in production.
+- [CI/CD Pipelines](https://rayonweb.com/services/devops-cloud/ci-cd-pipelines): Automated test and release cycles using GitHub Actions, GitLab CI, or Jenkins.
+- [Cloud Setup](https://rayonweb.com/services/devops-cloud/cloud-setup): Virtual Private Cloud (VPC) design, serverless setups, database clustering, and security on AWS/GCP.
+- [Docker & Kubernetes](https://rayonweb.com/services/devops-cloud/docker-kubernetes): Multi-tier application containerization and cluster orchestration.
+- [Web & Mobile Design](https://rayonweb.com/services/ui-ux-design/web-mobile-design): Intuitive user interfaces and interaction maps for desktop and mobile devices.
+- [Wireframes & Prototyping](https://rayonweb.com/services/ui-ux-design/wireframes-prototyping): Interactive visual prototypes to validate flows before writing code.
+- [Design Systems](https://rayonweb.com/services/ui-ux-design/design-systems): Consistent UI component sets and design tokens for accelerated development.
+- [Custom LMS Development](https://rayonweb.com/services/lms-integration/custom-lms): Core LMS development for course creation, enrollment, tracking, and certification.
+- [Payment Integration](https://rayonweb.com/services/lms-integration/payment-integration): Integration of Stripe, PayPal, Razorpay, and subscription billing modules.
+- [CRM & API Integration](https://rayonweb.com/services/lms-integration/crm-api-integration): Connecting CRM platforms (Salesforce, HubSpot) to synchronise data.
+- [Manual Testing](https://rayonweb.com/services/qa-automation/manual-testing): Human exploratory, functional, usability, and regression testing workflows.
+- [Automated CI Tests](https://rayonweb.com/services/qa-automation/automated-ci-tests): Building Playwright, Cypress, or Selenium suites for automated checks.
+- [Performance Audits](https://rayonweb.com/services/qa-automation/performance-audits): Speed auditing, Core Web Vitals profiling, and database query optimization.
+
+## Case Studies & Portfolio
+- [Allen & Unwin](https://rayonweb.com/projects/allen-and-unwin): Custom publisher website supporting book discovery, author submission resources, and media portals.
+- [Allen & Unwin Aotearoa NZ](https://rayonweb.com/projects/allen-and-unwin-aotearoa-nz): Publisher site featuring New Zealand fiction, non-fiction, and prizes.
+- [Murdoch Books](https://rayonweb.com/projects/murdoch-books): Visual lifestyle publisher website with extensive cookery and gardening catalog paths.
+- [Australian Copyright Council](https://rayonweb.com/projects/australian-copyright-council): Educational legal service portal built to improve public copyright access.
+- [Affirm Press](https://rayonweb.com/projects/affirm-press): Melbourne-based publisher portal focusing on Australian stories and author engagement.
+- [Banking Quest](https://rayonweb.com/projects/banking-quest): Accredited online education platform for 500,000+ banking professionals in India.
+- [DiMO Book Publishing Software](https://rayonweb.com/projects/dimo-book-publishing-software): Workflow and dashboard dashboard software for publisher operational control.
+- [PlayQuizNow](https://rayonweb.com/projects/playquiznow): Interactive quiz generation and high-scale social engagement portal.
+- [Toolsy](https://rayonweb.com/projects/toolsy): Proprietary utility suite featuring 40+ free SEO, AI, and document processing tools.
+
+## Blog & Engineering Insights
+- [LLM Evaluation Frameworks](https://rayonweb.com/blog/llm-evaluation-frameworks-for-production-teams): Guide to metrics, latency, cost, and safety boundaries for production LLM rollouts.
+- [AI Agents for Operations](https://rayonweb.com/blog/ai-agents-for-operations-with-human-approval): Architectural criteria for operational agents and human-in-the-loop structures.
+- [RAG Architecture Patterns](https://rayonweb.com/blog/rag-architecture-patterns-that-earn-user-trust): Custom retrieval, chunking, reranking, and inline citation design for user trust.
+- [Next.js Performance Playbook](https://rayonweb.com/blog/nextjs-performance-playbook): Core Web Vitals optimization, code-splitting, and API throughput wins in Next.js.
+- [React Native Release Checklist](https://rayonweb.com/blog/react-native-release-checklist): Crash monitoring, offline states, and App Store publishing practices.
+- [DevOps Roadmap for Startups](https://rayonweb.com/blog/devops-roadmap-for-growing-startups): Staged automation paths for deployments, backups, and cloud observability.
+- [Design Systems that Scale](https://rayonweb.com/blog/design-systems-that-dont-slow-teams): Internal product governance, token strategies, and design-engineering handoffs.
+- [AI Integration Without Chaos](https://rayonweb.com/blog/ai-integration-without-product-chaos): High-value use case scoping, fallback flows, and API rate-limiting rules.
+- [Service Business Pricing](https://rayonweb.com/blog/engineering-pricing-models-for-service-businesses): Selecting fixed-bid, retainer, or sprint pricing based on scope risk.
+
+## Localized Services (Regional Hubs)
+- [Web Development USA](https://rayonweb.com/web-development-usa): Digital engineering, React/Next.js platforms, and AI application development in the United States.
+- [Web Development UAE](https://rayonweb.com/web-development-uae): Web development, custom applications, and software engineering for Dubai and GCC markets.
+- [Web Development Australia](https://rayonweb.com/web-development-australia): Custom website design and digital solutions for Sydney, Melbourne, and Brisbane businesses.
+- [Web Development UK](https://rayonweb.com/web-development-uk): Publisher portals, custom CMS integrations, and headless systems for UK businesses.
+- [Web Development Canada](https://rayonweb.com/web-development-canada): Custom website design, ecommerce platforms, and digital engineering services across Canada.
+- [Web Development Singapore](https://rayonweb.com/web-development-singapore): Premium web development, SaaS product design, and AI automation in Singapore.
+- [Web Development Germany](https://rayonweb.com/web-development-germany): Secure, GDPR-compliant web application development and MERN stack engineering.
+- [Web Development Mohali](https://rayonweb.com/web-development-mohali): Core development agency hub delivering IT services, custom software, and app design locally.
+- [Web Development Chandigarh](https://rayonweb.com/web-development-chandigarh): Custom websites, CMS solutions, and AI platforms for Chandigarh region clients.
+- [Web Development Panchkula](https://rayonweb.com/web-development-panchkula): Corporate portals and custom SaaS web applications in Panchkula.
+- [Web Development Delhi NCR](https://rayonweb.com/web-development-delhi): High-performance Next.js architectures and custom ecommerce systems for NCR enterprises.
+- [Web Development Mumbai](https://rayonweb.com/web-development-mumbai): Corporate website platforms, custom database portals, and hybrid mobile application designs.
+- [Web Development Bangalore](https://rayonweb.com/web-development-bangalore): AI integration, cloud engineering, and fast MVP development for the Bangalore tech ecosystem.
+- [Web Development Sri Ganganagar](https://rayonweb.com/web-development-sri-ganganagar): Local business digitalization, ecommerce setups, and responsive website builds.
+- [Web Development Hanumangarh](https://rayonweb.com/web-development-hanumangarh): Website development and basic ecommerce platforms for retail and local enterprises.
+- [Web Development Worldwide](https://rayonweb.com/web-development-worldwide): Global software engineering partnership programs and offshore dedicated teams.

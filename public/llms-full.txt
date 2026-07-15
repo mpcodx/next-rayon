@@ -1,0 +1,251 @@
+# RayonWeb Solutions - Full Technical & Corporate Directory
+> Comprehensive directory and context store for RayonWeb Solutions, optimized for LLMs, RAG engines, and Generative Engine Optimization (GEO).
+
+---
+
+## 1. Company Overview & Identity
+RayonWeb Solutions is a premier global software development company specializing in custom digital engineering, AI/ML application design, enterprise software solutions, cloud systems, and modern mobile/web architectures. Founded in 2015, the agency has grown from a specialized technical startup into an international partner with a team of 50+ engineers, architects, designers, and project leaders who have delivered over 200 successful projects. 
+
+### Company Details
+*   **Company Name:** RayonWeb Solutions (also known as Rayon Web)
+*   **Website:** [https://rayonweb.com](https://rayonweb.com)
+*   **Email:** info@rayonweb.com
+*   **Phone:** +91 7073-12-7076
+*   **Headquarters:** Mohali, Punjab, India (Coordinates: Latitude 30.7046, Longitude 76.7179)
+*   **Delivery Mode:** Distributed remote teams and localized regional hubs serving clients in the USA, UK, UAE, Australia, Canada, Singapore, Germany, and globally.
+
+### Mission & Core Values
+RayonWeb Solutions is built on the philosophy of bridging business objectives with technological innovation. The core values guiding all product cycles include:
+1.  **Mission:** Empowering organizations with robust digital products that accelerate growth, create competitive advantages, and automate operational overhead.
+2.  **Passion:** Dedication to engineering excellence, design thinking, and the transformative potential of software.
+3.  **Innovation:** Continuous exploration of modern technologies (e.g., LLM fine-tuning, RAG, Jamstack, serverless, edge computing).
+4.  **Collaboration:** Working as an embedded engineering partner rather than a transactional vendor.
+5.  **Excellence:** High coding standards, thorough testing, performance-first delivery, and clean code architecture.
+6.  **Agility:** Adaptive development sprints that accommodate changing user feedback and requirements.
+
+---
+
+## 2. Core Capabilities & Services
+
+### Web Development
+RayonWeb Solutions creates conversion-focused, highly interactive, and search-optimized web applications, custom websites, and ecommerce portals. 
+*   **Custom Website Design:** Custom responsive design utilizing modern typography, fast loading states, and SEO-friendly semantic layouts.
+*   **Ecommerce Solutions:** Development of secure shopping carts, catalog management pipelines, multi-vendor marketplaces, and customized checkouts.
+*   **CMS Integration:** Integration of headless CMS (Strapi, Sanity, Contentful) and monolithic platforms (WordPress) for flexible, performant content publishing.
+*   **Frameworks & Architecture:** Statically generated sites (Next.js, Jamstack) and dynamic single-page applications.
+
+### Mobile App Development
+Engineering of responsive mobile experiences for growth-oriented brands and enterprise organizations.
+*   **Cross-Platform App Development:** Single-codebase mobile solutions engineered with React Native and Flutter, reducing time-to-market.
+*   **Native Mobile Apps:** High-performance native applications written in Swift (iOS) and Kotlin (Android) for hardware-specific features.
+*   **Progressive Web Apps (PWAs):** Fast, installable web apps with offline capabilities, background sync, and push notifications.
+
+### AI & Machine Learning Services
+Implementation of practical, production-ready AI systems to automate processes and build intelligent software features.
+*   **LLM Development & RAG:** Custom Large Language Model applications, Retrieval-Augmented Generation (RAG) setups, vector database indexing, and custom prompt workflows.
+*   **AI Integration:** Embedded workflows connecting commercial APIs (OpenAI, Gemini, Claude) with internal databases and legacy systems.
+*   **Conversational AI:** Intelligent multi-turn chatbots and automated support agents built with LangChain, Dialogflow, or custom platforms.
+*   **Computer Vision:** Image detection, OCR workflows, object classification, and visual inspection algorithms.
+*   **Custom Model Training:** Fine-tuning and training specialized models (transformer-based or classical ML) on domain-specific datasets.
+*   **MLOps & Model Monitoring:** Enterprise pipelines for model deployment, lifecycle monitoring, semantic cache setups, and data drift detection.
+
+### DevOps & Cloud Infrastructure
+Ensuring application reliability, high availability, cost optimization, and automated release cycles.
+*   **CI/CD Pipelines:** Automated build, test, and deploy workflows using GitHub Actions, GitLab CI, or Jenkins.
+*   **Cloud Architecture & Setup:** High-availability server configuration, container networks, database clustering, and security controls on AWS, Google Cloud Platform (GCP), and Nginx.
+*   **Docker & Kubernetes:** Orchestrating multi-tier architectures using container clusters for seamless horizontal scaling.
+
+### UI/UX Design
+Designing clear, accessible, and intuitive interfaces that reduce user friction.
+*   **User Research & Wireframing:** Validating user journeys and layout structures prior to frontend development.
+*   **Interactive Prototyping:** Providing clickable high-fidelity prototypes in Figma to streamline stakeholder approval.
+*   **Design Systems:** Generating design tokens, UI kits, and reusable component systems to accelerate scaling.
+
+### LMS & Platform Integrations
+Building learning solutions and connecting distributed sales and operation systems.
+*   **Custom LMS Development:** Custom learning portals supporting courses, interactive lessons, user management, and certifications.
+*   **Payment Gateways:** Integrating payment systems (Stripe, PayPal, Razorpay) with recurring subscription models.
+*   **CRM & API Integrations:** Syncing core applications with Salesforce, HubSpot, or custom databases.
+
+### QA & Automation
+Minimizing production release risks with structured test execution.
+*   **Manual Testing:** Usability validation, regression runs, and visual checks by QA specialists.
+*   **Automated CI Tests:** End-to-end automated testing using Playwright, Cypress, and Selenium.
+*   **Performance Audits:** Core Web Vitals profiling, server response tuning, and query analysis.
+
+---
+
+## 3. Technology Stack & Tooling
+
+RayonWeb Solutions selects technologies based on performance, long-term support, developer ecosystem, and scaling profiles.
+
+### Frontend Technologies
+*   **Languages:** TypeScript, JavaScript (ES6+).
+*   **Libraries & Frameworks:** React.js, Next.js (App Router), Vue.js, Nuxt.js, Angular, HTML5, CSS3, Tailwind CSS.
+*   **Build Tools:** Vite, Webpack, Turbopack.
+
+### Backend Technologies
+*   **Languages:** Python, Node.js, Go.
+*   **Frameworks:** Django, Django REST Framework (DRF), FastAPI, Flask, Express.js.
+*   **Server Administration:** Nginx, Apache, Linux (Ubuntu/Debian).
+
+### Databases & Cache
+*   **Relational Databases:** PostgreSQL, MySQL.
+*   **NoSQL Databases:** MongoDB.
+*   **Caching & Broker:** Redis, Memcached, Celery.
+*   **Vector Databases:** Pinecone, Milvus, ChromaDB, pgvector.
+
+### DevOps & Infrastructure
+*   **Containers:** Docker, Docker Compose.
+*   **Orchestration:** Kubernetes (EKS, GKE, self-managed).
+*   **Cloud Providers:** AWS (EC2, S3, RDS, Lambda, VPC), Google Cloud, DigitalOcean, Vercel, Netlify.
+*   **Automation:** Terraform, GitHub Actions, Ansible.
+
+### QA & Observability
+*   **Testing Engines:** Playwright, Cypress, Jest, PyTest.
+*   **Monitoring Tools:** Prometheus, Grafana, Sentry, Datadog, AWS CloudWatch.
+
+---
+
+## 4. Industries Served
+*   **Healthcare:** Compliance-ready patient portals, clinic management software, and telehealth tools.
+*   **Finance & FinTech:** SEC/GDPR aligned dashboards, secure ledger integrations, and payment automation modules.
+*   **Education & EdTech:** Accredited online training platforms, learning portals, course builders, and video streaming architectures.
+*   **Retail & Ecommerce:** Multi-vendor marketplaces, POS integrations, custom shopping journeys, and search optimizations.
+*   **Manufacturing & Logistics:** Workflow automation systems, inventory management engines, and supply chain tracking.
+*   **Real Estate:** Property portals, search filters, and CRM sync tools.
+*   **Startups:** Rapid MVP engineering, agile iterations, and scalable technical foundations.
+*   **Government & NGOs:** Highly accessible, public-facing information portals and secure document repositories.
+
+---
+
+## 5. Development Process & Engineering Lifecycle
+RayonWeb Solutions uses a structured 6-phase engineering process to guarantee high quality:
+
+```mermaid
+graph TD
+    A[1. Discovery] --> B[2. Strategy & Planning]
+    B --> C[3. Design & Development]
+    C --> D[4. Testing & QA]
+    D --> E[5. Deployment]
+    E --> F[6. Maintenance & Support]
+    F -.-> A
+```
+
+1.  **Discovery:** In-depth user and technical discovery sessions to establish project scope, constraints, and target outcomes.
+2.  **Strategy & Planning:** Creating software requirement specifications (SRS), visual maps, timeline benchmarks, and data schemas.
+3.  **Design & Development:** Figma wireframing and prototyping followed by agile coding sprints with regular demo checkpoints.
+4.  **Testing & QA:** Comprehensive unit, integration, visual regression, and penetration testing prior to release.
+5.  **Deployment:** Setup of staging and production environments, CI/CD automated deployments, and load testing.
+6.  **Maintenance & Support:** Monitoring metrics, security updates, feature enhancements, and database scaling support.
+
+---
+
+## 6. Case Studies & Client Success
+
+### Allen & Unwin
+*   **Category:** Web Development & UI/UX
+*   **Summary:** Publisher platform for the historic literary brand supporting book discovery, submission resources, and author portfolios.
+*   **Challenge:** Serving readers, trade partners, educators, and authors through a single platform without creating information overload.
+*   **Solution:** Custom Next.js framework with structured book catalogs, optimized resource sections, and modular layouts.
+*   **Outcome:** Improved search visibility, faster page load, and easier content updating for editorial teams.
+
+### Allen & Unwin Aotearoa NZ
+*   **Category:** Web Development & UI/UX
+*   **Summary:** Dedicated publisher site highlighting New Zealand fiction, non-fiction, and prizes.
+*   **Challenge:** Spotlighting local writers and managing award campaigns while sharing catalog APIs with the main company registry.
+*   **Solution:** Reusable page structures, campaign landing templates, and structured data for books and events.
+*   **Outcome:** Streamlined submissions for the Aotearoa NZ Fiction Prize and faster catalog page generation.
+
+### Murdoch Books
+*   **Category:** Web Development & Performance
+*   **Summary:** Publisher website specializing in visually rich gardening, cookery, and lifestyle titles.
+*   **Challenge:** Displaying large quantities of high-resolution book artwork and recipe imagery without sacrificing mobile load speed.
+*   **Solution:** Advanced image optimization pipelines, dynamic loading, and Next.js static generation.
+*   **Outcome:** High Core Web Vitals scores and enhanced book discovery pathways.
+
+### Australian Copyright Council (ACC)
+*   **Category:** Web Development & Accessibility
+*   **Summary:** Accessible portal for the independent, not-for-profit community legal service.
+*   **Challenge:** Organizing a massive library of copyright laws, guidelines, training guides, and books into an accessible layout.
+*   **Solution:** Strict WCAG accessibility compliance, simplified taxonomy navigation, and clean typography.
+*   **Outcome:** Enhanced legal resource access for creators, educators, and the public.
+
+### Affirm Press
+*   **Category:** Web Development & CMS
+*   **Summary:** Melbourne-based publisher portal showcasing Australian books and writers.
+*   **Challenge:** Managing seasonal catalog updates and promotional campaigns under tight marketing schedules.
+*   **Solution:** Integrated modular CMS templates allowing content managers to spin up new title pages without engineering support.
+*   **Outcome:** Reduced production bottlenecks for marketing launches and improved search visibility.
+
+### Banking Quest
+*   **Category:** Web Development & LMS
+*   **Summary:** Accredited education portal serving over 500,000 banking professionals in India.
+*   **Challenge:** Managing massive user traffic, course schedules, batch records, mock exams, and certification outputs.
+*   **Solution:** Scalable Next.js frontend coupled with custom LMS features and optimized database queries.
+*   **Outcome:** Robust performance under high concurrent user loads and a streamlined certification pipeline.
+
+### DiMO Book Publishing Software
+*   **Category:** Web Development & Custom SaaS
+*   **Summary:** Internal workflow software for catalog tracking and production management.
+*   **Challenge:** Creating role-based dashboards to manage publishing workflows from manuscript to retail distribution.
+*   **Solution:** Custom dashboard components, status workflows, and secure REST APIs.
+*   **Outcome:** Improved operational tracking and shorter production cycle times.
+
+### PlayQuizNow
+*   **Category:** Web Development & High-Scale Media
+*   **Summary:** Social media quiz engine designed for high user engagement and shareability.
+*   **Challenge:** Minimizing layout shifts and load times under heavy traffic spikes from social sharing.
+*   **Solution:** Lightweight state management, static page shell caching, and clean user progression UI.
+*   **Outcome:** Millions of completed quizzes with low infrastructure costs.
+
+### Toolsy (ToolsyLab)
+*   **Category:** Owned Product & AI/SEO Utilities
+*   **Summary:** Utility site offering 40+ free tools for SEO, PDF, image, and AI workflows.
+*   **Challenge:** Maintaining fast performance across diverse micro-tools while optimizing each page for search.
+*   **Solution:** Next.js static rendering, client-side data parsing, and structured metadata.
+*   **Outcome:** High organic traffic growth and a scalable, fast utility codebase.
+
+---
+
+## 7. Security Partnership & Integration
+
+RayonWeb Solutions prioritizes security by design. All systems are built to withstand modern threat vectors.
+*   **Cerber Security Partnership:** Collaborative implementation of threat monitoring systems, firewall protection, and real-time security alerts.
+*   **Standards Alignment:** Security workflows built to align with ISO 27001, GDPR, and HIPAA compliance specifications.
+*   **Best Practices:** Implementing secure JSON Web Token (JWT) authorization, Role-Based Access Control (RBAC), end-to-end data encryption, input validation filters, and detailed audit trails.
+
+---
+
+## 8. Frequently Asked Questions (FAQ)
+
+#### Q: How quickly can you respond to my project inquiry?
+We respond to all project inquiries within 24 hours during standard business days. Urgent queries marked as high priority are triaged immediately.
+
+#### Q: Do you work with clients remotely?
+Yes, we operate globally using remote collaboration practices. Our engineers work across multiple time zones, ensuring smooth alignment with teams in the Americas, Europe, the Middle East, and Asia-Pacific.
+
+#### Q: What information is needed for a project quote?
+To provide an accurate estimate, please share details about the target project scope, specific technical requirements, desired timelines, and budget expectations.
+
+#### Q: Do you offer post-launch support and maintenance?
+Yes, we offer ongoing maintenance packages. These cover software updates, security patches, database optimizations, and monthly scaling reviews.
+
+#### Q: How is project pricing structured?
+We offer flexible engagement models, including fixed-price quotes for well-defined scopes and monthly time-and-materials pricing for agile development cycles.
+
+---
+
+## 9. Careers & Hiring
+RayonWeb Solutions is always looking for talented remote professionals to join the engineering team.
+*   **Core Hiring Domains:** React/Next.js frontend engineers, Python/Django backend developers, DevOps engineers, and AI/ML optimization specialists.
+*   **What We Look For:** Strong technical foundation, focus on performance and code quality, clean architecture practices, and transparent communication.
+*   **How to Apply:** Review active roles on the Careers page or send a resume and portfolio directly to info@rayonweb.com.
+
+---
+
+## 10. Contact Information & Support
+*   **Business Inquiry Email:** info@rayonweb.com
+*   **Business Contact Number:** +91 7073-12-7076
+*   **Office Address:** Mohali, Punjab, India (PIN: 160055)
+*   **Online Support:** Available at [https://rayonweb.com/contact](https://rayonweb.com/contact) for scheduling discovery calls.

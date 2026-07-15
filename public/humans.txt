@@ -1,0 +1,16 @@
+/* TEAM */
+Chef de Cuisine / Head of Development: Ankit Verma
+Python & Django Backend Experts: Arshpreet Singh, Manpreet Singh
+AI/ML & Frontend Developer: Ajay Kumar
+DevOps Lead: Priya Nair
+Cybersecurity Expert: Anusha Agarwal
+Creative Director: Ritika Sharma
+Project Manager: Rajeev Kumar
+Contact: info@rayonweb.com
+
+/* SITE */
+Last update: 2026-07-15
+Standards: HTML5, CSS3, ESNext, WCAG 2.1
+Components: Next.js, React, TypeScript, Tailwind CSS, Framer Motion
+Software: Nginx, Docker, Python Django, FastAPI, PostgreSQL
+Location: Mohali, Punjab, India (Worldwide Remote Delivery)

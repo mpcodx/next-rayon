@@ -3,7 +3,7 @@ import Image from "next/image"
 import Link from "next/link"
 import { notFound } from "next/navigation"
 import { projects, getProjectBySlug } from "@/lib/projects-data"
-import { buildPageMetadata, SITE_NAME } from "@/lib/seo"
+import { buildPageMetadata, SITE_NAME, absoluteUrl, serializeJsonLd, DEFAULT_OG_IMAGE_URL } from "@/lib/seo"
 
 type ProjectDetailPageProps = {
   params: Promise<{
@@ -40,8 +40,69 @@ export default async function ProjectDetailPage({ params }: ProjectDetailPagePro
   const project = getProjectBySlug(slug)
   if (!project) notFound()
 
+  const projectSchema = {
+    "@context": "https://schema.org",
+    "@type": "CreativeWork",
+    "@id": absoluteUrl(`/projects/${project.slug}#creativework`),
+    "name": project.title,
+    "description": project.summary,
+    "image": [absoluteUrl(project.image)],
+    "genre": project.category,
+    "url": absoluteUrl(`/projects/${project.slug}`),
+    "creator": {
+      "@type": "Organization",
+      "name": SITE_NAME,
+      "url": absoluteUrl("/")
+    },
+    "publisher": {
+      "@type": "Organization",
+      "name": SITE_NAME,
+      "logo": {
+        "@type": "ImageObject",
+        "url": DEFAULT_OG_IMAGE_URL
+      }
+    }
+  }
+
+  const breadcrumbSchema = {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      {
+        "@type": "ListItem",
+        "position": 1,
+        "name": "Home",
+        "item": absoluteUrl("/")
+      },
+      {
+        "@type": "ListItem",
+        "position": 2,
+        "name": "Projects",
+        "item": absoluteUrl("/projects")
+      },
+      {
+        "@type": "ListItem",
+        "position": 3,
+        "name": project.title,
+        "item": absoluteUrl(`/projects/${project.slug}`)
+      }
+    ]
+  }
+
   return (
     <main className="min-h-screen pb-20">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: serializeJsonLd(projectSchema),
+        }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: serializeJsonLd(breadcrumbSchema),
+        }}
+      />
       <section className="pt-24 pb-10">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
           <Link href="/projects" className="inline-flex items-center text-sm text-cyan-300 hover:text-cyan-200">
