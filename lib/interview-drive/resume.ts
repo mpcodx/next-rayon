@@ -7,14 +7,12 @@ import { BookingError } from "./repo"
 import { RESUME_DIR } from "./store"
 import type { ResumeRef } from "./types"
 
-/**
- * Resume storage.
- *
- * Files are written OUTSIDE /public so they are never served statically —
- * the only way to read one is the authenticated admin route. The stored
- * filename is a random id plus a whitelisted extension, never anything
- * derived from the upload, so a crafted filename cannot escape the directory.
- */
+export type ResumeRefWithBuffer = ResumeRef & {
+  buffer?: Buffer
+}
+
+/** In-memory resume storage so resumes can be read without disk or database. */
+const inMemoryResumes = new Map<string, { buffer: Buffer; mimeType: string; originalName: string }>()
 
 /** Magic-byte signatures, so the check does not rely on a spoofable MIME header. */
 function sniffFileType(buffer: Buffer): "pdf" | "doc" | "docx" | null {
@@ -39,10 +37,10 @@ export function sanitizeOriginalName(name: string): string {
 }
 
 /**
- * Validates and stores an uploaded resume. Returns null when no file was
- * provided — the resume is optional, so an empty upload is not an error.
+ * Validates and stores an uploaded resume. Returns null when no file was provided.
+ * Preserves the file buffer so it can be emailed directly as an attachment.
  */
-export async function storeResume(file: File | null): Promise<ResumeRef | null> {
+export async function storeResume(file: File | null): Promise<ResumeRefWithBuffer | null> {
   if (!file || typeof file === "string") return null
   if (file.size === 0) return null
 
@@ -60,7 +58,6 @@ export async function storeResume(file: File | null): Promise<ResumeRef | null> 
   }
 
   const buffer = Buffer.from(await file.arrayBuffer())
-  // Re-check the real size: `file.size` is client-reported metadata.
   if (buffer.byteLength > RESUME_MAX_BYTES) {
     throw new BookingError("resume_too_large", "Resume must be 5 MB or smaller.", 400)
   }
@@ -69,7 +66,6 @@ export async function storeResume(file: File | null): Promise<ResumeRef | null> 
   if (!sniffed) {
     throw new BookingError("resume_bad_type", "That file does not look like a valid PDF or Word document.", 400)
   }
-  // .doc and .docx both legitimately appear with either Office extension.
   const extensionMatchesContent =
     (sniffed === "pdf" && extension === ".pdf") ||
     (sniffed !== "pdf" && (extension === ".doc" || extension === ".docx"))
@@ -78,24 +74,38 @@ export async function storeResume(file: File | null): Promise<ResumeRef | null> 
   }
 
   const id = `${crypto.randomUUID()}${extension}`
-  await fsp.mkdir(RESUME_DIR, { recursive: true })
-  await fsp.writeFile(path.join(RESUME_DIR, id), buffer, { mode: 0o600 })
+  const mimeType = file.type || (sniffed === "pdf" ? "application/pdf" : "application/msword")
+
+  // Cache in memory
+  inMemoryResumes.set(id, { buffer, mimeType, originalName })
+
+  // Try saving to disk if writable (non-fatal on read-only environments)
+  try {
+    await fsp.mkdir(RESUME_DIR, { recursive: true })
+    await fsp.writeFile(path.join(RESUME_DIR, id), buffer, { mode: 0o600 })
+  } catch {
+    // Read-only filesystem / serverless; memory and email attachment are sufficient
+  }
 
   return {
     id,
     originalName,
-    mimeType: file.type || (sniffed === "pdf" ? "application/pdf" : "application/msword"),
+    mimeType,
     size: buffer.byteLength,
     uploadedAt: new Date().toISOString(),
+    buffer,
   }
 }
 
-/** Only ever accept the exact filename shape this module generates. */
 const STORED_NAME_RE = /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}\.(pdf|doc|docx)$/i
 
-/** Resolves a stored resume for the admin download route. Path-traversal safe. */
+/** Resolves a resume buffer. Checks in-memory cache first, then disk. */
 export async function readResume(id: string): Promise<Buffer | null> {
   if (!STORED_NAME_RE.test(id)) return null
+
+  const inMem = inMemoryResumes.get(id)
+  if (inMem) return inMem.buffer
+
   const target = path.resolve(RESUME_DIR, id)
   if (path.dirname(target) !== path.resolve(RESUME_DIR)) return null
   try {
@@ -107,5 +117,10 @@ export async function readResume(id: string): Promise<Buffer | null> {
 
 export async function deleteResume(id: string): Promise<void> {
   if (!STORED_NAME_RE.test(id)) return
-  await fsp.unlink(path.join(RESUME_DIR, id)).catch(() => {})
+  inMemoryResumes.delete(id)
+  try {
+    await fsp.unlink(path.join(RESUME_DIR, id))
+  } catch {
+    // Ignore error
+  }
 }

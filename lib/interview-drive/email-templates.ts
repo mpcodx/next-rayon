@@ -258,10 +258,10 @@ ${detailRows([
   ])}
 <p style="margin:0;font-size:14px;color:${BRAND.body};line-height:1.7;">
   ${candidate.resume
-      ? "The resume is available from the interview drive admin dashboard."
+      ? "The candidate&#39;s resume is attached to this email."
       : "This candidate did not upload a resume."}
 </p>
-<p style="margin:8px 0 0;font-size:13px;color:${BRAND.muted};">Booking created at ${escapeHtml(booking.createdAt)}.</p>`
+<p style="margin:8px 0 0;font-size:13px;color:${BRAND.muted};">Booking received at ${escapeHtml(booking.createdAt)}.</p>`
 
   const text = `New interview booking
 
@@ -277,9 +277,7 @@ Interview Language: ${facts.language}
 Date: ${facts.dateLabel}
 Time: ${facts.timeLabel}
 Mode: Online
-Resume: ${candidate.resume ? candidate.resume.originalName : "Not uploaded"}
-
-Resumes are available from the interview drive admin dashboard.`
+Resume: ${candidate.resume ? `${candidate.resume.originalName} (attached to email)` : "Not uploaded"}`
 
   return {
     subject: `New Interview Booking – ${candidate.name} – ${facts.dateLabel} ${facts.timeLabel}`,

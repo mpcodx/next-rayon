@@ -45,8 +45,22 @@ async function tick(): Promise<void> {
   }
 }
 
+/**
+ * Serverless functions are frozen between invocations, so a `setInterval` here
+ * would simply never fire. On those platforms the queue is drained by the
+ * scheduled ping to /api/interview-drive/cron instead (see vercel.json).
+ */
+function isServerless(): boolean {
+  return Boolean(process.env.VERCEL || process.env.AWS_LAMBDA_FUNCTION_NAME)
+}
+
 export function startEmailWorker(): void {
   if (globalThis.__interviewDriveEmailTimer) return
+
+  if (isServerless()) {
+    console.log("[interview-drive] serverless detected: email queue is drained by the scheduled cron ping.")
+    return
+  }
 
   if (!isEmailConfigured()) {
     console.warn("[interview-drive] email worker not started: EMAIL_USER/EMAIL_PASS are not configured.")

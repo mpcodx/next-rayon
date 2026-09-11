@@ -391,3 +391,77 @@ export async function getEmailStatusByBooking(): Promise<Map<string, EmailJob[]>
   }
   return byBooking
 }
+
+export type ResumeAttachment = {
+  filename: string
+  content: Buffer
+  contentType?: string
+}
+
+/**
+ * Sends booking emails directly via SMTP without database queueing.
+ * Dispatches an admin notification (with resume attached if provided)
+ * and an acknowledgement email to the candidate.
+ */
+export async function sendBookingEmailsDirect(params: {
+  booking: InterviewBooking
+  candidate: Candidate
+  resumeAttachment?: ResumeAttachment | null
+}): Promise<{ adminSent: boolean; candidateSent: boolean }> {
+  if (!isEmailConfigured()) {
+    console.warn("[interview-drive] Email credentials not configured (EMAIL_USER / EMAIL_PASS missing). Skipping email dispatch.")
+    return { adminSent: false, candidateSent: false }
+  }
+
+  const { booking, candidate, resumeAttachment } = params
+  const context = { booking, candidate }
+  const transport = getTransporter()
+
+  let adminSent = false
+  let candidateSent = false
+
+  // 1. Internal notification to HR / Admin with full candidate details & attached resume
+  try {
+    const adminTemplate = buildAdminNotificationEmail(context)
+    await transport.sendMail({
+      from: `"${EMAIL_FROM_NAME}" <${EMAIL_USER}>`,
+      to: ADMIN_NOTIFICATION_EMAIL,
+      replyTo: candidate.email,
+      subject: adminTemplate.subject,
+      html: adminTemplate.html,
+      text: adminTemplate.text,
+      attachments: resumeAttachment
+        ? [
+            {
+              filename: resumeAttachment.filename,
+              content: resumeAttachment.content,
+              contentType: resumeAttachment.contentType,
+            },
+          ]
+        : [],
+    })
+    adminSent = true
+    console.log(`[interview-drive] Notification email sent to ${ADMIN_NOTIFICATION_EMAIL} for ${booking.bookingReference}`)
+  } catch (error) {
+    console.error("[interview-drive] Failed to send admin notification email:", error)
+  }
+
+  // 2. Candidate confirmation / acknowledgement email
+  try {
+    const candidateTemplate = buildSubmissionReceivedEmail(context)
+    await transport.sendMail({
+      from: `"${EMAIL_FROM_NAME}" <${EMAIL_USER}>`,
+      to: candidate.email,
+      subject: candidateTemplate.subject,
+      html: candidateTemplate.html,
+      text: candidateTemplate.text,
+    })
+    candidateSent = true
+    console.log(`[interview-drive] Candidate email sent to ${candidate.email} for ${booking.bookingReference}`)
+  } catch (error) {
+    console.error(`[interview-drive] Failed to send candidate email to ${candidate.email}:`, error)
+  }
+
+  return { adminSent, candidateSent }
+}
+

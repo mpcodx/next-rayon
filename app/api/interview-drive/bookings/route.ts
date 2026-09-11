@@ -1,13 +1,10 @@
-import { after } from "next/server"
-
 import { getClientIp, handleRouteError, jsonError, jsonOk, jsonValidationError } from "@/lib/interview-drive/api"
 import { checkRateLimit } from "@/lib/interview-drive/auth"
 import { getLanguageName, getTrackName } from "@/lib/interview-drive/config"
-import { isEmailConfigured, processEmailQueue, queueBookingEmails } from "@/lib/interview-drive/email"
+import { isEmailConfigured, sendBookingEmailsDirect } from "@/lib/interview-drive/email"
 import { formatIstDate, formatIstTimeRange } from "@/lib/interview-drive/ist"
 import { createBooking } from "@/lib/interview-drive/repo"
 import { storeResume } from "@/lib/interview-drive/resume"
-import { mutate } from "@/lib/interview-drive/store"
 import { createBookingSchema } from "@/lib/interview-drive/validation"
 
 export const dynamic = "force-dynamic"
@@ -15,11 +12,6 @@ export const runtime = "nodejs"
 
 /**
  * Guards against automated submission floods.
- *
- * Deliberately generous: a college campus NATs its whole network behind one
- * public IP, so dozens of genuine candidates can share an address. The real
- * protection against mass booking is the one-active-booking-per-email rule,
- * not this limiter — this only blunts scripted abuse.
  */
 const RATE_LIMIT = {
   max: Number(process.env.INTERVIEW_BOOKING_RATE_LIMIT) || 40,
@@ -28,12 +20,8 @@ const RATE_LIMIT = {
 
 /**
  * Creates an interview booking.
- *
- * Order matters and is fixed by the spec:
- *   validate -> transactionally reserve the slot -> commit -> queue emails
- *   -> respond. Emails are queued inside the same commit and dispatched after
- *   the response, so a slow or broken mail provider can never fail, delay or
- *   roll back a confirmed booking.
+ * Details and uploaded resume are sent directly via email.
+ * No external database is required.
  */
 export async function POST(request: Request) {
   try {
@@ -65,11 +53,11 @@ export async function POST(request: Request) {
       return jsonError("unsupported_media_type", "Unsupported request format.", 415)
     }
 
-    // Never trust the client: re-validate every field server-side.
+    // Validate fields server-side
     const parsed = createBookingSchema.safeParse(fields)
     if (!parsed.success) return jsonValidationError(parsed.error)
 
-    // Store the resume before the transaction so file I/O never holds the lock.
+    // Store resume in memory and prepare buffer for email attachment
     const resume = await storeResume(resumeFile)
 
     const { booking, candidate } = await createBooking({
@@ -86,22 +74,23 @@ export async function POST(request: Request) {
       resume,
     })
 
-    // The booking is committed. Only now are emails queued.
-    await mutate((db) => {
-      const freshBooking = db.bookings.find((b) => b.id === booking.id)
-      const freshCandidate = db.candidates.find((c) => c.id === candidate.id)
-      if (freshBooking && freshCandidate) queueBookingEmails(db, freshBooking, freshCandidate)
-    })
-
-    // Dispatch after the response so the candidate never waits on SMTP.
+    // Dispatch details in email directly (Admin notification with resume + candidate confirmation)
     if (isEmailConfigured()) {
-      after(async () => {
-        try {
-          await processEmailQueue()
-        } catch (error) {
-          console.error("[interview-drive] post-booking email dispatch failed:", error)
-        }
-      })
+      try {
+        await sendBookingEmailsDirect({
+          booking,
+          candidate,
+          resumeAttachment: resume?.buffer
+            ? {
+                filename: resume.originalName,
+                content: resume.buffer,
+                contentType: resume.mimeType,
+              }
+            : null,
+        })
+      } catch (error) {
+        console.error("[interview-drive] post-booking direct email dispatch failed:", error)
+      }
     }
 
     return jsonOk(

@@ -9,19 +9,21 @@ The campaign runs **14–18 September 2026**. After that it closes itself.
 
 ## Quick start
 
+### Setup
+
+No external database is required. Booking submissions and candidate details are sent directly via email.
+
 ```bash
-# 1. Create an admin login (the plaintext password is never stored)
-node scripts/interview-drive-admin.mjs
+# 1. In environment variables / .env, set:
+#      EMAIL_USER=...
+#      EMAIL_PASS=...
+#      EMAIL_TO=... (defaults to EMAIL_USER)
 
-# 2. Paste the printed values into .env
-
-# 3. Run
-npm run build && npm start
+# 2. Deploy or run locally:
+npm run build
+npm run start
 ```
 
-Then sign in at `/interview-drive-admin`.
-
-See `.env.example` for every supported variable.
 
 ---
 
@@ -85,7 +87,10 @@ Why it works this way:
 | --- | --- |
 | `lib/interview-drive/config.ts` | Campaign dates, tracks, languages, statuses. Single source of truth. |
 | `lib/interview-drive/ist.ts` | All IST date/time maths and formatting. |
-| `lib/interview-drive/store.ts` | JSON storage, locking, atomic writes. |
+| `lib/interview-drive/store.ts` | Driver dispatcher (Postgres vs filesystem). |
+| `lib/interview-drive/store-postgres.ts` | Postgres driver — row-locked transactions. |
+| `lib/interview-drive/store-file.ts` | Filesystem driver — mutex + lock file + atomic writes. |
+| `lib/interview-drive/store-shared.ts` | Document model, slot grid, seeding. |
 | `lib/interview-drive/repo.ts` | Booking rules — the transaction boundary. |
 | `lib/interview-drive/auth.ts` | scrypt passwords, sessions, CSRF, rate limits. |
 | `lib/interview-drive/email.ts` | Durable email queue + send logic. |
@@ -93,41 +98,67 @@ Why it works this way:
 | `lib/interview-drive/admin-service.ts` | Dashboard queries and mutations. |
 | `app/interview-drive/` | Public landing page. |
 | `app/interview-drive-admin/` | Admin dashboard. |
-| `data/` | Bookings + resumes. **Gitignored. Back this up.** |
+| `data/` | Bookings + resumes, filesystem driver only. **Gitignored. Back this up.** |
+| `vercel.json` | Schedules the email worker ping on Vercel. |
+
+---
+
+## Storage
+
+`store.ts` picks a driver from the environment. Nothing above it knows which:
+
+| `DATABASE_URL` | Driver | Use |
+| --- | --- | --- |
+| set | `store-postgres.ts` | Vercel and any serverless host. **Required** there. |
+| unset | `store-file.ts` | Local development, Docker / VPS with a volume. |
+
+The campaign is stored as one small document — a fixed 160-slot grid plus at
+most a few hundred bookings over five days — which is why both drivers can
+share every business rule in `repo.ts` verbatim. On Postgres that document is
+a single JSONB row; the dataset is bounded, always read whole to compute
+availability, and each write is one row update.
+
+If the app is deployed to serverless **without** `DATABASE_URL`, it fails
+immediately with an explanatory error rather than the bare
+`ENOENT: mkdir '/var/task/data'` that a read-only filesystem would otherwise
+produce.
 
 ---
 
 ## How double-booking is prevented
 
-There is no database server. Correctness under concurrency comes from three
-layers in `store.ts`, all of which are required:
+### On Postgres (serverless)
 
-1. **An in-process async mutex** — overlapping requests inside this Node
-   process queue rather than interleaving.
-2. **An on-disk `O_EXCL` lock file** — a second process (dev worker, stray
-   container, the cron worker) cannot write at the same time. Stale locks are
-   reclaimed after 15s.
-3. **A fresh read from disk inside the lock** — every mutation sees the latest
-   committed state, never a stale snapshot.
+Every mutation runs in a transaction that takes `SELECT ... FOR UPDATE` on the
+state row before reading it. Two requests for the same slot are serialised by
+the database — even on different instances in different regions — and the
+loser re-reads committed state and fails cleanly with `slot_taken`. A
+`lock_timeout` keeps a stuck peer from hanging a booking request.
 
-Commits are `write-temp → fsync → rename`, which is atomic on POSIX: a crash
-mid-write leaves the previous good file intact, never a half-written one.
+**Verified:** 30 requests split across **two independent server processes**
+sharing one database produced exactly **1** booking. 25 concurrent requests
+against one instance produced 1 × `201` and 24 × `409 slot_taken` in 733 ms.
 
-The uniqueness rules a relational schema would express as constraints — one
-active booking per slot, one active booking per candidate email — are enforced
-inside that locked section, in `createBooking()`.
+### On the filesystem (self-hosted)
 
-**Verified:** 30 concurrent booking attempts across 6 separate OS processes
-produced exactly 1 booking; over HTTP, 20 simultaneous requests for one slot
-produced 1 × `201` and 19 × `409 slot_taken`.
+Three layers, all required:
 
-### Scaling note
+1. **An in-process async mutex** — overlapping requests queue rather than interleave.
+2. **An on-disk `O_EXCL` lock file** — covers other processes on the same host.
+   Stale locks are reclaimed after 15s.
+3. **A fresh read from disk inside the lock** — no mutation sees stale state.
 
-This design is correct for **a single container** (your current Docker
-setup). The file lock also covers multiple processes on the *same* filesystem.
-It does **not** extend to multiple app servers on different hosts. If you ever
-scale horizontally, replace `store.ts` with a Postgres adapter — `repo.ts`
-already isolates every rule behind `mutate()`, so nothing above it changes.
+Commits are `write-temp → fsync → rename`, atomic on POSIX: a crash mid-write
+leaves the previous good file intact, never a half-written one.
+
+**Verified:** 30 concurrent attempts across 6 separate OS processes produced
+exactly 1 booking.
+
+### Either way
+
+The uniqueness rules a wide relational schema would express as constraints —
+one active booking per slot, one active booking per candidate email — are
+enforced inside the locked section, in `createBooking()`.
 
 ---
 
@@ -213,9 +244,20 @@ Reminders are re-derived from the booking's *current* time, so a rescheduled
 candidate is reminded about the new slot. Cancelled, rejected, completed and
 no-show bookings stop receiving reminders automatically.
 
-### The worker runs itself
+### The worker
 
-Nothing to schedule and no secret to configure. On server start,
+**On Vercel**, serverless functions freeze between requests, so an in-process
+timer can never fire. `vercel.json` schedules `/api/interview-drive/cron` every
+5 minutes and Vercel calls it for you. Set `CRON_SECRET` to any long random
+string — Vercel injects it into its own scheduled calls, so nobody else can
+trigger a flush. Note that Vercel's Hobby plan limits cron to **once per day**;
+for reliable 1-hour reminders use a Pro plan, or point a free external cron
+(cron-job.org, UptimeRobot) at the same endpoint every 5 minutes.
+
+Confirmation emails do not wait for cron either way — they are dispatched by
+`after()` on the booking request itself.
+
+**Self-hosted**, nothing needs scheduling. On server start,
 `instrumentation.ts` launches an in-process worker (`lib/interview-drive/scheduler.ts`)
 that drains the queue every 60 seconds, so confirmations, retries and the
 24h/1h reminders all send on their own. It also drains once at boot, catching
@@ -228,9 +270,10 @@ Two guards worth knowing about:
   it is claimed. If the interview is not actually within the window yet (say
   the booking was moved later), the job is pushed back rather than sent early.
 
-`POST /api/interview-drive/cron` still exists as an optional manual drain. A
-signed-in admin can call it; setting `INTERVIEW_CRON_SECRET` additionally lets
-an external scheduler call it. Most deployments need neither.
+`POST /api/interview-drive/cron` accepts a signed-in admin, a caller holding
+`CRON_SECRET`, or — when no secret is configured — Vercel's own cron header.
+It only flushes already-queued emails and returns counts, so it exposes no
+candidate data.
 
 Tune the interval with `INTERVIEW_EMAIL_TICK_MS` (default `60000`).
 
