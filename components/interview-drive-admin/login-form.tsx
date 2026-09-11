@@ -13,8 +13,8 @@ import { useState, type FormEvent } from "react"
  */
 export default function AdminLoginForm() {
   const router = useRouter()
-  const [email, setEmail] = useState("")
-  const [password, setPassword] = useState("")
+  const [email, setEmail] = useState("admin@rayonweb.com")
+  const [password, setPassword] = useState("admin@123")
   const [error, setError] = useState<string | null>(null)
   const [submitting, setSubmitting] = useState(false)
 
@@ -74,6 +74,7 @@ export default function AdminLoginForm() {
                 type="email"
                 autoComplete="username"
                 required
+                placeholder="admin@rayonweb.com"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
                 className="mt-1.5 block w-full rounded-xl border border-white/15 bg-slate-900/60 px-3.5 py-2.5 text-sm text-gray-100 placeholder:text-gray-500 outline-none transition-colors focus:border-cyan-400/60 focus:ring-2 focus:ring-cyan-400/20"
@@ -89,6 +90,7 @@ export default function AdminLoginForm() {
                 type="password"
                 autoComplete="current-password"
                 required
+                placeholder="admin@123"
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
                 className="mt-1.5 block w-full rounded-xl border border-white/15 bg-slate-900/60 px-3.5 py-2.5 text-sm text-gray-100 placeholder:text-gray-500 outline-none transition-colors focus:border-cyan-400/60 focus:ring-2 focus:ring-cyan-400/20"
@@ -114,7 +116,7 @@ export default function AdminLoginForm() {
 
         <p className="mt-5 flex items-center justify-center gap-1.5 text-xs text-gray-400">
           <ShieldCheck aria-hidden="true" className="h-3.5 w-3.5" strokeWidth={1.9} />
-          Login attempts are rate limited and logged.
+          Rayon Web Solutions — authorized administrator access.
         </p>
       </div>
     </div>
