@@ -1,7 +1,6 @@
 import type { Metadata } from "next"
 
-import AdminDashboard from "@/components/interview-drive-admin/dashboard"
-import AdminLoginForm from "@/components/interview-drive-admin/login-form"
+import AdminPortal from "@/components/interview-drive-admin/portal"
 import { getAuthenticatedAdmin } from "@/lib/interview-drive/auth"
 
 /**
@@ -30,9 +29,11 @@ export const revalidate = 0
 export default async function InterviewDriveAdminPage() {
   const authenticated = await getAuthenticatedAdmin()
 
-  if (!authenticated) {
-    return <AdminLoginForm />
-  }
-
-  return <AdminDashboard admin={{ name: authenticated.admin.name, email: authenticated.admin.email }} />
+  return (
+    <AdminPortal
+      initialAdmin={
+        authenticated ? { name: authenticated.admin.name, email: authenticated.admin.email } : null
+      }
+    />
+  )
 }

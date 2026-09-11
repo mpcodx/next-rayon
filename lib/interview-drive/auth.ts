@@ -285,7 +285,11 @@ export async function logout(): Promise<void> {
 
 export function sessionCookieOptions(request?: Request) {
   let isSecure = process.env.NODE_ENV === "production"
-  if (request) {
+  if (process.env.COOKIE_SECURE === "false" || process.env.COOKIE_SECURE === "0") {
+    isSecure = false
+  } else if (process.env.COOKIE_SECURE === "true" || process.env.COOKIE_SECURE === "1") {
+    isSecure = true
+  } else if (request) {
     const proto = request.headers.get("x-forwarded-proto")
     if (proto) {
       isSecure = proto.split(",")[0].trim() === "https"

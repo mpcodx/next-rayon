@@ -38,7 +38,13 @@ import { STATUS_STYLES, StatBlock, type CandidateRowView, type OverviewView } fr
  * fetched from /me on mount and attached to each mutating call. Nothing on
  * this screen is reachable without a valid session cookie.
  */
-export default function AdminDashboard({ admin }: { admin: { name: string; email: string } }) {
+export default function AdminDashboard({
+  admin,
+  onLogout,
+}: {
+  admin: { name: string; email: string }
+  onLogout?: () => void
+}) {
   const [csrfToken, setCsrfToken] = useState("")
   const [overview, setOverview] = useState<OverviewView | null>(null)
   const [rows, setRows] = useState<CandidateRowView[]>([])
@@ -158,7 +164,11 @@ export default function AdminDashboard({ admin }: { admin: { name: string; email
 
   const logout = async () => {
     await fetch("/api/interview-drive-admin/logout", { method: "POST" })
-    window.location.reload()
+    if (onLogout) {
+      onLogout()
+    } else {
+      window.location.reload()
+    }
   }
 
   const refreshAll = async () => {
