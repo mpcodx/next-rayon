@@ -5,7 +5,7 @@ export const SITE_URL = (process.env.NEXT_PUBLIC_SITE_URL || "https://www.rayonw
 export const SITE_TAGLINE = "Your Vision, Our Code"
 export const SITE_DESCRIPTION =
   "Software development company building web, mobile, AI/ML, DevOps, QA, and UI/UX products for startups and enterprises."
-export const DEFAULT_OG_IMAGE_PATH = "/new-1.png"
+export const DEFAULT_OG_IMAGE_PATH = "/logo3.png"
 export const DEFAULT_OG_IMAGE_URL = `${SITE_URL}${DEFAULT_OG_IMAGE_PATH}`
 export const CONTACT_EMAIL = "info@rayonweb.com"
 export const CONTACT_PHONE = "+91 7073-12-7076"

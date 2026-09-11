@@ -11,7 +11,15 @@ services:
       - "3000:3000"
     environment:
       - NODE_ENV=production
+      # Interview drive bookings/resumes live here; the volume below keeps
+      # them across container rebuilds.
+      - INTERVIEW_DRIVE_DATA_DIR=/app/data
       # Add other environment variables as needed
+    env_file:
+      - .env
+    volumes:
+      # Candidate bookings + uploaded resumes. Back this up.
+      - ./data:/app/data
     healthcheck:
       test: ["CMD", "wget", "--spider", "-q", "http://localhost:3000"]
       interval: 30s
