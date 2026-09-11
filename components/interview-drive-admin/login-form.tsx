@@ -1,7 +1,6 @@
 "use client"
 
 import { AlertCircle, Loader2, Lock, ShieldCheck } from "lucide-react"
-import { useRouter } from "next/navigation"
 import { useState, type FormEvent } from "react"
 
 /**
@@ -12,7 +11,6 @@ import { useState, type FormEvent } from "react"
  * intentionally generic so they cannot be used to discover valid accounts.
  */
 export default function AdminLoginForm() {
-  const router = useRouter()
   const [email, setEmail] = useState("admin@rayonweb.com")
   const [password, setPassword] = useState("admin@123")
   const [error, setError] = useState<string | null>(null)
@@ -32,13 +30,13 @@ export default function AdminLoginForm() {
       const data = await response.json()
 
       if (response.ok && data?.ok) {
-        router.refresh()
+        window.location.href = "/interview-drive-admin"
         return
       }
       setError(data?.message ?? "Invalid email or password.")
+      setSubmitting(false)
     } catch {
       setError("We could not reach the server. Please try again.")
-    } finally {
       setSubmitting(false)
     }
   }

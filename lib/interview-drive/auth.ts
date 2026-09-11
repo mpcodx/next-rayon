@@ -89,8 +89,8 @@ export function seedAdminsFromEnv(db: InterviewDriveDb): boolean {
     const hadStale = db.admins.length > 1
     revokeStaleAdmins(db, email)
     // Let the environment rotate the password without a manual migration.
-    if (passwordHash && existing.passwordHash !== passwordHash) {
-      existing.passwordHash = passwordHash
+    if (hash && existing.passwordHash !== hash) {
+      existing.passwordHash = hash
       return true
     }
     return hadStale
@@ -283,10 +283,23 @@ export async function logout(): Promise<void> {
   store.delete(SESSION_COOKIE)
 }
 
-export function sessionCookieOptions() {
+export function sessionCookieOptions(request?: Request) {
+  let isSecure = process.env.NODE_ENV === "production"
+  if (request) {
+    const proto = request.headers.get("x-forwarded-proto")
+    if (proto) {
+      isSecure = proto.split(",")[0].trim() === "https"
+    } else {
+      try {
+        isSecure = new URL(request.url).protocol === "https:"
+      } catch {
+        // keep default
+      }
+    }
+  }
   return {
     httpOnly: true,
-    secure: process.env.NODE_ENV === "production",
+    secure: isSecure,
     sameSite: "lax" as const,
     path: "/",
     maxAge: SESSION_TTL_MS / 1000,

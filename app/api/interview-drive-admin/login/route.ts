@@ -27,6 +27,6 @@ export async function POST(request: Request) {
     admin: { name: result.admin.name, email: result.admin.email },
     csrfToken: result.csrfToken,
   })
-  response.cookies.set(SESSION_COOKIE, result.token, sessionCookieOptions())
+  response.cookies.set(SESSION_COOKIE, result.token, sessionCookieOptions(request))
   return response
 }
