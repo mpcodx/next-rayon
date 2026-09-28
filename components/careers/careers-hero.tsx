@@ -3,7 +3,7 @@
 import { motion } from "framer-motion"
 import Image from "next/image"
 import { Button } from "@/components/ui/button"
-import { ArrowRight, Mail, Sparkles, Code2, BrainCircuit, Server, ShieldCheck } from "lucide-react"
+import { ArrowRight, Mail, Code2, BrainCircuit, Server, ShieldCheck, Clock } from "lucide-react"
 
 export default function CareersHero() {
   const scrollToOpenings = () => {
@@ -20,17 +20,23 @@ export default function CareersHero() {
       <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
           <motion.div initial={{ opacity: 0, x: -20 }} animate={{ opacity: 1, x: 0 }} transition={{ duration: 0.5 }}>
-            <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-purple-500/10 border border-purple-500/30 text-purple-400 text-xs font-semibold uppercase tracking-wider mb-4">
-              <Sparkles className="h-3.5 w-3.5" />
-              Now Hiring Freshers (2024 – 2026)
+            <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-rose-500/10 border border-rose-500/30 text-rose-400 text-xs font-semibold uppercase tracking-wider mb-4">
+              <span className="w-2 h-2 rounded-full bg-rose-400 animate-pulse" />
+              Openings Currently Closed • Stay in Touch
             </div>
 
             <h1 className="text-4xl sm:text-5xl lg:text-6xl font-extrabold mb-6 tracking-tight text-white leading-tight">
               Launch Your Career in <span className="gradient-text">Tech & AI</span>
             </h1>
 
+            {/* Tagline Alert */}
+            <div className="flex items-center gap-2.5 p-3 rounded-xl bg-rose-950/40 border border-rose-500/30 text-xs sm:text-sm text-rose-300 font-bold mb-6">
+              <Clock className="h-4 w-4 text-rose-400 flex-shrink-0" />
+              <span>&ldquo;Right now openings are closed. Stay in touch, we will be back soon!&rdquo;</span>
+            </div>
+
             <p className="text-lg sm:text-xl text-gray-300 mb-6 leading-relaxed">
-              We are actively looking for enthusiastic freshers ready to learn, build, and deploy production software across <strong className="text-white">Frontend</strong>, <strong className="text-white">Python AI/ML</strong>, <strong className="text-white">DevOps</strong>, and <strong className="text-white">Cybersecurity</strong>.
+              Explore our technical pathways across <strong className="text-white">Frontend</strong>, <strong className="text-white">Python AI/ML</strong>, <strong className="text-white">DevOps</strong>, and <strong className="text-white">Cybersecurity</strong>. While current hiring is paused, prepare your skills for our next intake.
             </p>
 
             <p className="text-sm sm:text-base text-gray-400 mb-8 leading-relaxed">
@@ -43,16 +49,16 @@ export default function CareersHero() {
                 onClick={scrollToOpenings}
                 className="bg-gradient-to-r from-purple-600 to-blue-600 hover:from-purple-700 hover:to-blue-700 text-white px-7 py-6 text-base rounded-full shadow-lg shadow-purple-600/25"
               >
-                Explore 4 Open Roles
+                Explore 4 Career Tracks
                 <ArrowRight className="ml-2 h-5 w-5" />
               </Button>
 
               <a
-                href="mailto:hr@rayonweb.com?subject=Fresher%20Application%20-%20Rayon%20Web%20Solutions"
+                href="mailto:hr@rayonweb.com?subject=Future%20Openings%20-%20Stay%20in%20Touch%20-%20Rayon%20Web%20Solutions"
                 className="inline-flex items-center gap-2 px-6 py-3.5 rounded-full border border-gray-700 bg-gray-900/80 hover:bg-gray-800 text-gray-200 text-sm font-medium transition-all hover:border-purple-500/50"
               >
                 <Mail className="h-4 w-4 text-purple-400" />
-                <span>Email hr@rayonweb.com</span>
+                <span>Email HR to Stay in Touch</span>
               </a>
             </div>
 

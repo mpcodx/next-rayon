@@ -7,6 +7,7 @@ import DeferredFloatingCTA from "@/components/deferred-floating-cta"
 import Script from "next/script"
 import { Manrope, Space_Grotesk } from "next/font/google"
 import ThirdPartyScripts from "@/components/third-party-scripts"
+import { Toaster } from "@/components/ui/toaster"
 import {
   BUSINESS_COORDINATES,
   BUSINESS_COUNTRY,
@@ -161,6 +162,7 @@ export default function RootLayout({
           <DeferredFloatingCTA />
           <Footer />
         </div>
+        <Toaster />
       </body>
     </html>
   )
