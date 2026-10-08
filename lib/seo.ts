@@ -91,9 +91,21 @@ export const PAGE_SEO: Record<string, PageSeo> = {
       "Read practical articles on web engineering, mobile delivery, AI integration, DevOps, UX, and product execution from the Rayon Web team and partners.",
   },
   "/careers": {
-    title: "Careers | Rayon Web Solutions",
+    title: "Careers at Rayon Web Solutions | Frontend Developer (Fresher) Hiring Now",
     description:
-      "Explore current remote openings at Rayon Web Solutions across frontend development, backend AI/ML, and DevOps engineering.",
+      "Join Rayon Web Solutions. Actively hiring Frontend Developer (Fresher) (2024, 2025 & 2026 Batch) with React, Next.js & TypeScript in Mohali / Hybrid / Remote. Apply online today.",
+    keywords: [
+      "Frontend Developer Fresher",
+      "Frontend Developer fresher jobs Mohali",
+      "React developer fresher opening",
+      "Next.js developer fresher jobs",
+      "software engineer fresher hiring 2024 2025 2026",
+      "Rayon Web Solutions careers",
+      "junior frontend developer job",
+      "web developer fresher opening",
+      "fresher IT jobs Mohali",
+      "remote frontend developer fresher",
+    ],
   },
   "/contact": {
     title: "Contact Rayon Web Solutions | Start Your Project",
@@ -550,6 +562,85 @@ export function buildFaqSchema(faqs: { question: string; answer: string }[]) {
       },
     })),
   }
+}
+
+export function buildFrontendJobPostingSchema() {
+  return {
+    "@context": "https://schema.org",
+    "@type": "JobPosting",
+    "@id": `${SITE_URL}/careers#frontend-developer-fresher`,
+    title: "Frontend Developer (Fresher)",
+    description: `Rayon Web Solutions is actively hiring enthusiastic freshers for the role of Frontend Developer (Fresher) across 2024, 2025 and 2026 batches. Candidates will build high-performance web applications using React, Next.js 14/15, TypeScript, and Tailwind CSS with direct mentorship from senior architects.`,
+    identifier: {
+      "@type": "PropertyValue",
+      name: SITE_NAME,
+      value: "RAYON-FRONTEND-FRESHER-2026",
+    },
+    datePosted: "2026-10-08",
+    validThrough: "2026-12-31T23:59:59Z",
+    employmentType: "FULL_TIME",
+    hiringOrganization: {
+      "@type": "Organization",
+      name: SITE_NAME,
+      sameAs: SITE_URL,
+      logo: DEFAULT_OG_IMAGE_URL,
+    },
+    jobLocation: {
+      "@type": "Place",
+      address: {
+        "@type": "PostalAddress",
+        addressLocality: BUSINESS_LOCALITY,
+        addressRegion: BUSINESS_REGION,
+        addressCountry: BUSINESS_COUNTRY,
+      },
+    },
+    jobLocationType: "TELECOMMUTE",
+    applicantLocationRequirements: {
+      "@type": "Country",
+      name: "India",
+    },
+    experienceRequirements: {
+      "@type": "OccupationalExperienceRequirements",
+      monthsOfExperience: 0,
+    },
+    educationRequirements: {
+      "@type": "EducationalOccupationalCredential",
+      credentialCategory: "bachelor degree",
+    },
+    skills: "React.js, Next.js, TypeScript, Tailwind CSS, JavaScript (ES6+), REST APIs, Git, GitHub, HTML5, CSS3",
+    industry: "Information Technology, Software Development",
+    directApply: true,
+  }
+}
+
+export function buildCareersFaqSchema() {
+  return buildFaqSchema([
+    {
+      question: "Is Rayon Web Solutions hiring freshers for Frontend Developer roles?",
+      answer:
+        "Yes, Rayon Web Solutions is actively hiring for Frontend Developer (Fresher) positions. Applications are open for candidates from 2024, 2025, and 2026 batches.",
+    },
+    {
+      question: "What technical skills are required for the Frontend Developer (Fresher) position at Rayon Web Solutions?",
+      answer:
+        "Key skills include React.js, Next.js (App Router), TypeScript, JavaScript (ES6+), Tailwind CSS, HTML5/CSS3, Git version control, and REST API integration.",
+    },
+    {
+      question: "What degrees and batches are eligible for the fresher opening?",
+      answer:
+        "Graduates and final-year students from 2024, 2025, and 2026 batches holding B.Tech, B.E., BCA, MCA, or B.Sc in Computer Science/IT or related technical streams are eligible to apply.",
+    },
+    {
+      question: "Where is the job location for the Frontend Developer opening?",
+      answer:
+        "The position is based out of Mohali, Punjab with hybrid and remote work flexibility available.",
+    },
+    {
+      question: "How can freshers apply for the Frontend Developer role at Rayon Web Solutions?",
+      answer:
+        "Candidates can apply directly through the online application form on our careers page at https://rayonweb.com/careers or by sending their resume and portfolio link to hr@rayonweb.com.",
+    },
+  ])
 }
 
 type BuildPageMetadataOptions = PageSeo & {

@@ -63,6 +63,75 @@ export const blogAuthors: Record<string, BlogAuthor> = {
 
 export const blogPosts: BlogPost[] = [
   {
+    slug: "frontend-developer-roadmap-freshers-guide-2025-2026",
+    title: "Frontend Developer Roadmap for Freshers (2025–2026): Essential Skills, Projects & Getting Hired",
+    category: "Web Development",
+    image: "https://images.unsplash.com/photo-1593720213428-28a5b9e94613?auto=format&fit=crop&w=1400&q=80",
+    date: "October 8, 2026",
+    publishedAt: "2026-10-08T00:00:00.000Z",
+    updatedAt: "2026-10-08T00:00:00.000Z",
+    author: "Ajay Kumar",
+    readTime: "8 min read",
+    excerpt:
+      "A complete, practical 2025-2026 frontend roadmap for engineering freshers: key skills in React and Next.js, high-signal portfolio projects, interview prep, and live hiring openings at Rayon Web Solutions.",
+    tags: ["Frontend Development", "Fresher Guide", "React.js", "Next.js", "Career Advice", "Web Development"],
+    sections: [
+      {
+        heading: "The Shift in Frontend Expectations for 2025–2026",
+        paragraphs: [
+          "The bar for entry-level frontend engineers has transformed rapidly. In previous years, writing static HTML, CSS, and basic JavaScript was sufficient to land an interview. Today, engineering teams look for freshers who understand component hierarchies, reactive state management, modern build tooling, and API integration.",
+          "Hiring managers in forward-looking companies like Rayon Web Solutions seek developers who don't just write code, but also understand web performance, Core Web Vitals, accessible design patterns, and how to translate Figma mockups into responsive user experiences.",
+        ],
+      },
+      {
+        heading: "Core Technical Skills Breakdown: What Actually Matters",
+        paragraphs: [
+          "Focusing your effort on the right stack accelerates your job readiness dramatically. Rather than attempting to learn every framework, master the core ecosystem that industry-leading product teams rely on daily.",
+        ],
+        bullets: [
+          "JavaScript (ES6+) Fundamentals: Master closures, promises, async/await, array manipulation methods, and DOM event bubbling before jumping into abstractions.",
+          "TypeScript: Strongly typed code is now standard across production codebases. Understand generics, union types, and interface definitions for API responses.",
+          "React 19 & Next.js 14/15: Understand component lifecycles, hooks (useState, useEffect, useMemo, useCallback), server vs client components, and App Router navigation.",
+          "Tailwind CSS & Styling: Modern utility-first CSS allows rapid interface construction without writing stylesheet overrides.",
+          "Git & Collaboration: Clean commits, pull request workflows, branch management, and basic merge conflict resolution.",
+          "REST APIs & Fetching: Handling network states (loading, error, success), pagination, and asynchronous request caching.",
+        ],
+      },
+      {
+        heading: "Building High-Signal Portfolio Projects That Stand Out",
+        paragraphs: [
+          "Generic calculator apps and todo lists are overlooked by technical recruiters. To demonstrate production readiness, your portfolio projects should emulate real digital products with genuine user utility.",
+          "Build applications that integrate live third-party REST APIs, implement user authentication flows, showcase responsive multi-device layouts, and handle edge cases like offline states or API timeouts. Host your projects on platforms like Vercel or Netlify, and ensure clean, well-documented GitHub READMEs.",
+        ],
+        bullets: [
+          "Include a live working URL and a public GitHub repository with informative commits.",
+          "Write clean documentation outlining features, tech stack decisions, and how to run the project locally.",
+          "Showcase performance considerations: optimize images with Next.js Image component and minimize bundle sizes.",
+        ],
+      },
+      {
+        heading: "Cracking Technical Interviews & Coding Rounds",
+        paragraphs: [
+          "Frontend interviews for freshers typically evaluate three key dimensions: JavaScript problem solving, component architecture in React, and overall communication and learning velocity.",
+          "During technical discussions, explain your thought process out loud. Engineering leads value developers who ask clarifying questions, consider edge cases, and show willingness to take feedback during live code reviews.",
+        ],
+      },
+      {
+        heading: "Start Your Career: Frontend Developer (Fresher) Opening at Rayon",
+        paragraphs: [
+          "If you are from the 2024, 2025, or 2026 batch and have built projects with React and Next.js, Rayon Web Solutions is actively hiring freshers for our Frontend Engineering team.",
+          "Freshers at Rayon work directly alongside senior architects on real client platforms, enterprise web apps, and modern design systems. Check out our open roles on our Careers page and submit your application today.",
+        ],
+        bullets: [
+          "Role: Frontend Developer (Fresher) - Full Time",
+          "Eligibility: 2024, 2025 & 2026 Batch (B.Tech, B.E., BCA, MCA, B.Sc CS/IT)",
+          "Location: Mohali / Hybrid / Remote",
+          "Apply directly at: https://rayonweb.com/careers or email hr@rayonweb.com",
+        ],
+      },
+    ],
+  },
+  {
     slug: "llm-evaluation-frameworks-for-production-teams",
     title: "LLM Evaluation Frameworks for Production Teams: What to Measure Beyond Demo Quality",
     category: "AI/ML",

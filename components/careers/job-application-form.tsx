@@ -7,7 +7,7 @@ import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import { Textarea } from "@/components/ui/textarea"
 import { useToast } from "@/hooks/use-toast"
-import { Mail, ExternalLink, Send, Clock } from "lucide-react"
+import { Mail, ExternalLink, Send, Sparkles, CheckCircle2, Loader2 } from "lucide-react"
 
 interface JobApplicationFormProps {
   jobTitle: string
@@ -25,7 +25,9 @@ const AVAILABLE_ROLES = [
 export default function JobApplicationForm({ jobTitle: initialJobTitle, onClose }: JobApplicationFormProps) {
   const { toast } = useToast()
   const [selectedRole, setSelectedRole] = useState(initialJobTitle || AVAILABLE_ROLES[0])
-  const [showClosedNotice, setShowClosedNotice] = useState(false)
+  const [isSubmitting, setIsSubmitting] = useState(false)
+  const [isSubmitted, setIsSubmitted] = useState(false)
+  const [submissionError, setSubmissionError] = useState<string | null>(null)
   const [formData, setFormData] = useState({
     name: "",
     email: "",
@@ -44,28 +46,119 @@ export default function JobApplicationForm({ jobTitle: initialJobTitle, onClose 
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
-    setShowClosedNotice(true)
-    toast({
-      title: "Openings Currently Closed",
-      description: "Right now openings are closed. Stay in touch, we will be back soon!",
-      variant: "destructive",
-    })
+    setIsSubmitting(true)
+    setSubmissionError(null)
+
+    try {
+      const messageBody = [
+        `Job Application for: ${selectedRole}`,
+        ``,
+        `--- Candidate Details ---`,
+        `Name: ${formData.name}`,
+        `Email: ${formData.email}`,
+        `Phone: ${formData.phone}`,
+        `College / University: ${formData.college || "Not specified"}`,
+        `Graduation Year: ${formData.graduationYear || "Not specified"}`,
+        ``,
+        `--- Links ---`,
+        `Resume Link: ${formData.resumeLink || "Not provided"}`,
+        `Portfolio / GitHub: ${formData.portfolioLink || "Not provided"}`,
+        ``,
+        `--- Cover Letter / Candidate Note ---`,
+        formData.coverLetter || "No additional note provided.",
+      ].join("\n")
+
+      const payload = {
+        subject: `Job Application: ${selectedRole} - ${formData.name}`,
+        message: messageBody,
+        name: formData.name,
+        email: formData.email,
+        replyTo: formData.email,
+      }
+
+      const res = await fetch("/api/send-email", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(payload),
+      })
+
+      if (!res.ok) {
+        const errorData = await res.json().catch(() => ({}))
+        throw new Error(errorData?.message || "Failed to send email")
+      }
+
+      setIsSubmitted(true)
+      toast({
+        title: "Application Submitted Successfully! 🎉",
+        description: "Our recruitment team has received your application and will review it shortly.",
+      })
+
+      setTimeout(() => {
+        setFormData({
+          name: "",
+          email: "",
+          phone: "",
+          college: "",
+          graduationYear: "2025",
+          resumeLink: "",
+          portfolioLink: "",
+          coverLetter: "",
+        })
+        setIsSubmitted(false)
+        setIsSubmitting(false)
+        onClose()
+      }, 3000)
+    } catch (error: any) {
+      console.error(error)
+      setSubmissionError(
+        error?.message || "Unable to send online right now. You can also email hr@rayonweb.com directly with your resume."
+      )
+      toast({
+        title: "Application Notice",
+        description:
+          "Please email your resume directly to hr@rayonweb.com if online submission does not reach.",
+        variant: "destructive",
+      })
+      setIsSubmitting(false)
+    }
   }
 
-  const directEmailSubject = encodeURIComponent(`Future Consideration: ${selectedRole} - ${formData.name || "[Your Name]"}`)
+  const directEmailSubject = encodeURIComponent(`Job Application: ${selectedRole} - ${formData.name || "[Your Name]"}`)
   const directEmailBody = encodeURIComponent(
-    `Hello Rayon HR Team,\n\nI understand that current openings are closed, but I would like to submit my profile for future consideration for the ${selectedRole} position.\n\nMy details:\n- Name: ${formData.name || ""}\n- Phone: ${formData.phone || ""}\n- College/Degree: ${formData.college || ""}\n- Graduation Year: ${formData.graduationYear || ""}\n- Portfolio/GitHub: ${formData.portfolioLink || ""}\n\nPlease find my resume attached.\n\nBest regards,\n${formData.name || ""}`
+    `Hello Rayon HR Team,\n\nI would like to apply for the ${selectedRole} position.\n\nMy details:\n- Name: ${formData.name || ""}\n- Phone: ${formData.phone || ""}\n- College/Degree: ${formData.college || ""}\n- Graduation Year: ${formData.graduationYear || ""}\n- Resume Link: ${formData.resumeLink || ""}\n- Portfolio/GitHub: ${formData.portfolioLink || ""}\n\nPlease find my resume attached.\n\nBest regards,\n${formData.name || ""}`
   )
+
+  if (isSubmitted) {
+    return (
+      <div className="flex flex-col items-center justify-center py-10 px-4 text-center">
+        <div className="w-16 h-16 rounded-full bg-emerald-500/20 text-emerald-400 flex items-center justify-center mb-4 border border-emerald-500/30">
+          <CheckCircle2 className="h-10 w-10" />
+        </div>
+        <h3 className="text-2xl font-bold mb-2 text-white">Application Received! 🎉</h3>
+        <p className="text-gray-300 max-w-md mb-4 text-sm leading-relaxed">
+          Thank you for applying for the <span className="text-cyan-400 font-semibold">{selectedRole}</span> position. Our hiring team will review your profile and reach out via email or WhatsApp.
+        </p>
+        <p className="text-xs text-gray-400">
+          Have additional questions? Email us anytime at{" "}
+          <a href="mailto:hr@rayonweb.com" className="text-cyan-400 underline hover:text-cyan-300">
+            hr@rayonweb.com
+          </a>
+        </p>
+      </div>
+    )
+  }
 
   return (
     <form onSubmit={handleSubmit} className="space-y-4 py-2 max-h-[80vh] overflow-y-auto pr-1">
-      {/* Closed Openings Notice Banner */}
-      <div className="rounded-xl p-3.5 bg-rose-500/10 border border-rose-500/30 text-rose-300 text-xs sm:text-sm flex items-start gap-2.5">
-        <Clock className="h-5 w-5 text-rose-400 flex-shrink-0 mt-0.5" />
+      {/* Active Application Notice Banner */}
+      <div className="rounded-xl p-3.5 bg-cyan-500/10 border border-cyan-500/30 text-cyan-300 text-xs sm:text-sm flex items-start gap-2.5">
+        <Sparkles className="h-5 w-5 text-cyan-400 flex-shrink-0 mt-0.5" />
         <div>
-          <p className="font-bold text-white">Notice: Openings Currently Closed</p>
-          <p className="mt-0.5 text-xs text-rose-200/90 font-medium">
-            &ldquo;Right now openings are closed. Stay in touch, we will be back soon!&rdquo;
+          <p className="font-bold text-white">Actively Reviewing Applications: {selectedRole}</p>
+          <p className="mt-0.5 text-xs text-cyan-200/90 font-medium">
+            2024, 2025 &amp; 2026 Batch freshers welcome. Fill in your details below.
           </p>
         </div>
       </div>
@@ -241,19 +334,15 @@ export default function JobApplicationForm({ jobTitle: initialJobTitle, onClose 
         </div>
       </div>
 
-      {/* Closed Tagline Triggered on Submit Attempt */}
-      {showClosedNotice && (
-        <div className="p-4 rounded-xl bg-gradient-to-r from-rose-950/70 via-purple-950/60 to-rose-950/70 border border-rose-500/40 text-center shadow-lg">
-          <p className="text-[11px] uppercase tracking-wider font-bold text-rose-400 mb-1">Applications Paused</p>
-          <p className="text-sm sm:text-base font-bold text-white leading-relaxed">
-            &ldquo;Right now openings are closed. Stay in touch, we will be back soon!&rdquo;
-          </p>
-          <p className="text-xs text-gray-300 mt-2">
-            You can email your resume directly to{" "}
-            <a href="mailto:hr@rayonweb.com" className="text-purple-400 underline font-semibold hover:text-purple-300">
+      {/* Error or Fallback Message if Submission Fails */}
+      {submissionError && (
+        <div className="p-4 rounded-xl bg-gradient-to-r from-amber-950/70 via-gray-900 to-amber-950/70 border border-amber-500/40 text-center shadow-lg">
+          <p className="text-xs font-semibold text-amber-300 mb-1">{submissionError}</p>
+          <p className="text-xs text-gray-300">
+            Please attach your resume and send an email directly to{" "}
+            <a href={`mailto:hr@rayonweb.com?subject=${directEmailSubject}&body=${directEmailBody}`} className="text-cyan-400 underline font-semibold hover:text-cyan-300">
               hr@rayonweb.com
-            </a>{" "}
-            to stay in touch for our upcoming hiring drive.
+            </a>.
           </p>
         </div>
       )}
@@ -264,19 +353,27 @@ export default function JobApplicationForm({ jobTitle: initialJobTitle, onClose 
           type="button"
           variant="outline"
           onClick={onClose}
+          disabled={isSubmitting}
           className="border-gray-700 text-gray-300 hover:bg-gray-800"
         >
           Cancel
         </Button>
         <Button
           type="submit"
-          className="bg-gradient-to-r from-gray-800 to-gray-750 hover:from-rose-950/70 hover:to-purple-950/70 text-gray-200 hover:text-white border border-gray-700 hover:border-rose-500/40 font-medium shadow-lg"
+          disabled={isSubmitting}
+          className="bg-gradient-to-r from-cyan-600 via-blue-600 to-purple-600 hover:from-cyan-500 hover:to-purple-500 text-white font-semibold shadow-lg shadow-cyan-600/20"
         >
-          <Send className="mr-2 h-4 w-4 text-purple-400" />
-          <span>Submit Application</span>
-          <span className="text-[10px] font-semibold uppercase tracking-wider px-1.5 py-0.5 rounded bg-rose-500/20 text-rose-300 border border-rose-500/30 ml-2">
-            Closed
-          </span>
+          {isSubmitting ? (
+            <>
+              <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+              Submitting Application...
+            </>
+          ) : (
+            <>
+              <Send className="mr-2 h-4 w-4" />
+              Submit Application
+            </>
+          )}
         </Button>
       </div>
     </form>

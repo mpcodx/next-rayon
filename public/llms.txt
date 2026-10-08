@@ -11,9 +11,12 @@
 - [Blog](https://rayonweb.com/blog): Insights, tutorials, and articles on software engineering, AI, DevOps, mobile delivery, and product management.
 - [FAQ](https://rayonweb.com/faq): Answers to common questions regarding project pricing, remote collaboration, timelines, and post-launch support.
 - [Security Practices](https://rayonweb.com/security): Security measures, data protection protocols, compliance standards, and developer guidelines.
-- [Careers](https://rayonweb.com/careers): Remote job openings across frontend development, backend engineering, DevOps, and AI/ML.
+- [Careers](https://rayonweb.com/careers): Active hiring open for Frontend Developer (Fresher) (2024, 2025 & 2026 Batch) with React, Next.js, and TypeScript, plus engineering tracks in AI/ML, DevOps, and Cybersecurity.
 - [Contact Us](https://rayonweb.com/contact): Start a project, request a consultation, or connect with our support team.
 - [Sitemap](https://rayonweb.com/sitemap): Complete HTML page map for RayonWeb Solutions.
+
+## Active Job Openings
+- [Frontend Developer (Fresher)](https://rayonweb.com/careers): Open Now. Actively hiring 2024, 2025 & 2026 Batch freshers (B.Tech, B.E., BCA, MCA, B.Sc CS/IT) with React.js, Next.js 14/15, TypeScript, Tailwind CSS, and REST APIs. Location: Mohali / Hybrid / Remote. Apply online at https://rayonweb.com/careers or email resume to hr@rayonweb.com.
 
 ## Core Services
 - [Web Development](https://rayonweb.com/services/web-development): Custom websites, ecommerce storefronts, and CMS integration engineered for speed and SEO.
@@ -64,6 +67,7 @@
 - [Toolsy](https://rayonweb.com/projects/toolsy): Proprietary utility suite featuring 40+ free SEO, AI, and document processing tools.
 
 ## Blog & Engineering Insights
+- [Frontend Developer Roadmap for Freshers](https://rayonweb.com/blog/frontend-developer-roadmap-freshers-guide-2025-2026): Essential technical skills, portfolio project blueprints, interview strategies, and active fresher hiring at Rayon Web Solutions.
 - [LLM Evaluation Frameworks](https://rayonweb.com/blog/llm-evaluation-frameworks-for-production-teams): Guide to metrics, latency, cost, and safety boundaries for production LLM rollouts.
 - [AI Agents for Operations](https://rayonweb.com/blog/ai-agents-for-operations-with-human-approval): Architectural criteria for operational agents and human-in-the-loop structures.
 - [RAG Architecture Patterns](https://rayonweb.com/blog/rag-architecture-patterns-that-earn-user-trust): Custom retrieval, chunking, reranking, and inline citation design for user trust.

@@ -22,6 +22,7 @@ import {
   ExternalLink,
   Search,
   AlertCircle,
+  Sparkles,
 } from "lucide-react"
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription } from "@/components/ui/dialog"
 import JobApplicationForm from "@/components/careers/job-application-form"
@@ -37,6 +38,8 @@ interface JobOpening {
   type: string
   experience: string
   batch: string
+  isOpen: boolean
+  statusBadge: string
   icon: typeof Code2
   accentColor: {
     gradient: string
@@ -64,6 +67,8 @@ const jobOpenings: JobOpening[] = [
     type: "Full-Time",
     experience: "Fresher (0 - 1 Year)",
     batch: "2024, 2025 & 2026 Batch",
+    isOpen: true,
+    statusBadge: "Open Now • Actively Hiring",
     icon: Code2,
     accentColor: {
       gradient: "from-cyan-500/20 via-blue-500/10 to-indigo-500/20",
@@ -107,6 +112,8 @@ const jobOpenings: JobOpening[] = [
     type: "Full-Time",
     experience: "Fresher (0 - 1 Year)",
     batch: "2024, 2025 & 2026 Batch",
+    isOpen: true,
+    statusBadge: "Accepting Applications",
     icon: BrainCircuit,
     accentColor: {
       gradient: "from-purple-500/20 via-pink-500/10 to-indigo-500/20",
@@ -150,6 +157,8 @@ const jobOpenings: JobOpening[] = [
     type: "Full-Time",
     experience: "Fresher (0 - 1 Year)",
     batch: "2024, 2025 & 2026 Batch",
+    isOpen: true,
+    statusBadge: "Accepting Applications",
     icon: Server,
     accentColor: {
       gradient: "from-amber-500/20 via-orange-500/10 to-emerald-500/20",
@@ -193,6 +202,8 @@ const jobOpenings: JobOpening[] = [
     type: "Full-Time",
     experience: "Fresher (0 - 1 Year)",
     batch: "2024, 2025 & 2026 Batch",
+    isOpen: true,
+    statusBadge: "Accepting Applications",
     icon: ShieldCheck,
     accentColor: {
       gradient: "from-emerald-500/20 via-teal-500/10 to-cyan-500/20",
@@ -244,12 +255,7 @@ export default function CareersOpenings() {
   }
 
   const handleApplyClick = (jobTitle: string) => {
-    setClosedNoticeJob(jobTitle)
-    toast({
-      title: "Openings Currently Closed",
-      description: "Right now openings are closed. Stay in touch, we will be back soon!",
-      variant: "destructive",
-    })
+    setApplicationJobTitle(jobTitle)
   }
 
   const toggleExpand = (id: string) => {
@@ -269,7 +275,7 @@ export default function CareersOpenings() {
   return (
     <section id="openings" className="py-16 relative">
       {/* Background glow accents */}
-      <div className="absolute top-1/4 left-1/2 -translate-x-1/2 w-3/4 h-96 bg-purple-600/5 blur-[120px] pointer-events-none -z-10" />
+      <div className="absolute top-1/4 left-1/2 -translate-x-1/2 w-3/4 h-96 bg-cyan-600/10 blur-[120px] pointer-events-none -z-10" />
 
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         {/* Section Header */}
@@ -280,55 +286,60 @@ export default function CareersOpenings() {
           transition={{ duration: 0.5 }}
           className="text-center mb-12"
         >
-          <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-rose-500/10 border border-rose-500/30 text-rose-400 text-xs font-semibold uppercase tracking-wider mb-4">
-            <span className="w-2 h-2 rounded-full bg-rose-400 animate-pulse" />
-            Applications Closed • Stay in Touch
+          <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-cyan-500/10 border border-cyan-500/30 text-cyan-300 text-xs font-semibold uppercase tracking-wider mb-4">
+            <span className="w-2 h-2 rounded-full bg-cyan-400 animate-pulse" />
+            Actively Hiring • Frontend Developer (Fresher) Open Now
           </div>
           <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold mb-4 text-white">
             Early Career Tracks at <span className="gradient-text">Rayon</span>
           </h2>
-          <p className="text-base sm:text-lg font-bold text-rose-300 max-w-3xl mx-auto mb-3">
-            &ldquo;Right now openings are closed. Stay in touch, we will be back soon!&rdquo;
+          <p className="text-base sm:text-lg font-bold text-cyan-300 max-w-3xl mx-auto mb-3">
+            Frontend Developer (Fresher) opening is live for 2024, 2025 &amp; 2026 Batch!
           </p>
           <p className="text-sm sm:text-base text-gray-300 max-w-3xl mx-auto leading-relaxed">
-            Explore our technical tracks and skills requirements below. While active hiring is currently closed, you can stay connected and share your resume for future batches.
+            We are actively hiring freshers to build high-performance web applications with React, Next.js, and TypeScript. Explore the roles below and apply online.
           </p>
         </motion.div>
 
-        {/* Prominent Hiring Status & Stay in Touch Banner */}
+        {/* Prominent Active Opening Announcement Banner */}
         <motion.div
           initial={{ opacity: 0, y: 15 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.5, delay: 0.1 }}
-          className="mb-12 rounded-2xl p-6 sm:p-8 bg-gradient-to-r from-rose-950/40 via-purple-950/20 to-gray-900/80 border border-rose-500/30 shadow-xl relative overflow-hidden"
+          className="mb-12 rounded-2xl p-6 sm:p-8 bg-gradient-to-r from-cyan-950/60 via-blue-950/40 to-gray-900/90 border border-cyan-500/30 shadow-xl relative overflow-hidden"
         >
-          <div className="absolute -right-12 -bottom-12 w-48 h-48 bg-rose-600/10 rounded-full blur-2xl pointer-events-none" />
+          <div className="absolute -right-12 -bottom-12 w-48 h-48 bg-cyan-600/15 rounded-full blur-2xl pointer-events-none" />
 
           <div className="flex flex-col lg:flex-row items-start lg:items-center justify-between gap-6 relative z-10">
             <div className="space-y-2">
-              <div className="flex items-center gap-2 text-rose-400 text-sm font-semibold">
-                <Clock className="h-4 w-4" />
-                <span>Hiring Status Notice</span>
+              <div className="flex items-center gap-2 text-cyan-400 text-sm font-semibold">
+                <Briefcase className="h-4 w-4" />
+                <span>Featured Open Role • Hiring Now</span>
               </div>
               <h3 className="text-xl sm:text-2xl font-bold text-white">
-                Right now openings are closed. Stay in touch, we will be back soon!
+                Frontend Developer (Fresher) — Applications Open
               </h3>
               <p className="text-sm text-gray-300 max-w-2xl leading-relaxed">
-                Active hiring for fresher roles is currently paused. You can review the roles and required skillsets below, or share your resume directly with{" "}
-                <span className="text-white font-mono bg-purple-950/80 px-2 py-0.5 rounded border border-purple-800/40">
-                  hr@rayonweb.com
-                </span>{" "}
-                so we can reach out as soon as new positions open up.
+                We are actively looking for freshers (2024, 2025 &amp; 2026 batches) with skills in React, Next.js, TypeScript, and modern CSS. Learn from senior architects and work on live client projects.
               </p>
             </div>
 
             <div className="flex flex-wrap items-center gap-3 w-full lg:w-auto">
               <Button
                 type="button"
+                onClick={() => setApplicationJobTitle("Frontend Developer (Fresher)")}
+                className="bg-gradient-to-r from-cyan-500 via-blue-600 to-indigo-600 hover:from-cyan-400 hover:to-indigo-500 text-white font-semibold text-sm px-6 py-2.5 rounded-lg shadow-lg shadow-cyan-500/25 flex items-center gap-2"
+              >
+                <span>Apply for Frontend Developer</span>
+                <ArrowRight className="h-4 w-4" />
+              </Button>
+
+              <Button
+                type="button"
                 onClick={handleCopyEmail}
                 variant="outline"
-                className="border-purple-500/40 text-purple-300 hover:bg-purple-950/50 hover:text-white flex items-center gap-2"
+                className="border-gray-700 text-gray-300 hover:bg-gray-800 hover:text-white flex items-center gap-2 text-sm"
               >
                 {emailCopied ? (
                   <>
@@ -338,19 +349,10 @@ export default function CareersOpenings() {
                 ) : (
                   <>
                     <Copy className="h-4 w-4" />
-                    <span>Copy hr@rayonweb.com</span>
+                    <span>Copy HR Email</span>
                   </>
                 )}
               </Button>
-
-              <a
-                href="mailto:hr@rayonweb.com?subject=Future%20Job%20Openings%20-%20Stay%20in%20Touch%20-%20Rayon%20Web%20Solutions&body=Hello%20HR%20Team%2C%0A%0AI%20understand%20that%20openings%20are%20currently%20closed%2C%20but%20I%20would%20like%20to%20share%20my%20resume%20for%20future%20career%20opportunities%20at%20Rayon%20Web%20Solutions.%0A%0AName%3A%20%0APhone%3A%20%0ADesired%20Role%3A%20%0AGraduation%20Year%3A%20%0AGitHub%2FPortfolio%3A%20%0A%0AThank%20you!"
-                className="inline-flex items-center justify-center gap-2 px-5 py-2.5 rounded-lg bg-gradient-to-r from-purple-600 to-blue-600 hover:from-purple-500 hover:to-blue-500 text-white text-sm font-semibold shadow-lg shadow-purple-600/20 transition-all"
-              >
-                <Mail className="h-4 w-4" />
-                <span>Email HR to Stay in Touch</span>
-                <ExternalLink className="h-3.5 w-3.5" />
-              </a>
             </div>
           </div>
         </motion.div>
@@ -400,10 +402,12 @@ export default function CareersOpenings() {
               const Icon = job.icon
               const isExpanded = expandedJobId === job.id
 
-              const mailtoSubject = encodeURIComponent(`Future Consideration - ${job.title} - [Your Name]`)
+              const mailtoSubject = encodeURIComponent(`Job Application: ${job.title} - [Your Name]`)
               const mailtoBody = encodeURIComponent(
-                `Hello Rayon HR Team,\n\nI understand that current openings are closed, but I would like to submit my resume for future consideration for the ${job.title} position.\n\nMy details:\n- Full Name: \n- Phone Number: \n- College & Degree: \n- Graduation Year: \n- GitHub / Portfolio Link: \n\nPlease find my resume attached.\n\nThank you,\n`
+                `Hello Rayon HR Team,\n\nI would like to apply for the ${job.title} position.\n\nMy details:\n- Full Name: \n- Phone Number: \n- College & Degree: \n- Graduation Year: \n- GitHub / Portfolio Link: \n\nPlease find my resume attached.\n\nThank you,\n`
               )
+
+              const isFrontend = job.id === "frontend-developer"
 
               return (
                 <motion.div
@@ -413,7 +417,7 @@ export default function CareersOpenings() {
                   animate={{ opacity: 1, y: 0 }}
                   exit={{ opacity: 0, scale: 0.95 }}
                   transition={{ duration: 0.4, delay: index * 0.08 }}
-                  className={`rounded-2xl p-6 sm:p-8 bg-gradient-to-b from-gray-900/90 to-gray-950/90 border border-gray-800 transition-all duration-300 flex flex-col justify-between ${job.accentColor.borderHover} shadow-xl`}
+                  className={`rounded-2xl p-6 sm:p-8 bg-gradient-to-b from-gray-900/90 to-gray-950/90 border border-gray-800 transition-all duration-300 flex flex-col justify-between ${job.accentColor.borderHover} shadow-xl ${isFrontend ? "ring-1 ring-cyan-500/30" : ""}`}
                 >
                   <div>
                     {/* Top Header & Badges */}
@@ -426,9 +430,9 @@ export default function CareersOpenings() {
                           <span className={`inline-block px-2.5 py-0.5 rounded-full text-xs font-semibold ${job.accentColor.badgeBg}`}>
                             {job.department}
                           </span>
-                          <span className="ml-2 text-xs font-semibold px-2.5 py-0.5 rounded-full border bg-rose-500/15 text-rose-400 border-rose-500/30 inline-flex items-center gap-1.5 shadow-sm">
-                            <span className="w-1.5 h-1.5 rounded-full bg-rose-400 animate-pulse" />
-                            Closed
+                          <span className={`ml-2 text-xs font-semibold px-2.5 py-0.5 rounded-full border ${isFrontend ? "bg-cyan-500/15 text-cyan-300 border-cyan-500/40" : "bg-purple-500/15 text-purple-300 border-purple-500/30"} inline-flex items-center gap-1.5 shadow-sm`}>
+                            <span className={`w-1.5 h-1.5 rounded-full ${isFrontend ? "bg-cyan-400" : "bg-purple-400"} animate-pulse`} />
+                            {job.statusBadge}
                           </span>
                         </div>
                       </div>
@@ -438,11 +442,18 @@ export default function CareersOpenings() {
                     <h3 className="text-2xl font-bold text-white mb-2">{job.title}</h3>
                     <p className="text-sm text-gray-300 mb-3 leading-relaxed">{job.tagline}</p>
 
-                    {/* Closed Tagline Notice on Card */}
-                    <div className="flex items-center gap-2 p-2.5 rounded-lg bg-rose-950/30 border border-rose-500/25 text-xs text-rose-300 mb-5">
-                      <Clock className="h-3.5 w-3.5 text-rose-400 flex-shrink-0" />
-                      <span className="font-medium">Right now openings are closed. Stay in touch, we will be back soon!</span>
-                    </div>
+                    {/* Opening Status Alert on Card */}
+                    {isFrontend ? (
+                      <div className="flex items-center gap-2 p-2.5 rounded-lg bg-cyan-950/40 border border-cyan-500/30 text-xs text-cyan-200 mb-5">
+                        <Sparkles className="h-3.5 w-3.5 text-cyan-400 flex-shrink-0" />
+                        <span className="font-medium">Open Now • Actively reviewing 2024, 2025 &amp; 2026 Batch applications.</span>
+                      </div>
+                    ) : (
+                      <div className="flex items-center gap-2 p-2.5 rounded-lg bg-gray-900/60 border border-gray-800 text-xs text-gray-300 mb-5">
+                        <Briefcase className="h-3.5 w-3.5 text-purple-400 flex-shrink-0" />
+                        <span className="font-medium">Early Career Pathway • Applications currently accepted.</span>
+                      </div>
+                    )}
 
                     {/* Meta Information Pills */}
                     <div className="grid grid-cols-2 sm:grid-cols-4 gap-2 mb-6 text-xs text-gray-300">
@@ -560,13 +571,10 @@ export default function CareersOpenings() {
                       <Button
                         type="button"
                         onClick={() => handleApplyClick(job.title)}
-                        className="w-full bg-gradient-to-r from-gray-800 to-gray-750 hover:from-rose-950/70 hover:to-purple-950/70 text-gray-200 hover:text-white border border-gray-700 hover:border-rose-500/40 font-medium text-xs sm:text-sm py-2.5 rounded-lg shadow-md transition-all flex items-center justify-center gap-1.5 group"
+                        className={`w-full bg-gradient-to-r ${job.accentColor.buttonGlow} text-white font-semibold text-xs sm:text-sm py-2.5 rounded-lg shadow-md transition-all flex items-center justify-center gap-1.5 group`}
                       >
-                        <span>Apply / Submit</span>
-                        <span className="text-[10px] font-semibold uppercase tracking-wider px-1.5 py-0.5 rounded bg-rose-500/20 text-rose-300 border border-rose-500/30 ml-1">
-                          Closed
-                        </span>
-                        <ArrowRight className="h-3.5 w-3.5 text-gray-400 group-hover:text-white transition-colors" />
+                        <span>{isFrontend ? "Apply Now" : "Apply with Form"}</span>
+                        <ArrowRight className="h-3.5 w-3.5 text-white/90 group-hover:translate-x-0.5 transition-transform" />
                       </Button>
 
                       <a
@@ -681,19 +689,19 @@ export default function CareersOpenings() {
             <DialogContent className="sm:max-w-[620px] bg-gray-950/95 backdrop-blur-xl border border-purple-500/30 text-white shadow-2xl p-6">
               <DialogHeader>
                 <div className="flex items-center gap-2 mb-1">
-                  <span className="px-2.5 py-0.5 rounded-full text-xs font-semibold bg-rose-500/20 text-rose-300 border border-rose-500/30">
-                    Applications Closed
+                  <span className="px-2.5 py-0.5 rounded-full text-xs font-semibold bg-cyan-500/20 text-cyan-300 border border-cyan-500/30">
+                    Fresher Application • 2024, 2025 &amp; 2026 Batch
                   </span>
                 </div>
                 <DialogTitle className="text-2xl font-bold text-white">
                   Apply for <span className="gradient-text">{applicationJobTitle}</span>
                 </DialogTitle>
                 <DialogDescription className="text-gray-400 text-xs sm:text-sm">
-                  Complete the quick form below or email your resume directly to{" "}
-                  <a href="mailto:hr@rayonweb.com" className="text-purple-400 underline font-medium">
+                  Complete the quick application below or email your resume directly to{" "}
+                  <a href="mailto:hr@rayonweb.com" className="text-cyan-400 underline font-medium">
                     hr@rayonweb.com
                   </a>
-                  . We will review your application for upcoming openings.
+                  . Our technical recruitment team typically responds within 48 hours.
                 </DialogDescription>
               </DialogHeader>
 

@@ -237,15 +237,48 @@ We offer flexible engagement models, including fixed-price quotes for well-defin
 ---
 
 ## 9. Careers & Hiring
-RayonWeb Solutions is always looking for talented remote professionals to join the engineering team.
-*   **Core Hiring Domains:** React/Next.js frontend engineers, Python/Django backend developers, DevOps engineers, and AI/ML optimization specialists.
-*   **What We Look For:** Strong technical foundation, focus on performance and code quality, clean architecture practices, and transparent communication.
-*   **How to Apply:** Review active roles on the Careers page or send a resume and portfolio directly to info@rayonweb.com.
+RayonWeb Solutions is actively hiring engineering talent with special focus on early career pathways.
+*   **Active Job Opening:** Frontend Developer (Fresher)
+    *   **Position:** Full-Time
+    *   **Eligible Batches:** 2024, 2025 & 2026 Batch (B.Tech, B.E., BCA, MCA, B.Sc in Computer Science / IT / technical disciplines).
+    *   **Experience Level:** Fresher (0 to 1 year).
+    *   **Location:** Mohali, Punjab / Hybrid / Remote.
+    *   **Core Tech Stack:** React.js, Next.js 14/15 (App Router), TypeScript, Tailwind CSS, JavaScript (ES6+), REST APIs, Git & GitHub, HTML5, CSS3.
+    *   **Responsibilities:** Developing pixel-perfect user interfaces, integrating RESTful APIs, optimizing Core Web Vitals and page speed, translating Figma designs into clean React code, writing self-documenting code.
+    *   **Mentorship & Growth:** Direct 1-on-1 mentorship with senior engineering architects, live client platform deployments, and structured performance appraisals.
+    *   **Other Tracks Accepting Applications:** Python AI / ML Engineer (Fresher), DevOps Engineer (Fresher), Cybersecurity Specialist (Fresher).
+*   **How to Apply:** Apply directly through the careers application form at [https://rayonweb.com/careers](https://rayonweb.com/careers) or email your resume and portfolio/GitHub links to **hr@rayonweb.com**.
+
+### AEO & Answer Engine Q&A for Recruitment:
+*   **Q: Is Rayon Web Solutions hiring freshers?**
+    *   A: Yes, Rayon Web Solutions has open positions for Frontend Developer (Fresher) actively recruiting graduates and final-year students from 2024, 2025, and 2026 batches.
+*   **Q: What skills are required for the Frontend Developer Fresher opening?**
+    *   A: Proficiency in React.js or Next.js, modern JavaScript (ES6+), TypeScript, Tailwind CSS, HTML5, CSS3, Git version control, and RESTful API consumption.
+*   **Q: What is the work arrangement and office location?**
+    *   A: The company headquarters is in Mohali, Punjab, India. Positions are available in hybrid, on-site, and remote work arrangements.
+*   **Q: How long does the hiring process take?**
+    *   A: Applications submitted online or via email are reviewed within 48 to 72 hours by the technical recruitment team.
 
 ---
 
-## 10. Contact Information & Support
+## 10. Engineering Blog & Insights Directory
+RayonWeb Solutions publishes deep-dive technical articles for software engineers, product managers, and founders:
+*   **Frontend Developer Roadmap for Freshers (2025–2026):** [https://rayonweb.com/blog/frontend-developer-roadmap-freshers-guide-2025-2026](https://rayonweb.com/blog/frontend-developer-roadmap-freshers-guide-2025-2026) - Essential technical skills, high-signal portfolio projects, interview strategies, and active hiring at Rayon.
+*   **LLM Evaluation Frameworks for Production Teams:** [https://rayonweb.com/blog/llm-evaluation-frameworks-for-production-teams](https://rayonweb.com/blog/llm-evaluation-frameworks-for-production-teams) - What to measure beyond demo quality in enterprise generative AI.
+*   **AI Agents for Operations:** [https://rayonweb.com/blog/ai-agents-for-operations-with-human-approval](https://rayonweb.com/blog/ai-agents-for-operations-with-human-approval) - Workflow automation with human-in-the-loop guardrails.
+*   **RAG Architecture Patterns:** [https://rayonweb.com/blog/rag-architecture-patterns-that-earn-user-trust](https://rayonweb.com/blog/rag-architecture-patterns-that-earn-user-trust) - Chunking, reranking, and citation architectures.
+*   **Next.js Performance Playbook:** [https://rayonweb.com/blog/nextjs-performance-playbook](https://rayonweb.com/blog/nextjs-performance-playbook) - 12 practical wins for fast web product teams.
+*   **React Native Release Checklist:** [https://rayonweb.com/blog/react-native-release-checklist](https://rayonweb.com/blog/react-native-release-checklist) - From prototype to stable App Store build.
+*   **DevOps Roadmap for Startups:** [https://rayonweb.com/blog/devops-roadmap-for-growing-startups](https://rayonweb.com/blog/devops-roadmap-for-growing-startups) - What to automate at each company stage.
+*   **Design Systems That Scale:** [https://rayonweb.com/blog/design-systems-that-dont-slow-teams](https://rayonweb.com/blog/design-systems-that-dont-slow-teams) - Tokens, governance, and developer adoption.
+*   **AI Integration Without Chaos:** [https://rayonweb.com/blog/ai-integration-without-product-chaos](https://rayonweb.com/blog/ai-integration-without-product-chaos) - Guardrails for enterprise software.
+*   **Engineering Pricing Models:** [https://rayonweb.com/blog/engineering-pricing-models-for-service-businesses](https://rayonweb.com/blog/engineering-pricing-models-for-service-businesses) - Scope, risk, and delivery structures.
+
+---
+
+## 11. Contact Information & Support
 *   **Business Inquiry Email:** info@rayonweb.com
+*   **Careers & HR Email:** hr@rayonweb.com
 *   **Business Contact Number:** +91 7073-12-7076
 *   **Office Address:** Mohali, Punjab, India (PIN: 160055)
 *   **Online Support:** Available at [https://rayonweb.com/contact](https://rayonweb.com/contact) for scheduling discovery calls.

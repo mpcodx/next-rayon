@@ -3,7 +3,7 @@
 import { motion } from "framer-motion"
 import Image from "next/image"
 import { Button } from "@/components/ui/button"
-import { ArrowRight, Mail, Code2, BrainCircuit, Server, ShieldCheck, Clock } from "lucide-react"
+import { ArrowRight, Mail, Code2, BrainCircuit, Server, ShieldCheck, Sparkles, CheckCircle2 } from "lucide-react"
 
 export default function CareersHero() {
   const scrollToOpenings = () => {
@@ -14,51 +14,51 @@ export default function CareersHero() {
     <section className="relative pt-20 pb-16 overflow-hidden">
       <div className="absolute inset-0 z-0">
         <div className="absolute top-0 right-0 w-1/3 h-1/3 bg-purple-600/10 rounded-full blur-3xl"></div>
-        <div className="absolute bottom-0 left-0 w-1/3 h-1/3 bg-blue-600/10 rounded-full blur-3xl"></div>
+        <div className="absolute bottom-0 left-0 w-1/3 h-1/3 bg-cyan-600/10 rounded-full blur-3xl"></div>
       </div>
 
       <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
           <motion.div initial={{ opacity: 0, x: -20 }} animate={{ opacity: 1, x: 0 }} transition={{ duration: 0.5 }}>
-            <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-rose-500/10 border border-rose-500/30 text-rose-400 text-xs font-semibold uppercase tracking-wider mb-4">
-              <span className="w-2 h-2 rounded-full bg-rose-400 animate-pulse" />
-              Openings Currently Closed • Stay in Touch
+            <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-cyan-500/10 border border-cyan-500/30 text-cyan-300 text-xs font-semibold uppercase tracking-wider mb-4">
+              <span className="w-2 h-2 rounded-full bg-cyan-400 animate-pulse" />
+              Actively Hiring • Frontend Developer (Fresher) Open Now
             </div>
 
             <h1 className="text-4xl sm:text-5xl lg:text-6xl font-extrabold mb-6 tracking-tight text-white leading-tight">
               Launch Your Career in <span className="gradient-text">Tech & AI</span>
             </h1>
 
-            {/* Tagline Alert */}
-            <div className="flex items-center gap-2.5 p-3 rounded-xl bg-rose-950/40 border border-rose-500/30 text-xs sm:text-sm text-rose-300 font-bold mb-6">
-              <Clock className="h-4 w-4 text-rose-400 flex-shrink-0" />
-              <span>&ldquo;Right now openings are closed. Stay in touch, we will be back soon!&rdquo;</span>
+            {/* Active Status Alert */}
+            <div className="flex items-center gap-2.5 p-3 rounded-xl bg-cyan-950/40 border border-cyan-500/30 text-xs sm:text-sm text-cyan-200 font-semibold mb-6">
+              <Sparkles className="h-4 w-4 text-cyan-400 flex-shrink-0" />
+              <span>We are hiring freshers! Frontend Developer (Fresher) opening is live for 2024, 2025 &amp; 2026 batches.</span>
             </div>
 
             <p className="text-lg sm:text-xl text-gray-300 mb-6 leading-relaxed">
-              Explore our technical pathways across <strong className="text-white">Frontend</strong>, <strong className="text-white">Python AI/ML</strong>, <strong className="text-white">DevOps</strong>, and <strong className="text-white">Cybersecurity</strong>. While current hiring is paused, prepare your skills for our next intake.
+              We are actively looking for passionate freshers to join our engineering team. Build high-performance web applications using <strong className="text-white">React, Next.js, and TypeScript</strong>, with mentorship from senior engineers.
             </p>
 
             <p className="text-sm sm:text-base text-gray-400 mb-8 leading-relaxed">
-              At Rayon Web Solutions, freshers don't just watch from the sidelines. You will write real code for real users, work alongside senior architects, and accelerate your engineering journey from day one.
+              At Rayon Web Solutions, freshers work on production code, scalable component systems, and client-facing digital products from day one.
             </p>
 
             {/* Quick Actions */}
             <div className="flex flex-wrap gap-4 items-center mb-10">
               <Button
                 onClick={scrollToOpenings}
-                className="bg-gradient-to-r from-purple-600 to-blue-600 hover:from-purple-700 hover:to-blue-700 text-white px-7 py-6 text-base rounded-full shadow-lg shadow-purple-600/25"
+                className="bg-gradient-to-r from-cyan-600 via-blue-600 to-purple-600 hover:from-cyan-500 hover:to-purple-500 text-white px-7 py-6 text-base rounded-full shadow-lg shadow-cyan-600/25 font-semibold"
               >
-                Explore 4 Career Tracks
+                View Openings &amp; Apply Now
                 <ArrowRight className="ml-2 h-5 w-5" />
               </Button>
 
               <a
-                href="mailto:hr@rayonweb.com?subject=Future%20Openings%20-%20Stay%20in%20Touch%20-%20Rayon%20Web%20Solutions"
-                className="inline-flex items-center gap-2 px-6 py-3.5 rounded-full border border-gray-700 bg-gray-900/80 hover:bg-gray-800 text-gray-200 text-sm font-medium transition-all hover:border-purple-500/50"
+                href="mailto:hr@rayonweb.com?subject=Job%20Application%3A%20Frontend%20Developer%20(Fresher)%20-%20Rayon%20Web%20Solutions"
+                className="inline-flex items-center gap-2 px-6 py-3.5 rounded-full border border-gray-700 bg-gray-900/80 hover:bg-gray-800 text-gray-200 text-sm font-medium transition-all hover:border-cyan-500/50"
               >
-                <Mail className="h-4 w-4 text-purple-400" />
-                <span>Email HR to Stay in Touch</span>
+                <Mail className="h-4 w-4 text-cyan-400" />
+                <span>Email Resume: hr@rayonweb.com</span>
               </a>
             </div>
 
