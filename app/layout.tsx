@@ -147,6 +147,11 @@ export default function RootLayout({
             __html: serializeJsonLd(buildProfessionalServiceSchema()),
           }}
         />
+        <script
+          async
+          src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4412692797128393"
+          crossOrigin="anonymous"
+        />
       </head>
       <body className={`${manrope.variable} ${spaceGrotesk.variable} font-sans antialiased text-gray-100 min-h-screen`}>
         <Suspense fallback={null}>
