@@ -67,6 +67,9 @@
 - [Toolsy](https://rayonweb.com/projects/toolsy): Proprietary utility suite featuring 40+ free SEO, AI, and document processing tools.
 
 ## Blog & Engineering Insights
+- [Generative Engine Optimization (GEO) & AEO in 2026](https://rayonweb.com/blog/generative-engine-optimization-geo-aeo-guide-2026): The definitive guide to ranking in AI search (ChatGPT, Perplexity, Google AI Overviews) with dual-layer schema markup, modular chunking, and llms.txt protocols.
+- [Production-Grade LLM & Agent Architecture in 2026](https://rayonweb.com/blog/production-grade-llm-agent-architecture-2026): Multi-agent workflows, LangGraph state machines, advanced semantic chunking, semantic caching, and human-in-the-loop enterprise governance.
+- [Modern Technical SEO Playbook for Next.js 15](https://rayonweb.com/blog/modern-technical-seo-nextjs-playbook-2026): Sub-100ms INP Core Web Vitals, React Server Components, dynamic XML sitemaps, OpenGraph generation, and Schema.org knowledge graphs.
 - [Frontend Developer Roadmap for Freshers](https://rayonweb.com/blog/frontend-developer-roadmap-freshers-guide-2025-2026): Essential technical skills, portfolio project blueprints, interview strategies, and active fresher hiring at Rayon Web Solutions.
 - [LLM Evaluation Frameworks](https://rayonweb.com/blog/llm-evaluation-frameworks-for-production-teams): Guide to metrics, latency, cost, and safety boundaries for production LLM rollouts.
 - [AI Agents for Operations](https://rayonweb.com/blog/ai-agents-for-operations-with-human-approval): Architectural criteria for operational agents and human-in-the-loop structures.

@@ -2,7 +2,7 @@
 
 import { motion } from "framer-motion"
 import { Input } from "@/components/ui/input"
-import { Search } from "lucide-react"
+import { Search, Sparkles } from "lucide-react"
 
 interface BlogHeroProps {
   searchQuery: string
@@ -24,15 +24,16 @@ export default function BlogHero({ searchQuery, onSearchChange }: BlogHeroProps)
           transition={{ duration: 0.45 }}
           className="max-w-4xl mx-auto text-center glass-card rounded-3xl p-8 sm:p-10 border border-white/15"
         >
-          <p className="inline-flex rounded-full border border-cyan-500/30 bg-cyan-500/10 px-4 py-1.5 text-sm text-cyan-200 mb-5">
-            Engineering Insights
+          <p className="inline-flex items-center gap-1.5 rounded-full border border-cyan-500/30 bg-cyan-500/10 px-4 py-1.5 text-xs sm:text-sm text-cyan-200 mb-5">
+            <Sparkles className="h-3.5 w-3.5 text-cyan-400" />
+            Engineering, AI & Search Optimization Insights
           </p>
-          <h1 className="text-4xl sm:text-5xl font-bold mb-5">
+          <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold mb-5 tracking-tight">
             Latest from Our <span className="gradient-text">Blog</span>
           </h1>
-          <p className="text-lg text-gray-300 mb-8">
-            Practical guides on web, mobile, cloud, AI, and delivery strategy. Written for teams shipping real
-            products.
+          <p className="text-base sm:text-lg text-gray-300 mb-8 max-w-2xl mx-auto leading-relaxed">
+            In-depth guides on Generative Engine Optimization (GEO), Answer Engine Optimization (AEO),
+            LLM architecture, Next.js performance, Cloud DevOps, and scalable software delivery.
           </p>
 
           <div className="max-w-2xl mx-auto relative">
@@ -40,7 +41,7 @@ export default function BlogHero({ searchQuery, onSearchChange }: BlogHeroProps)
             <Input
               value={searchQuery}
               onChange={(event) => onSearchChange(event.target.value)}
-              placeholder="Search articles, topics, or keywords..."
+              placeholder="Search by topic: GEO, AEO, Next.js, LLM agents, DevOps, RAG..."
               className="pl-11 h-12 bg-slate-900/70 border-white/20 text-white placeholder:text-gray-400"
               aria-label="Search blog articles"
             />

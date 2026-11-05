@@ -5,7 +5,7 @@ const clients = [
   { name: "Client 2", logo: "/download.png?height=80&width=160" },
   { name: "Lenovo", logo: "/lenovo-service-centre.jpg?height=80&width=160" },
   { name: "Client 4", logo: "/rKXaODLl_400x400.jpg?height=80&width=160" },
-  { name: "Client 5", logo: "/touchicon-180.png?height=80&width=160" },
+  { name: "Client 5", logo: "/client-5.png?height=80&width=160" },
   { name: "Client 6", logo: "/unnamed.png?height=80&width=160" },
 ]
 
