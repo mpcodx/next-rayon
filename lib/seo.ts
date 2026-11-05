@@ -18,10 +18,14 @@ export const BUSINESS_COORDINATES = {
   latitude: "30.7046",
   longitude: "76.7179",
 } as const
+export const GOOGLE_MAPS_PLACE_ID = "ChIJ9ebiu1vvDzkRJuFZfoCgzko"
+export const GOOGLE_BUSINESS_URL =
+  "https://local.google.com/place?placeid=ChIJ9ebiu1vvDzkRJuFZfoCgzko&utm_medium=noren&utm_source=gbp&utm_campaign=2026"
 export const SOCIAL_PROFILES = [
   "https://www.facebook.com/profile.php?id=61573818253676",
   "https://www.instagram.com/rayonwebsolutions/",
   "https://www.linkedin.com/company/rayonwebsolutions/?viewAsMember=true",
+  GOOGLE_BUSINESS_URL,
 ] as const
 export const SERVICE_AREAS = [
   "Worldwide",

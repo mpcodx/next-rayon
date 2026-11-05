@@ -2,6 +2,7 @@ import ContactHero from "@/components/contact/contact-hero"
 import ContactForm from "@/components/contact/contact-form"
 import EnhancedContactInfo from "@/components/contact/enhanced-contact-info"
 import ContactMap from "@/components/contact/contact-map"
+import CheckUsOutOnGoogle from "@/components/check-us-out-on-google"
 import ContactFAQ from "@/components/contact/contact-faq"
 import ContactCTA from "@/components/contact/contact-cta"
 import { getPageMetadata } from "@/lib/seo"
@@ -19,6 +20,7 @@ export default function ContactPage() {
         </div>
       </div>
       <ContactMap />
+      <CheckUsOutOnGoogle />
       <ContactFAQ />
       <ContactCTA />
     </div>
